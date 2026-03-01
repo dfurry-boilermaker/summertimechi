@@ -1,5 +1,6 @@
 import Foundation
 import CoreLocation
+import CoreData
 
 /// Lightweight in-memory bar model used throughout the app.
 /// Backed by `BarEntity` in CoreData for persistence.
