@@ -321,9 +321,6 @@
 							com.apple.Push = {
 								enabled = 1;
 							};
-							com.apple.WeatherKit = {
-								enabled = 1;
-							};
 							com.apple.iCloud = {
 								enabled = 1;
 							};
@@ -587,6 +584,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "";
 				ENABLE_PREVIEWS = YES;
+				INSTALL_PATH = "$(LOCAL_APPS_DIR)";
+				SKIP_INSTALL = NO;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = SummertimeChi/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = NO;
