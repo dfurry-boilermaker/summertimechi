@@ -25,6 +25,7 @@ final class MapViewModel: ObservableObject {
 
     func loadBars() {
         let request = BarEntity.fetchRequest()
+        request.predicate = NSPredicate(format: "hasPatioConfirmed == YES")
         request.sortDescriptors = [NSSortDescriptor(keyPath: \BarEntity.name, ascending: true)]
         guard let entities = try? context.fetch(request) else { return }
         bars = entities.map { Bar(entity: $0) }

@@ -60,7 +60,7 @@ final class ChicagoCityDataService {
             yelpURL: nil,
             yelpRating: 0,
             yelpReviewCount: 0,
-            hasPatioConfirmed: true,
+            hasPatioConfirmed: false, // permit confirms address/name only, not patio quality
             dataSourceMask: .cityPermit,
             isFavorite: false,
             sunAlertsEnabled: false

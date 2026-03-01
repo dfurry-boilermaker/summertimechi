@@ -12,24 +12,37 @@ final class OSMService {
 
     // MARK: - Bar Query
 
-    /// Fetches Chicago bars with `outdoor_seating=yes` from OSM.
+    /// Fetches Chicago bars/pubs/biergarens with confirmed outdoor seating from OSM.
+    /// Queries both node and way element types; biergarten implies outdoor seating by definition.
     func fetchBars() async throws -> [Bar] {
         let query = """
-        [out:json][timeout:30];
-        node["amenity"="bar"]["outdoor_seating"="yes"](\(chicagoBBox));
-        out body qt;
+        [out:json][timeout:45];
+        (
+          node["amenity"~"^(bar|pub|biergarten)$"]["outdoor_seating"="yes"](\(chicagoBBox));
+          way["amenity"~"^(bar|pub|biergarten)$"]["outdoor_seating"="yes"](\(chicagoBBox));
+          node["amenity"="biergarten"](\(chicagoBBox));
+          way["amenity"="biergarten"](\(chicagoBBox));
+        );
+        out center qt;
         """
         let elements = try await runQuery(query)
         return elements.compactMap { barFromElement($0) }
     }
 
     private func barFromElement(_ element: [String: Any]) -> Bar? {
-        guard let lat = element["lat"] as? Double,
-              let lon = element["lon"] as? Double,
-              element["id"] is Int,
-              let tags = element["tags"] as? [String: String] else {
+        // Nodes provide lat/lon directly; ways provide it via the "center" key (out center qt)
+        let lat: Double
+        let lon: Double
+        if let l = element["lat"] as? Double, let o = element["lon"] as? Double {
+            lat = l; lon = o
+        } else if let center = element["center"] as? [String: Double],
+                  let l = center["lat"], let o = center["lon"] {
+            lat = l; lon = o
+        } else {
             return nil
         }
+
+        guard let tags = element["tags"] as? [String: String] else { return nil }
         let name = tags["name"] ?? tags["brand"] ?? "Unnamed Bar"
         return Bar(
             id: UUID(),
