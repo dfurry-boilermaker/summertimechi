@@ -34,22 +34,27 @@ final class MapViewModel: ObservableObject {
         isLoading = true
         defer { isLoading = false }
 
-        do {
-            async let permitsTask = ChicagoCityDataService.shared.fetchPermits()
-            async let osmTask     = OSMService.shared.fetchBars()
-            async let yelpTask    = YelpService.shared.fetchBars()
+        // Fetch each source independently — a single failure shouldn't block the others
+        async let permitsTask = ChicagoCityDataService.shared.fetchPermits()
+        async let osmTask     = OSMService.shared.fetchBars()
+        async let yelpTask    = YelpService.shared.fetchBars()
 
-            let (permits, osmBars, yelpBars) = try await (permitsTask, osmTask, yelpTask)
-            await DataMergeService.shared.mergeAndPersist(
-                permits: permits,
-                osmBars: osmBars,
-                yelpBars: yelpBars,
-                context: context
-            )
-            loadBars()
-        } catch {
-            self.error = error.localizedDescription
+        let permits = (try? await permitsTask) ?? []
+        let osmBars = (try? await osmTask) ?? []
+        let yelpBars = (try? await yelpTask) ?? []
+
+        if permits.isEmpty && osmBars.isEmpty && yelpBars.isEmpty {
+            self.error = "Could not load bar data. Check your network connection."
+            return
         }
+
+        await DataMergeService.shared.mergeAndPersist(
+            permits: permits,
+            osmBars: osmBars,
+            yelpBars: yelpBars,
+            context: context
+        )
+        loadBars()
     }
 
     // MARK: - Sun Status Updates

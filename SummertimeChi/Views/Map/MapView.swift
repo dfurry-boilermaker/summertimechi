@@ -74,6 +74,10 @@ struct MapView: View {
         }
         .onAppear {
             viewModel.loadBars()
+            // Auto-refresh on first launch when the local cache is empty
+            if viewModel.bars.isEmpty {
+                Task { await viewModel.refreshData() }
+            }
         }
     }
 

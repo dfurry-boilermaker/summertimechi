@@ -37,11 +37,10 @@ final class YelpService {
     private func fetchPage(city: String, limit: Int, offset: Int) async throws -> [Bar] {
         var components = URLComponents(string: baseURL)!
         components.queryItems = [
-            URLQueryItem(name: "location",    value: city),
-            URLQueryItem(name: "categories",  value: "bars"),
-            URLQueryItem(name: "attributes",  value: "outdoor_seating"),
-            URLQueryItem(name: "limit",       value: String(limit)),
-            URLQueryItem(name: "offset",      value: String(offset))
+            URLQueryItem(name: "location",   value: city),
+            URLQueryItem(name: "categories", value: "bars"),
+            URLQueryItem(name: "limit",      value: String(limit)),
+            URLQueryItem(name: "offset",     value: String(offset))
         ]
 
         var request = URLRequest(url: components.url!)
