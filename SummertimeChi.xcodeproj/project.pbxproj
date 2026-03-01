@@ -43,6 +43,7 @@
 		A1000034 /* WeatherKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2000034 /* WeatherKit.framework */; };
 		A1000035 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2000035 /* CloudKit.framework */; };
 		A1000036 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2000036 /* CoreData.framework */; };
+		A1000037 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD000001 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -96,6 +97,7 @@
 		A3000002 /* SummertimeChiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SummertimeChiTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3000003 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AC000001 /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Secrets.xcconfig; path = SummertimeChi/Resources/Secrets.xcconfig; sourceTree = SOURCE_ROOT; };
+		AD000001 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Resources/Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +142,7 @@
 				A5000007 /* Views */,
 				A3000003 /* Info.plist */,
 				AC000001 /* Secrets.xcconfig */,
+				AD000001 /* Assets.xcassets */,
 			);
 			path = SummertimeChi;
 			sourceTree = "<group>";
@@ -357,6 +360,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1000037 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
