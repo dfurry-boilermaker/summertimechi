@@ -1,0 +1,663 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A1000001 /* SummertimeChiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000001 /* SummertimeChiApp.swift */; };
+		A1000002 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000002 /* AppState.swift */; };
+		A1000003 /* Bar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000003 /* Bar.swift */; };
+		A1000004 /* SunStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000004 /* SunStatus.swift */; };
+		A1000005 /* SunTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000005 /* SunTimeline.swift */; };
+		A1000006 /* OSMBuilding.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000006 /* OSMBuilding.swift */; };
+		A1000007 /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000007 /* PersistenceController.swift */; };
+		A1000008 /* SummertimeChi.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A2000008 /* SummertimeChi.xcdatamodeld */; };
+		A1000009 /* SolarCalculatorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000009 /* SolarCalculatorService.swift */; };
+		A1000010 /* ShadowCalculatorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000010 /* ShadowCalculatorService.swift */; };
+		A1000011 /* OSMService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000011 /* OSMService.swift */; };
+		A1000012 /* ChicagoCityDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000012 /* ChicagoCityDataService.swift */; };
+		A1000013 /* YelpService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000013 /* YelpService.swift */; };
+		A1000014 /* DataMergeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000014 /* DataMergeService.swift */; };
+		A1000015 /* WeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000015 /* WeatherService.swift */; };
+		A1000016 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000016 /* NotificationService.swift */; };
+		A1000017 /* CameraFeedService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000017 /* CameraFeedService.swift */; };
+		A1000018 /* ReviewService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000018 /* ReviewService.swift */; };
+		A1000019 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000019 /* MapViewModel.swift */; };
+		A1000020 /* BarDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000020 /* BarDetailViewModel.swift */; };
+		A1000021 /* FavoritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000021 /* FavoritesViewModel.swift */; };
+		A1000022 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000022 /* ContentView.swift */; };
+		A1000023 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000023 /* MapView.swift */; };
+		A1000024 /* BarAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000024 /* BarAnnotationView.swift */; };
+		A1000025 /* BarDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000025 /* BarDetailView.swift */; };
+		A1000026 /* SunTimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000026 /* SunTimelineView.swift */; };
+		A1000027 /* CameraFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000027 /* CameraFeedView.swift */; };
+		A1000028 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000028 /* SearchView.swift */; };
+		A1000029 /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000029 /* FavoritesView.swift */; };
+		A1000030 /* ReviewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000030 /* ReviewsView.swift */; };
+		A1000031 /* SolarCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000031 /* SolarCalculatorTests.swift */; };
+		A1000032 /* ShadowCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000032 /* ShadowCalculatorTests.swift */; };
+		A1000033 /* DataMergeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000033 /* DataMergeTests.swift */; };
+		A1000034 /* WeatherKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2000034 /* WeatherKit.framework */; };
+		A1000035 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2000035 /* CloudKit.framework */; };
+		A1000036 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2000036 /* CoreData.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		A2000001 /* SummertimeChiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummertimeChiApp.swift; sourceTree = "<group>"; };
+		A2000002 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		A2000003 /* Bar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bar.swift; sourceTree = "<group>"; };
+		A2000004 /* SunStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunStatus.swift; sourceTree = "<group>"; };
+		A2000005 /* SunTimeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunTimeline.swift; sourceTree = "<group>"; };
+		A2000006 /* OSMBuilding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSMBuilding.swift; sourceTree = "<group>"; };
+		A2000007 /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
+		A2000008 /* SummertimeChi.xcdatamodeld */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SummertimeChi.xcdatamodeld; sourceTree = "<group>"; };
+		A2000009 /* SolarCalculatorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarCalculatorService.swift; sourceTree = "<group>"; };
+		A2000010 /* ShadowCalculatorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowCalculatorService.swift; sourceTree = "<group>"; };
+		A2000011 /* OSMService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSMService.swift; sourceTree = "<group>"; };
+		A2000012 /* ChicagoCityDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChicagoCityDataService.swift; sourceTree = "<group>"; };
+		A2000013 /* YelpService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpService.swift; sourceTree = "<group>"; };
+		A2000014 /* DataMergeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataMergeService.swift; sourceTree = "<group>"; };
+		A2000015 /* WeatherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherService.swift; sourceTree = "<group>"; };
+		A2000016 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		A2000017 /* CameraFeedService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraFeedService.swift; sourceTree = "<group>"; };
+		A2000018 /* ReviewService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewService.swift; sourceTree = "<group>"; };
+		A2000019 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
+		A2000020 /* BarDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarDetailViewModel.swift; sourceTree = "<group>"; };
+		A2000021 /* FavoritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewModel.swift; sourceTree = "<group>"; };
+		A2000022 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		A2000023 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		A2000024 /* BarAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarAnnotationView.swift; sourceTree = "<group>"; };
+		A2000025 /* BarDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarDetailView.swift; sourceTree = "<group>"; };
+		A2000026 /* SunTimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunTimelineView.swift; sourceTree = "<group>"; };
+		A2000027 /* CameraFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraFeedView.swift; sourceTree = "<group>"; };
+		A2000028 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		A2000029 /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
+		A2000030 /* ReviewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewsView.swift; sourceTree = "<group>"; };
+		A2000031 /* SolarCalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarCalculatorTests.swift; sourceTree = "<group>"; };
+		A2000032 /* ShadowCalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowCalculatorTests.swift; sourceTree = "<group>"; };
+		A2000033 /* DataMergeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataMergeTests.swift; sourceTree = "<group>"; };
+		A2000034 /* WeatherKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WeatherKit.framework; path = System/Library/Frameworks/WeatherKit.framework; sourceTree = SDKROOT; };
+		A2000035 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		A2000036 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		A3000001 /* SummertimeChi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SummertimeChi.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A3000002 /* SummertimeChiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SummertimeChiTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A3000003 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AC000001 /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Secrets.xcconfig; path = SummertimeChi/Resources/Secrets.xcconfig; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A4000001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A1000034 /* WeatherKit.framework in Frameworks */,
+				A1000035 /* CloudKit.framework in Frameworks */,
+				A1000036 /* CoreData.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A4000002 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A5000000 /* root */ = {
+			isa = PBXGroup;
+			children = (
+				A5000001 /* SummertimeChi */,
+				A5000020 /* SummertimeChiTests */,
+				A5000030 /* Products */,
+				A5000040 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		A5000001 /* SummertimeChi */ = {
+			isa = PBXGroup;
+			children = (
+				A5000002 /* App */,
+				A5000003 /* Models */,
+				A5000004 /* Services */,
+				A5000005 /* Persistence */,
+				A5000006 /* ViewModels */,
+				A5000007 /* Views */,
+				A3000003 /* Info.plist */,
+				AC000001 /* Secrets.xcconfig */,
+			);
+			path = SummertimeChi;
+			sourceTree = "<group>";
+		};
+		A5000002 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				A2000001 /* SummertimeChiApp.swift */,
+				A2000002 /* AppState.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		A5000003 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A2000003 /* Bar.swift */,
+				A2000004 /* SunStatus.swift */,
+				A2000005 /* SunTimeline.swift */,
+				A2000006 /* OSMBuilding.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		A5000004 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				A2000009 /* SolarCalculatorService.swift */,
+				A2000010 /* ShadowCalculatorService.swift */,
+				A2000011 /* OSMService.swift */,
+				A2000012 /* ChicagoCityDataService.swift */,
+				A2000013 /* YelpService.swift */,
+				A2000014 /* DataMergeService.swift */,
+				A2000015 /* WeatherService.swift */,
+				A2000016 /* NotificationService.swift */,
+				A2000017 /* CameraFeedService.swift */,
+				A2000018 /* ReviewService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		A5000005 /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				A2000007 /* PersistenceController.swift */,
+				A2000008 /* SummertimeChi.xcdatamodeld */,
+			);
+			path = Persistence;
+			sourceTree = "<group>";
+		};
+		A5000006 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				A2000019 /* MapViewModel.swift */,
+				A2000020 /* BarDetailViewModel.swift */,
+				A2000021 /* FavoritesViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		A5000007 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A2000022 /* ContentView.swift */,
+				A5000008 /* Map */,
+				A5000009 /* BarDetail */,
+				A2000028 /* SearchView.swift */,
+				A2000029 /* FavoritesView.swift */,
+				A2000030 /* ReviewsView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		A5000008 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				A2000023 /* MapView.swift */,
+				A2000024 /* BarAnnotationView.swift */,
+			);
+			path = Map;
+			sourceTree = "<group>";
+		};
+		A5000009 /* BarDetail */ = {
+			isa = PBXGroup;
+			children = (
+				A2000025 /* BarDetailView.swift */,
+				A2000026 /* SunTimelineView.swift */,
+				A2000027 /* CameraFeedView.swift */,
+			);
+			path = BarDetail;
+			sourceTree = "<group>";
+		};
+		A5000020 /* SummertimeChiTests */ = {
+			isa = PBXGroup;
+			children = (
+				A2000031 /* SolarCalculatorTests.swift */,
+				A2000032 /* ShadowCalculatorTests.swift */,
+				A2000033 /* DataMergeTests.swift */,
+			);
+			path = SummertimeChiTests;
+			sourceTree = "<group>";
+		};
+		A5000030 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A3000001 /* SummertimeChi.app */,
+				A3000002 /* SummertimeChiTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A5000040 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A2000034 /* WeatherKit.framework */,
+				A2000035 /* CloudKit.framework */,
+				A2000036 /* CoreData.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A6000001 /* SummertimeChi */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A7000001 /* Build configuration list for PBXNativeTarget "SummertimeChi" */;
+			buildPhases = (
+				A8000001 /* Sources */,
+				A4000001 /* Frameworks */,
+				A8000002 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SummertimeChi;
+			productName = SummertimeChi;
+			productReference = A3000001 /* SummertimeChi.app */;
+			productType = "com.apple.product-type.application";
+		};
+		A6000002 /* SummertimeChiTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A7000002 /* Build configuration list for PBXNativeTarget "SummertimeChiTests" */;
+			buildPhases = (
+				A8000003 /* Sources */,
+				A4000002 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A9000001 /* PBXTargetDependency */,
+			);
+			name = SummertimeChiTests;
+			productName = SummertimeChiTests;
+			productReference = A3000002 /* SummertimeChiTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AA000001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					A6000001 = {
+						CreatedOnToolsVersion = 15.0;
+						DevelopmentTeam = 2DBY9B53R4;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.CloudKit = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+							com.apple.WeatherKit = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
+					};
+					A6000002 = {
+						CreatedOnToolsVersion = 15.0;
+						DevelopmentTeam = 2DBY9B53R4;
+						TestTargetID = A6000001;
+					};
+				};
+			};
+			buildConfigurationList = A7000000 /* Build configuration list for PBXProject "SummertimeChi" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A5000000;
+			productRefGroup = A5000030 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A6000001 /* SummertimeChi */,
+				A6000002 /* SummertimeChiTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A8000002 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A8000001 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A1000001 /* SummertimeChiApp.swift in Sources */,
+				A1000002 /* AppState.swift in Sources */,
+				A1000003 /* Bar.swift in Sources */,
+				A1000004 /* SunStatus.swift in Sources */,
+				A1000005 /* SunTimeline.swift in Sources */,
+				A1000006 /* OSMBuilding.swift in Sources */,
+				A1000007 /* PersistenceController.swift in Sources */,
+				A1000008 /* SummertimeChi.xcdatamodeld in Sources */,
+				A1000009 /* SolarCalculatorService.swift in Sources */,
+				A1000010 /* ShadowCalculatorService.swift in Sources */,
+				A1000011 /* OSMService.swift in Sources */,
+				A1000012 /* ChicagoCityDataService.swift in Sources */,
+				A1000013 /* YelpService.swift in Sources */,
+				A1000014 /* DataMergeService.swift in Sources */,
+				A1000015 /* WeatherService.swift in Sources */,
+				A1000016 /* NotificationService.swift in Sources */,
+				A1000017 /* CameraFeedService.swift in Sources */,
+				A1000018 /* ReviewService.swift in Sources */,
+				A1000019 /* MapViewModel.swift in Sources */,
+				A1000020 /* BarDetailViewModel.swift in Sources */,
+				A1000021 /* FavoritesViewModel.swift in Sources */,
+				A1000022 /* ContentView.swift in Sources */,
+				A1000023 /* MapView.swift in Sources */,
+				A1000024 /* BarAnnotationView.swift in Sources */,
+				A1000025 /* BarDetailView.swift in Sources */,
+				A1000026 /* SunTimelineView.swift in Sources */,
+				A1000027 /* CameraFeedView.swift in Sources */,
+				A1000028 /* SearchView.swift in Sources */,
+				A1000029 /* FavoritesView.swift in Sources */,
+				A1000030 /* ReviewsView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A8000003 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A1000031 /* SolarCalculatorTests.swift in Sources */,
+				A1000032 /* ShadowCalculatorTests.swift in Sources */,
+				A1000033 /* DataMergeTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A9000001 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A6000001 /* SummertimeChi */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		AB000001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_CYCLE = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		AB000002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_CYCLE = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		AB000003 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AC000001 /* Secrets.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = SummertimeChi/SummertimeChi.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = 2DBY9B53R4;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = SummertimeChi/Resources/Info.plist;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = NO;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.danielfurry.summertimechi";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		AB000004 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AC000001 /* Secrets.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = SummertimeChi/SummertimeChi.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = 2DBY9B53R4;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = SummertimeChi/Resources/Info.plist;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = NO;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.danielfurry.summertimechi";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		AB000005 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2DBY9B53R4;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.danielfurry.summertimechi.tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SummertimeChi.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/SummertimeChi";
+			};
+			name = Debug;
+		};
+		AB000006 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2DBY9B53R4;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.danielfurry.summertimechi.tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SummertimeChi.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/SummertimeChi";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A7000000 /* Build configuration list for PBXProject "SummertimeChi" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AB000001 /* Debug */,
+				AB000002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A7000001 /* Build configuration list for PBXNativeTarget "SummertimeChi" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AB000003 /* Debug */,
+				AB000004 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A7000002 /* Build configuration list for PBXNativeTarget "SummertimeChiTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AB000005 /* Debug */,
+				AB000006 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+	};
+	rootObject = AA000001 /* Project object */;
+}

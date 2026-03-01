@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21754" systemVersion="22A380" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+    <entity name="BarEntity" representedClassName="BarEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="address" optional="YES" attributeType="String"/>
+        <attribute name="cachedStatusTimestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="cachedSunStatus" optional="YES" attributeType="String"/>
+        <attribute name="dataSourceMask" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="hasPatioConfirmed" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="isFavorite" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="neighborhood" optional="YES" attributeType="String"/>
+        <attribute name="sunAlertsEnabled" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="yelpID" optional="YES" attributeType="String"/>
+        <attribute name="yelpRating" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="yelpReviewCount" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="BuildingGeometryEntity" representedClassName="BuildingGeometryEntity" syncable="NO" codeGenerationType="class">
+        <attribute name="centroidLatitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="centroidLongitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="encodedCoordinates" optional="YES" attributeType="Binary"/>
+        <attribute name="fetchedAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="heightMeters" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="osmWayID" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="UserReviewEntity" representedClassName="UserReviewEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="authorDisplayName" optional="YES" attributeType="String"/>
+        <attribute name="barID" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="cloudKitRecordID" optional="YES" attributeType="String"/>
+        <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="reviewText" optional="YES" attributeType="String"/>
+        <attribute name="sunRating" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="syncPending" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+    </entity>
+    <configuration name="Cloud">
+        <memberEntity name="BarEntity"/>
+        <memberEntity name="UserReviewEntity"/>
+    </configuration>
+    <configuration name="Local">
+        <memberEntity name="BuildingGeometryEntity"/>
+    </configuration>
+</model>
