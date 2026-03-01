@@ -19,7 +19,6 @@
 		A1000010 /* ShadowCalculatorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000010 /* ShadowCalculatorService.swift */; };
 		A1000011 /* OSMService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000011 /* OSMService.swift */; };
 		A1000012 /* ChicagoCityDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000012 /* ChicagoCityDataService.swift */; };
-		A1000013 /* YelpService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000013 /* YelpService.swift */; };
 		A1000014 /* DataMergeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000014 /* DataMergeService.swift */; };
 		A1000015 /* WeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000015 /* WeatherService.swift */; };
 		A1000016 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000016 /* NotificationService.swift */; };
@@ -44,6 +43,7 @@
 		A1000035 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2000035 /* CloudKit.framework */; };
 		A1000036 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2000036 /* CoreData.framework */; };
 		A1000037 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD000001 /* Assets.xcassets */; };
+		A1000038 /* SeedDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE000001 /* SeedDataService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,12 +69,12 @@
 		A2000010 /* ShadowCalculatorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowCalculatorService.swift; sourceTree = "<group>"; };
 		A2000011 /* OSMService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSMService.swift; sourceTree = "<group>"; };
 		A2000012 /* ChicagoCityDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChicagoCityDataService.swift; sourceTree = "<group>"; };
-		A2000013 /* YelpService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpService.swift; sourceTree = "<group>"; };
 		A2000014 /* DataMergeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataMergeService.swift; sourceTree = "<group>"; };
 		A2000015 /* WeatherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherService.swift; sourceTree = "<group>"; };
 		A2000016 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		A2000017 /* CameraFeedService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraFeedService.swift; sourceTree = "<group>"; };
 		A2000018 /* ReviewService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewService.swift; sourceTree = "<group>"; };
+		AE000001 /* SeedDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedDataService.swift; sourceTree = "<group>"; };
 		A2000019 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		A2000020 /* BarDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarDetailViewModel.swift; sourceTree = "<group>"; };
 		A2000021 /* FavoritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewModel.swift; sourceTree = "<group>"; };
@@ -174,12 +174,12 @@
 				A2000010 /* ShadowCalculatorService.swift */,
 				A2000011 /* OSMService.swift */,
 				A2000012 /* ChicagoCityDataService.swift */,
-				A2000013 /* YelpService.swift */,
-				A2000014 /* DataMergeService.swift */,
+					A2000014 /* DataMergeService.swift */,
 				A2000015 /* WeatherService.swift */,
 				A2000016 /* NotificationService.swift */,
 				A2000017 /* CameraFeedService.swift */,
 				A2000018 /* ReviewService.swift */,
+				AE000001 /* SeedDataService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -383,8 +383,7 @@
 				A1000010 /* ShadowCalculatorService.swift in Sources */,
 				A1000011 /* OSMService.swift in Sources */,
 				A1000012 /* ChicagoCityDataService.swift in Sources */,
-				A1000013 /* YelpService.swift in Sources */,
-				A1000014 /* DataMergeService.swift in Sources */,
+					A1000014 /* DataMergeService.swift in Sources */,
 				A1000015 /* WeatherService.swift in Sources */,
 				A1000016 /* NotificationService.swift in Sources */,
 				A1000017 /* CameraFeedService.swift in Sources */,
@@ -401,6 +400,7 @@
 				A1000028 /* SearchView.swift in Sources */,
 				A1000029 /* FavoritesView.swift in Sources */,
 				A1000030 /* ReviewsView.swift in Sources */,
+				A1000038 /* SeedDataService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

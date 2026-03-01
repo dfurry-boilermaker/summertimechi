@@ -37,21 +37,16 @@ final class MapViewModel: ObservableObject {
         // Fetch each source independently — a single failure shouldn't block the others
         async let permitsTask = ChicagoCityDataService.shared.fetchPermits()
         async let osmTask     = OSMService.shared.fetchBars()
-        async let yelpTask    = YelpService.shared.fetchBars()
 
         let permits = (try? await permitsTask) ?? []
         let osmBars = (try? await osmTask) ?? []
-        let yelpBars = (try? await yelpTask) ?? []
 
-        if permits.isEmpty && osmBars.isEmpty && yelpBars.isEmpty {
-            self.error = "Could not load bar data. Check your network connection."
-            return
-        }
+        let osmBarsAll = osmBars + SeedDataService.shared.curatedBars
 
         await DataMergeService.shared.mergeAndPersist(
             permits: permits,
-            osmBars: osmBars,
-            yelpBars: yelpBars,
+            osmBars: osmBarsAll,
+            yelpBars: [],
             context: context
         )
         loadBars()

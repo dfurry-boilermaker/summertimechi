@@ -22,6 +22,18 @@ final class PersistenceController {
             }
         }
 
+        // Seed curated bars on first launch
+        let ctx = container.viewContext
+        let req = BarEntity.fetchRequest()
+        req.fetchLimit = 1
+        if ((try? ctx.fetch(req)) ?? []).isEmpty {
+            for bar in SeedDataService.shared.curatedBars {
+                let entity = BarEntity(context: ctx)
+                bar.apply(to: entity)
+            }
+            try? ctx.save()
+        }
+
         container.viewContext.automaticallyMergesChangesFromParent = true
         container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
     }
