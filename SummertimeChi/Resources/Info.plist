@@ -45,5 +45,9 @@
 	</array>
 	<key>WeatherKitUsageDescription</key>
 	<string>SummertimeChi uses WeatherKit to check cloud cover and improve sun/shade accuracy.</string>
+	<key>CHICAGO_APP_TOKEN</key>
+	<string>$(CHICAGO_APP_TOKEN)</string>
+	<key>YELP_API_KEY</key>
+	<string>$(YELP_API_KEY)</string>
 </dict>
 </plist>
