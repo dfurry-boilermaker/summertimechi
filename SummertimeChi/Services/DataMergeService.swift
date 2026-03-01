@@ -162,7 +162,8 @@ final class DataMergeService {
     private func jaroDistance(_ s1: String, _ s2: String) -> Double {
         let a = Array(s1)
         let b = Array(s2)
-        let matchDistance = max(a.count, b.count) / 2 - 1
+        // Clamp to 0 so single-char strings don't produce a negative matchDistance
+        let matchDistance = max(max(a.count, b.count) / 2 - 1, 0)
 
         var aMatched = Array(repeating: false, count: a.count)
         var bMatched = Array(repeating: false, count: b.count)
@@ -172,6 +173,7 @@ final class DataMergeService {
         for i in 0..<a.count {
             let start = max(0, i - matchDistance)
             let end   = min(i + matchDistance, b.count - 1)
+            guard start <= end else { continue } // guard against inverted range
             for j in start...end {
                 if bMatched[j] || a[i] != b[j] { continue }
                 aMatched[i] = true
@@ -184,7 +186,8 @@ final class DataMergeService {
 
         var k = 0
         for i in 0..<a.count where aMatched[i] {
-            while !bMatched[k] { k += 1 }
+            while k < b.count && !bMatched[k] { k += 1 } // bounds-checked
+            guard k < b.count else { break }
             if a[i] != b[k] { transpositions += 1 }
             k += 1
         }

@@ -60,16 +60,19 @@ final class MapViewModel: ObservableObject {
         let weatherConditions = await weather.fetchConditions(for: region.center)
         let cloudCover = weatherConditions?.cloudCoverFraction ?? 0
 
-        for i in bars.indices {
-            guard visibleBars.contains(where: { $0.id == bars[i].id }) else { continue }
-            let bar = bars[i]
+        // Iterate by value — bars array may be replaced by loadBars() at any await point,
+        // so we re-look up the live index after each suspension rather than using a stale i.
+        for bar in visibleBars {
+            // Skip if status was updated within the last 30 minutes
+            if let ts = bar.cachedStatusTimestamp, date.timeIntervalSince(ts) < 1800 { continue }
 
-            // Fetch or use cached buildings
             let buildings = (try? await OSMService.shared.fetchBuildings(near: bar.coordinate, context: context)) ?? []
             let status = shadow.sunStatus(forPatio: bar.coordinate, buildings: buildings, date: date, cloudCover: cloudCover)
 
-            bars[i].cachedSunStatus = status
-            bars[i].cachedStatusTimestamp = date
+            // Re-look up live index after the await — array may have been replaced
+            guard let idx = bars.firstIndex(where: { $0.id == bar.id }) else { continue }
+            bars[idx].cachedSunStatus = status
+            bars[idx].cachedStatusTimestamp = date
 
             // Persist status update
             let fetchRequest = BarEntity.fetchRequest()
