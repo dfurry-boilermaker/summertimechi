@@ -23,9 +23,6 @@ struct ContentView: View {
                 }
         }
         .tint(.yellow)
-        .onAppear {
-            appState.requestLocationPermission()
-        }
     }
 }
 

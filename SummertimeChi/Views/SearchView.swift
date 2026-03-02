@@ -16,6 +16,7 @@ struct SearchView: View {
 
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \BarEntity.name, ascending: true)],
+        predicate: NSPredicate(format: "hasPatioConfirmed == YES"),
         animation: .default
     )
     private var barEntities: FetchedResults<BarEntity>

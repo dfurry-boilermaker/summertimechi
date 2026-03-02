@@ -202,12 +202,9 @@ final class SolarCalculatorService {
     }
 
     private func utcMinutes(from date: Date) -> Double {
-        let cal = Calendar(identifier: .gregorian)
-        let components = cal.dateComponents([.hour, .minute, .second], from: date)
-        let h = Double(components.hour ?? 0)
-        let m = Double(components.minute ?? 0)
-        let s = Double(components.second ?? 0)
-        return h * 60.0 + m + s / 60.0
+        // Seconds elapsed since the most recent UTC midnight.
+        // timeIntervalSince1970 is always UTC-based, so no timezone conversion needed.
+        return date.timeIntervalSince1970.truncatingRemainder(dividingBy: 86400.0) / 60.0
     }
 
     // MARK: - Angle Utilities

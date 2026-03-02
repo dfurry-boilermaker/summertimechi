@@ -34,7 +34,7 @@ enum SunStatus: String, CaseIterable {
     var systemImageName: String {
         switch self {
         case .sunlit:       return "sun.max.fill"
-        case .shaded:       return "cloud.fill"
+        case .shaded:       return "building.2.fill"
         case .partialSun:   return "cloud.sun.fill"
         case .cloudy:       return "cloud.fill"
         case .belowHorizon: return "moon.stars.fill"

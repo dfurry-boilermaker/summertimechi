@@ -10,10 +10,12 @@ final class OSMService {
     private let overpassURL = URL(string: "https://overpass-api.de/api/interpreter")!
     private let chicagoBBox = "41.64,-87.94,42.02,-87.52"
 
+    /// Deduplicates concurrent building fetch requests for the same ~200m grid cell.
+    private let buildingDeduplicator = InFlightDeduplicator<String, [OSMBuilding]>()
+
     // MARK: - Bar Query
 
     /// Fetches Chicago bars/pubs/biergarens with confirmed outdoor seating from OSM.
-    /// Queries both node and way element types; biergarten implies outdoor seating by definition.
     func fetchBars() async throws -> [Bar] {
         let query = """
         [out:json][timeout:45];
@@ -25,12 +27,13 @@ final class OSMService {
         );
         out center qt;
         """
-        let elements = try await runQuery(query)
+        let elements = try await withRetry(maxAttempts: 3, initialDelay: 2.0) {
+            try await self.runQuery(query)
+        }
         return elements.compactMap { barFromElement($0) }
     }
 
     private func barFromElement(_ element: [String: Any]) -> Bar? {
-        // Nodes provide lat/lon directly; ways provide it via the "center" key (out center qt)
         let lat: Double
         let lon: Double
         if let l = element["lat"] as? Double, let o = element["lon"] as? Double {
@@ -72,19 +75,28 @@ final class OSMService {
 
     // MARK: - Building Query
 
-    /// Fetches building footprints within 200m of a given coordinate.
-    /// Uses a 1-second rate limit delay between calls.
+    /// Fetches building footprints within 200 m of `coordinate`.
+    ///
+    /// Concurrent requests for the same ~200 m grid cell are deduplicated: only
+    /// one Overpass request fires; all callers share its result.
     func fetchBuildings(
         near coordinate: CLLocationCoordinate2D,
         context: NSManagedObjectContext
     ) async throws -> [OSMBuilding] {
-        // Check cache first (7-day TTL)
         if let cached = cachedBuildings(near: coordinate, context: context) {
             return cached
         }
 
-        try await Task.sleep(nanoseconds: 1_000_000_000) // 1-second delay
+        let key = gridKey(for: coordinate)
+        return try await buildingDeduplicator.deduplicate(key: key) {
+            try await self.fetchBuildingsFromOverpass(near: coordinate, context: context)
+        }
+    }
 
+    private func fetchBuildingsFromOverpass(
+        near coordinate: CLLocationCoordinate2D,
+        context: NSManagedObjectContext
+    ) async throws -> [OSMBuilding] {
         let lat = coordinate.latitude
         let lon = coordinate.longitude
         let query = """
@@ -95,13 +107,15 @@ final class OSMService {
         (._;>;);
         out body qt;
         """
-        let elements = try await runQuery(query)
+        let elements = try await withRetry(maxAttempts: 2, initialDelay: 1.0) {
+            try await self.runQuery(query)
+        }
         let buildings = parseBuildingElements(elements, near: coordinate)
 
-        // Persist to cache
-        await MainActor.run {
+        let bgContext = PersistenceController.shared.container.newBackgroundContext()
+        await bgContext.perform {
             for building in buildings {
-                let entity = BuildingGeometryEntity(context: context)
+                let entity = BuildingGeometryEntity(context: bgContext)
                 entity.osmWayID = building.id
                 entity.heightMeters = building.heightMeters
                 entity.centroidLatitude = building.centroid.latitude
@@ -110,7 +124,7 @@ final class OSMService {
                 let pairs = building.footprint.map { [$0.latitude, $0.longitude] }
                 entity.encodedCoordinates = try? JSONEncoder().encode(pairs)
             }
-            try? context.save()
+            try? bgContext.save()
         }
 
         return buildings
@@ -121,11 +135,11 @@ final class OSMService {
         context: NSManagedObjectContext
     ) -> [OSMBuilding]? {
         let sevenDaysAgo = Date().addingTimeInterval(-7 * 24 * 3600)
-        let radius = 0.002 // ~200m in degrees
+        let radius = 0.002
 
         let request = BuildingGeometryEntity.fetchRequest()
         request.predicate = NSPredicate(
-            format: "centroidLatitude BETWEEN {%f, %f} AND centroidLongitude BETWEEN {%f, %f} AND fetchedAt > %@",
+            format: "osmWayID > 0 AND centroidLatitude BETWEEN {%f, %f} AND centroidLongitude BETWEEN {%f, %f} AND fetchedAt > %@",
             coordinate.latitude - radius, coordinate.latitude + radius,
             coordinate.longitude - radius, coordinate.longitude + radius,
             sevenDaysAgo as NSDate
@@ -135,10 +149,18 @@ final class OSMService {
         return entities.compactMap { OSMBuilding(entity: $0) }
     }
 
+    // MARK: - Grid Key (for deduplication)
+
+    /// Returns a stable key for the ~200 m grid cell containing `coordinate`.
+    private func gridKey(for coordinate: CLLocationCoordinate2D) -> String {
+        let lat = (coordinate.latitude  * 500).rounded() / 500  // 0.002° ≈ 200 m
+        let lon = (coordinate.longitude * 500).rounded() / 500
+        return "\(lat),\(lon)"
+    }
+
     // MARK: - Building Parsing
 
     private func parseBuildingElements(_ elements: [[String: Any]], near origin: CLLocationCoordinate2D) -> [OSMBuilding] {
-        // Build nodeID → coordinate map
         var nodeMap: [Int64: CLLocationCoordinate2D] = [:]
         for element in elements {
             guard let type = element["type"] as? String, type == "node",
@@ -148,7 +170,6 @@ final class OSMService {
             nodeMap[Int64(id)] = CLLocationCoordinate2D(latitude: lat, longitude: lon)
         }
 
-        // Build footprints from ways
         var buildings: [OSMBuilding] = []
         for element in elements {
             guard let type = element["type"] as? String, type == "way",
@@ -159,14 +180,11 @@ final class OSMService {
             let coords = nodeIDs.compactMap { nodeMap[Int64($0)] }
             guard coords.count >= 3 else { continue }
 
-            let height = resolveHeight(from: tags)
-            let centroid = computeCentroid(coords)
-
             buildings.append(OSMBuilding(
                 id: Int64(id),
                 footprint: coords,
-                heightMeters: height,
-                centroid: centroid
+                heightMeters: resolveHeight(from: tags),
+                centroid: computeCentroid(coords)
             ))
         }
         return buildings

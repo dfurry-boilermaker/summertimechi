@@ -23,8 +23,6 @@ struct BarDetailView: View {
                     Divider()
                     weatherSection
                     Divider()
-                    CameraFeedView(snapshot: viewModel.cameraSnapshot, cameraName: viewModel.nearbyCamera?.name)
-                    Divider()
                     yelpSection
                     Divider()
                     ReviewsView(barID: viewModel.bar.id, reviews: viewModel.communityReviews)

@@ -1,11 +1,9 @@
 import Foundation
 import CoreData
-import Combine
 
 @MainActor
 final class FavoritesViewModel: ObservableObject {
     @Published var favoriteBars: [Bar] = []
-    @Published var isLoading: Bool = false
 
     private let context: NSManagedObjectContext
 

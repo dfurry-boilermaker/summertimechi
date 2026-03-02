@@ -1,5 +1,6 @@
 import Foundation
 import CoreLocation
+import MapKit
 
 /// Computes shadow polygons from OSM building footprints and sun position,
 /// then tests whether a patio point falls inside any shadow.
@@ -60,29 +61,99 @@ final class ShadowCalculatorService {
     // MARK: - Shadow Polygon Check
 
     /// Returns `true` if `patio` falls inside the shadow cast by `building` at the given solar position.
+    ///
+    /// Uses a component-polygon approach rather than a convex hull so that non-convex buildings
+    /// (L-shapes, U-shapes, setbacks) are handled correctly. The shadow volume consists of:
+    ///   1. The building footprint itself (patio directly beneath the roof)
+    ///   2. The rooftop footprint translated in the shadow direction (tip of shadow)
+    ///   3. One parallelogram quad per footprint edge (the swept shadow between base and tip)
+    ///
+    /// The convex-hull approach overestimates for concave buildings — e.g. the open notch of an
+    /// L-shaped building would be incorrectly marked as shaded. Testing each component separately
+    /// with ray-casting is geometrically exact for any polygon shape.
     func isPoint(
         _ patio: CLLocationCoordinate2D,
         inShadowOf building: OSMBuilding,
         solarPosition: SolarPosition
     ) -> Bool {
         guard solarPosition.isAboveHorizon,
-              solarPosition.altitude > 0.5,   // Ignore near-horizon (very long shadows, unreliable)
+              solarPosition.altitude > 0.1,   // Lowered from 0.5° — real shadows still exist at 2-5°
+              building.heightMeters > 0,
               building.footprint.count >= 3 else {
             return false
         }
 
         let altRad = solar.toRadians(solarPosition.altitude)
-        let shadowLength = building.heightMeters / tan(altRad)
+        // Cap at 300 m so near-horizon shadows stay realistic without sprawling citywide.
+        let shadowLength = min(building.heightMeters / tan(altRad), 300.0)
         let shadowAzimuth = (solarPosition.azimuth + 180.0).truncatingRemainder(dividingBy: 360.0)
 
         // Convert to flat-earth local coordinate system (meters, origin = building centroid)
         let origin = building.centroid
-        let footprintLocal = building.footprint.map { coord in
-            toLocal(coord: coord, origin: origin)
-        }
+        let footprintLocal = building.footprint.map { toLocal(coord: $0, origin: origin) }
         let patioLocal = toLocal(coord: patio, origin: origin)
 
-        // Extrude footprint in shadow direction
+        // Shadow offset vector (direction away from sun, scaled to shadow length)
+        let shadowDX = shadowLength * sin(solar.toRadians(shadowAzimuth))
+        let shadowDY = shadowLength * cos(solar.toRadians(shadowAzimuth))
+
+        let extruded = footprintLocal.map { CGPoint(x: $0.x + shadowDX, y: $0.y + shadowDY) }
+
+        // 1. Patio directly under the building footprint
+        if isPointInPolygon(patioLocal, polygon: footprintLocal) { return true }
+
+        // 2. Patio at the tip of the shadow (under the translated rooftop)
+        if isPointInPolygon(patioLocal, polygon: extruded) { return true }
+
+        // 3. Each edge's parallelogram quad sweeps the shadow between base and tip.
+        //    This handles every wall segment of any polygon — convex or concave.
+        let n = footprintLocal.count
+        for i in 0..<n {
+            let j = (i + 1) % n
+            let quad = [footprintLocal[i], footprintLocal[j], extruded[j], extruded[i]]
+            if isPointInPolygon(patioLocal, polygon: quad) { return true }
+        }
+
+        return false
+    }
+
+    // MARK: - Coordinate Transform
+
+    func toLocal(coord: CLLocationCoordinate2D, origin: CLLocationCoordinate2D) -> CGPoint {
+        let metersPerDegreeLat = 111_320.0
+        let metersPerDegreeLon = 111_320.0 * cos(solar.toRadians(origin.latitude))
+        let dx = (coord.longitude - origin.longitude) * metersPerDegreeLon
+        let dy = (coord.latitude  - origin.latitude)  * metersPerDegreeLat
+        return CGPoint(x: dx, y: dy)
+    }
+
+    /// Inverse of `toLocal`: converts a local meter-offset `CGPoint` back to geographic coordinates.
+    func fromLocal(_ point: CGPoint, origin: CLLocationCoordinate2D) -> CLLocationCoordinate2D {
+        let metersPerDegreeLat = 111_320.0
+        let metersPerDegreeLon = 111_320.0 * cos(solar.toRadians(origin.latitude))
+        let longitude = origin.longitude + Double(point.x) / metersPerDegreeLon
+        let latitude  = origin.latitude  + Double(point.y) / metersPerDegreeLat
+        return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+    }
+
+    /// Returns the convex-hull shadow polygon cast by `building` at the given solar position,
+    /// or `nil` if the sun is below the horizon or the building footprint is too small.
+    /// (Convex hull is an acceptable approximation for map overlay rendering.)
+    func shadowPolygon(for building: OSMBuilding, solarPosition: SolarPosition) -> MKPolygon? {
+        guard solarPosition.isAboveHorizon,
+              solarPosition.altitude > 0.1,
+              building.heightMeters > 0,
+              building.footprint.count >= 3 else {
+            return nil
+        }
+
+        let altRad = solar.toRadians(solarPosition.altitude)
+        let shadowLength = min(building.heightMeters / tan(altRad), 300.0)
+        let shadowAzimuth = (solarPosition.azimuth + 180.0).truncatingRemainder(dividingBy: 360.0)
+
+        let origin = building.centroid
+        let footprintLocal = building.footprint.map { toLocal(coord: $0, origin: origin) }
+
         let shadowDX = shadowLength * sin(solar.toRadians(shadowAzimuth))
         let shadowDY = shadowLength * cos(solar.toRadians(shadowAzimuth))
 
@@ -90,21 +161,11 @@ final class ShadowCalculatorService {
             CGPoint(x: pt.x + shadowDX, y: pt.y + shadowDY)
         }
 
-        // Convex hull of original + extruded footprint
-        let allPoints = footprintLocal + extrudedFootprint
-        let hull = convexHull(of: allPoints)
+        let hull = convexHull(of: footprintLocal + extrudedFootprint)
+        guard hull.count >= 3 else { return nil }
 
-        return isPointInPolygon(patioLocal, polygon: hull)
-    }
-
-    // MARK: - Coordinate Transform
-
-    private func toLocal(coord: CLLocationCoordinate2D, origin: CLLocationCoordinate2D) -> CGPoint {
-        let metersPerDegreeLat = 111_320.0
-        let metersPerDegreeLon = 111_320.0 * cos(solar.toRadians(origin.latitude))
-        let dx = (coord.longitude - origin.longitude) * metersPerDegreeLon
-        let dy = (coord.latitude  - origin.latitude)  * metersPerDegreeLat
-        return CGPoint(x: dx, y: dy)
+        var coords = hull.map { fromLocal($0, origin: origin) }
+        return MKPolygon(coordinates: &coords, count: coords.count)
     }
 
     // MARK: - Point-in-Polygon (Ray Casting)

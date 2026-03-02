@@ -4,40 +4,94 @@ import CoreData
 
 /// Merges bar data from three sources (City permits, OSM, Yelp) by deduplicating
 /// using geohash proximity + Jaro-Winkler name similarity.
-final class DataMergeService {
+///
+/// **Atomic diff-based merge:** Instead of deleting all records and re-inserting,
+/// the merge matches incoming bars against existing `BarEntity` records by
+/// coordinate proximity + name similarity. Matched entities are updated in-place —
+/// preserving the user's `isFavorite` and `sunAlertsEnabled` flags. Unmatched
+/// stale entities are deleted only if the user hasn't personalised them.
+///
+/// **Background execution:** CoreData work runs on a private background context
+/// so the main thread is never blocked.
+final class DataMergeService: @unchecked Sendable {
     static let shared = DataMergeService()
     private init() {}
 
+    @MainActor private var isMerging = false
+
     // MARK: - Public API
 
-    /// Takes bars from all three sources, deduplicates them, and saves to CoreData.
+    @MainActor
     func mergeAndPersist(
         permits: [Bar],
         osmBars: [Bar],
-        yelpBars: [Bar],
-        context: NSManagedObjectContext
+        yelpBars: [Bar]
     ) async {
+        guard !isMerging else { return }
+        isMerging = true
+        defer { isMerging = false }
+
         let allBars = permits + osmBars + yelpBars
         let deduplicated = deduplicate(allBars)
 
-        await MainActor.run {
-            // Delete all existing BarEntity records before re-inserting
-            let fetchRequest: NSFetchRequest<NSFetchRequestResult> = BarEntity.fetchRequest()
-            let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-            _ = try? context.execute(deleteRequest)
+        let bgContext = PersistenceController.shared.container.newBackgroundContext()
+        bgContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+
+        await bgContext.perform {
+            let request = BarEntity.fetchRequest()
+            let existing = (try? bgContext.fetch(request)) ?? []
+
+            var matchedIDs = Set<NSManagedObjectID>()
 
             for bar in deduplicated {
-                let entity = BarEntity(context: context)
-                bar.apply(to: entity)
+                if let entity = self.findMatchingEntity(for: bar, in: existing) {
+                    // Update metadata while preserving user-controlled fields
+                    let savedFavorite  = entity.isFavorite
+                    let savedAlerts    = entity.sunAlertsEnabled
+                    let savedStatus    = entity.cachedSunStatus
+                    let savedTimestamp = entity.cachedStatusTimestamp
+
+                    bar.apply(to: entity)
+
+                    entity.isFavorite         = savedFavorite
+                    entity.sunAlertsEnabled   = savedAlerts
+                    entity.cachedSunStatus    = savedStatus
+                    entity.cachedStatusTimestamp = savedTimestamp
+
+                    matchedIDs.insert(entity.objectID)
+                } else {
+                    let entity = BarEntity(context: bgContext)
+                    bar.apply(to: entity)
+                    matchedIDs.insert(entity.objectID)
+                }
             }
-            try? context.save()
+
+            // Delete stale bars that the user hasn't personalised
+            for entity in existing where !matchedIDs.contains(entity.objectID) {
+                if !entity.isFavorite && !entity.sunAlertsEnabled {
+                    bgContext.delete(entity)
+                }
+            }
+
+            try? bgContext.save()
+        }
+    }
+
+    // MARK: - Entity Matching
+
+    /// Finds an existing `BarEntity` within ~200 m of `bar` with a similar name (Jaro-Winkler > 0.80).
+    private func findMatchingEntity(for bar: Bar, in entities: [BarEntity]) -> BarEntity? {
+        let coordThreshold = 0.002  // ~200 m in degrees
+        return entities.first { entity in
+            abs(entity.latitude  - bar.coordinate.latitude)  < coordThreshold &&
+            abs(entity.longitude - bar.coordinate.longitude) < coordThreshold &&
+            jaroWinkler(entity.name ?? "", bar.name) > 0.80
         }
     }
 
     // MARK: - Deduplication
 
     func deduplicate(_ bars: [Bar]) -> [Bar] {
-        // Group by geohash cell (precision 7 ≈ 150m × 150m)
         var grid: [String: [Bar]] = [:]
         for bar in bars {
             let hash = geohash(lat: bar.coordinate.latitude, lon: bar.coordinate.longitude, precision: 7)
@@ -72,25 +126,21 @@ final class DataMergeService {
         return merged
     }
 
-    /// Combines two bars that represent the same venue, preferring higher-quality data per field.
     private func combinedBar(preferred: Bar, secondary: Bar) -> Bar {
         var result = preferred
 
-        // Prefer city permit address
         if preferred.dataSourceMask.contains(.cityPermit) {
             // keep preferred.address
         } else if secondary.dataSourceMask.contains(.cityPermit), let addr = secondary.address {
             result.address = addr
         }
 
-        // Prefer OSM coordinates (more precise)
         if preferred.dataSourceMask.contains(.osm) {
             // keep preferred.coordinate
         } else if secondary.dataSourceMask.contains(.osm) {
             result.coordinate = secondary.coordinate
         }
 
-        // Prefer Yelp ratings/ID
         if result.yelpID == nil, let yelpID = secondary.yelpID {
             result.yelpID = yelpID
             result.yelpURL = secondary.yelpURL
@@ -98,10 +148,9 @@ final class DataMergeService {
             result.yelpReviewCount = secondary.yelpReviewCount
         }
 
-        // Combine data source masks
-        result.dataSourceMask = Bar.DataSourceMask(rawValue: preferred.dataSourceMask.rawValue | secondary.dataSourceMask.rawValue)
-
-        // patio confirmed if either source confirms it
+        result.dataSourceMask = Bar.DataSourceMask(
+            rawValue: preferred.dataSourceMask.rawValue | secondary.dataSourceMask.rawValue
+        )
         result.hasPatioConfirmed = preferred.hasPatioConfirmed || secondary.hasPatioConfirmed
 
         return result
@@ -142,7 +191,6 @@ final class DataMergeService {
 
     // MARK: - Jaro-Winkler Similarity
 
-    /// Computes Jaro-Winkler string similarity (0.0–1.0).
     func jaroWinkler(_ s1: String, _ s2: String) -> Double {
         let a = s1.lowercased()
         let b = s2.lowercased()
@@ -150,7 +198,6 @@ final class DataMergeService {
         if a.isEmpty || b.isEmpty { return 0.0 }
 
         let jaro = jaroDistance(a, b)
-        // Common prefix (max 4 chars)
         var prefix = 0
         for (c1, c2) in zip(a, b) {
             if c1 == c2 { prefix += 1 } else { break }
@@ -162,7 +209,6 @@ final class DataMergeService {
     private func jaroDistance(_ s1: String, _ s2: String) -> Double {
         let a = Array(s1)
         let b = Array(s2)
-        // Clamp to 0 so single-char strings don't produce a negative matchDistance
         let matchDistance = max(max(a.count, b.count) / 2 - 1, 0)
 
         var aMatched = Array(repeating: false, count: a.count)
@@ -173,7 +219,7 @@ final class DataMergeService {
         for i in 0..<a.count {
             let start = max(0, i - matchDistance)
             let end   = min(i + matchDistance, b.count - 1)
-            guard start <= end else { continue } // guard against inverted range
+            guard start <= end else { continue }
             for j in start...end {
                 if bMatched[j] || a[i] != b[j] { continue }
                 aMatched[i] = true
@@ -186,7 +232,7 @@ final class DataMergeService {
 
         var k = 0
         for i in 0..<a.count where aMatched[i] {
-            while k < b.count && !bMatched[k] { k += 1 } // bounds-checked
+            while k < b.count && !bMatched[k] { k += 1 }
             guard k < b.count else { break }
             if a[i] != b[k] { transpositions += 1 }
             k += 1

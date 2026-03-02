@@ -18,6 +18,10 @@ struct SummertimeChiApp: App {
             ContentView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .environmentObject(appState)
+                .task {
+                    // Retry any reviews that failed to sync on a previous launch
+                    await ReviewService.shared.retryPendingReviews()
+                }
         }
     }
 
@@ -34,33 +38,28 @@ struct SummertimeChiApp: App {
     }
 
     private func handleSunCheckTask(_ task: BGAppRefreshTask) {
-        scheduleNextSunCheck()
+        SummertimeChiApp.scheduleNextSunCheck()
 
         let operation = SunCheckOperation()
         task.expirationHandler = {
             operation.cancel()
         }
-
         operation.completionBlock = {
             task.setTaskCompleted(success: !operation.isCancelled)
         }
 
-        OperationQueue.main.addOperation(operation)
+        // Run on a dedicated background queue, not the main queue
+        let queue = OperationQueue()
+        queue.maxConcurrentOperationCount = 1
+        queue.addOperation(operation)
     }
 
     static func scheduleNextSunCheck() {
         let request = BGAppRefreshTaskRequest(
             identifier: "com.danielfurry.summertimechi.suncheck"
         )
-        request.earliestBeginDate = Date(timeIntervalSinceNow: 30 * 60) // 30 min
+        request.earliestBeginDate = Date(timeIntervalSinceNow: 30 * 60)
         try? BGTaskScheduler.shared.submit(request)
-    }
-}
-
-// Expose static method for use from instance context
-private extension SummertimeChiApp {
-    func scheduleNextSunCheck() {
-        SummertimeChiApp.scheduleNextSunCheck()
     }
 }
 
@@ -70,34 +69,37 @@ final class SunCheckOperation: Operation, @unchecked Sendable {
     override func main() {
         guard !isCancelled else { return }
 
-        let context = PersistenceController.shared.container.viewContext
-        let fetchRequest = BarEntity.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "sunAlertsEnabled == YES")
+        // Use a private background context — never use viewContext from a background thread
+        let bgContext = PersistenceController.shared.container.newBackgroundContext()
 
-        guard let bars = try? context.fetch(fetchRequest) else { return }
+        bgContext.performAndWait {
+            let fetchRequest = BarEntity.fetchRequest()
+            fetchRequest.predicate = NSPredicate(format: "sunAlertsEnabled == YES")
+            guard let bars = try? bgContext.fetch(fetchRequest) else { return }
 
-        for bar in bars {
-            guard !isCancelled else { return }
-            let coordinate = CLLocationCoordinate2D(
-                latitude: bar.latitude,
-                longitude: bar.longitude
-            )
-            let solarPos = SolarCalculatorService.shared.solarPosition(
-                at: coordinate,
-                date: Date()
-            )
-            let previousStatus = SunStatus(rawValue: bar.cachedSunStatus ?? "") ?? .unknown
-            // Shadow check requires buildings — skip in background for now, use solar position only
-            let newStatus: SunStatus = solarPos.isAboveHorizon ? .sunlit : .belowHorizon
+            for bar in bars {
+                guard !isCancelled else { return }
+                let coordinate = CLLocationCoordinate2D(
+                    latitude: bar.latitude,
+                    longitude: bar.longitude
+                )
+                let solarPos = SolarCalculatorService.shared.solarPosition(
+                    at: coordinate,
+                    date: Date()
+                )
+                let previousStatus = SunStatus(rawValue: bar.cachedSunStatus ?? "") ?? .unknown
+                // Building data not available in background; use solar position only
+                let newStatus: SunStatus = solarPos.isAboveHorizon ? .sunlit : .belowHorizon
 
-            if previousStatus == .shaded && newStatus == .sunlit {
-                NotificationService.shared.scheduleTransitionNotification(barName: bar.name ?? "Bar")
+                if previousStatus == .shaded && newStatus == .sunlit {
+                    NotificationService.shared.scheduleTransitionNotification(barName: bar.name ?? "Bar")
+                }
+
+                bar.cachedSunStatus    = newStatus.rawValue
+                bar.cachedStatusTimestamp = Date()
             }
 
-            bar.cachedSunStatus = newStatus.rawValue
-            bar.cachedStatusTimestamp = Date()
+            try? bgContext.save()
         }
-
-        try? context.save()
     }
 }

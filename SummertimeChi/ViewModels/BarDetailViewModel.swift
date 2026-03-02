@@ -7,8 +7,6 @@ final class BarDetailViewModel: ObservableObject {
     @Published var sunTimeline: SunTimeline?
     @Published var currentStatus: SunStatus = .unknown
     @Published var weatherConditions: WeatherService.WeatherConditions?
-    @Published var nearbyCamera: ChicagoCamera?
-    @Published var cameraSnapshot: Data?
     @Published var communityReviews: [UserReview] = []
     @Published var isLoadingTimeline: Bool = false
     @Published var isFavorite: Bool = false
@@ -17,7 +15,6 @@ final class BarDetailViewModel: ObservableObject {
     private let context: NSManagedObjectContext
     private let shadow = ShadowCalculatorService.shared
     private let weather = WeatherService.shared
-    private let camera = CameraFeedService.shared
 
     init(bar: Bar, context: NSManagedObjectContext) {
         self.bar = bar
@@ -32,7 +29,6 @@ final class BarDetailViewModel: ObservableObject {
         await withTaskGroup(of: Void.self) { group in
             group.addTask { await self.loadSunTimeline() }
             group.addTask { await self.loadWeather() }
-            group.addTask { await self.loadCameraFeed() }
             group.addTask { await self.loadCommunityReviews() }
         }
     }
@@ -63,13 +59,6 @@ final class BarDetailViewModel: ObservableObject {
         weatherConditions = await weather.fetchConditions(for: bar.coordinate)
     }
 
-    func loadCameraFeed() async {
-        nearbyCamera = camera.nearestCamera(to: bar.coordinate)
-        if let cam = nearbyCamera {
-            cameraSnapshot = await camera.fetchSnapshot(for: cam)
-        }
-    }
-
     func loadCommunityReviews() async {
         communityReviews = await ReviewService.shared.fetchReviews(for: bar.id)
     }
@@ -95,14 +84,18 @@ final class BarDetailViewModel: ObservableObject {
 
     // MARK: - Next Transition
 
+    private static let transitionTimeFormatter: DateFormatter = {
+        let f = DateFormatter()
+        f.timeStyle = .short
+        return f
+    }()
+
     var nextTransitionDescription: String? {
         guard let timeline = sunTimeline,
               let (nextStatus, nextTime) = timeline.nextTransition(from: Date()) else {
             return nil
         }
-        let formatter = DateFormatter()
-        formatter.timeStyle = .short
-        let timeStr = formatter.string(from: nextTime)
+        let timeStr = Self.transitionTimeFormatter.string(from: nextTime)
         switch nextStatus {
         case .sunlit: return "Enters sun at \(timeStr)"
         case .shaded: return "Enters shade at \(timeStr)"

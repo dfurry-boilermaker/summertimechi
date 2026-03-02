@@ -46,22 +46,19 @@ struct SunTimelineView: View {
         .frame(height: 28)
     }
 
+    @ViewBuilder
     private func currentTimeIndicator(totalHours: Double, width: CGFloat) -> some View {
         let now = Date()
         let cal = Calendar.current
         let hour = Double(cal.component(.hour, from: now))
         let minute = Double(cal.component(.minute, from: now))
-        let totalMinutes = hour * 60 + minute
-        let startMinutes = Double(hourRange.lowerBound) * 60
-        let rangeMinutes = totalHours * 60
-        let fraction = (totalMinutes - startMinutes) / rangeMinutes
-        guard fraction >= 0 && fraction <= 1 else { return AnyView(EmptyView()) }
-        return AnyView(
+        let fraction = (hour * 60 + minute - Double(hourRange.lowerBound) * 60) / (totalHours * 60)
+        if fraction >= 0 && fraction <= 1 {
             Rectangle()
                 .fill(Color.white)
                 .frame(width: 2, height: 36)
                 .offset(x: fraction * width - 1)
-        )
+        }
     }
 
     // MARK: - Hour Labels

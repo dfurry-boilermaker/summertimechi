@@ -10,13 +10,15 @@ struct BarAnnotationView: View {
     }
 
     var body: some View {
-        Button(action: onTap) {
-            VStack(spacing: 0) {
-                pinBody
-                pinStem
-            }
+        VStack(spacing: 0) {
+            pinBody
+            pinStem
+                .allowsHitTesting(false)
         }
-        .buttonStyle(.plain)
+        // Restrict hit-testing to the circle only so the stem gap and surrounding
+        // space pass touches through to the map's pinch-to-zoom recognizer.
+        .contentShape(Circle())
+        .onTapGesture(perform: onTap)
     }
 
     private var pinBody: some View {

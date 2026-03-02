@@ -15,10 +15,14 @@ struct SunTimelineEntry: Identifiable {
     }
 
     var timeString: String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "h:mm a"
-        return formatter.string(from: date)
+        Self.timeFormatter.string(from: date)
     }
+
+    private static let timeFormatter: DateFormatter = {
+        let f = DateFormatter()
+        f.dateFormat = "h:mm a"
+        return f
+    }()
 }
 
 /// A full-day sun/shade timeline at 15-minute resolution.
