@@ -1,0 +1,35 @@
+Chicago summers are short. Make every patio hour count.
+
+SummertimeChi tells you whether a bar's outdoor patio is in the sun or shade — right now, and at any time of day. No more arriving at your favorite spot only to find you're sitting in a shadow all afternoon.
+
+HOW IT WORKS
+─────────────
+Using real-time solar position calculations and 3D LIDAR building data from Chicago's own mapping systems, SummertimeChi draws accurate shadow polygons directly on a 3D map. You can see exactly which patios the sun is hitting at this moment.
+
+THE TIME SLIDER
+───────────────
+Planning a meetup at 4pm? Drag the time slider to see what the sun situation will look like before you leave the house. Simulate any hour from 6 AM to 11 PM without changing your phone's clock.
+
+FIND YOUR KIND OF SUN
+──────────────────────
+Map Tab — Browse an interactive 3D map of Chicago with color-coded pins showing each patio's current sun status. Tap any pin for a full day-by-day timeline.
+
+Search Tab — Filter bars by "In Sun Now," "In Shade," name, or neighborhood. Covers hundreds of confirmed outdoor patio bars across every Chicago neighborhood: River North, Wicker Park, Wrigleyville, Logan Square, Old Town, Lincoln Park, Lakeview, the Loop, and more.
+
+Favorites Tab — Save your go-to spots and get weather context (cloud cover + patio suitability) all in one place.
+
+SUN ALERTS
+──────────
+Enable alerts on any favorite bar and get notified the moment its patio moves into — or out of — direct sunlight.
+
+BEAUTIFUL 3D VISUALIZATION
+────────────────────────────
+Toggle between a flat overview and a tilted 3D perspective with Apple's realistic building models. Shadow overlays update in real time as you pan and zoom.
+
+BUILT FOR CHICAGO
+──────────────────
+SummertimeChi focuses entirely on Chicago's patio scene — not a generic nationwide bar finder. Every bar on the map has a confirmed outdoor patio. Data is sourced from OpenStreetMap and ArcGIS Chicago 3D Buildings and refreshed regularly.
+
+Whether you're chasing the afternoon sun at Sheffield's or hunting for shade on a scorching August Saturday, SummertimeChi helps you pick the right patio at the right time.
+
+Download free. No account required.

@@ -47,7 +47,6 @@ final class WeatherService: ObservableObject {
             cache[key] = conditions
             return conditions
         } catch {
-            print("[WeatherService] fetch failed: \(error)")
             return cache[key]
         }
     }

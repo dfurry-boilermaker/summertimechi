@@ -15,10 +15,20 @@ final class PersistenceController {
             setupStoreDescriptions()
         }
 
-        container.loadPersistentStores { description, error in
-            if let error = error {
-                // In production, handle gracefully rather than crashing
-                fatalError("CoreData failed to load: \(error.localizedDescription)")
+        container.loadPersistentStores { [weak self] description, error in
+            guard error != nil else { return }
+            // Attempt recovery: destroy the corrupted store and re-add it empty.
+            // Seed data will be reloaded on next fetch.
+            if let url = description.url {
+                _ = try? self?.container.persistentStoreCoordinator.destroyPersistentStore(
+                    at: url, type: .sqlite, options: nil
+                )
+                _ = try? self?.container.persistentStoreCoordinator.addPersistentStore(
+                    ofType: NSSQLiteStoreType,
+                    configurationName: description.configuration,
+                    at: url,
+                    options: nil
+                )
             }
         }
 

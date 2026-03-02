@@ -6,7 +6,6 @@ final class BarDetailViewModel: ObservableObject {
     @Published var bar: Bar
     @Published var sunTimeline: SunTimeline?
     @Published var currentStatus: SunStatus = .unknown
-    @Published var weatherConditions: WeatherService.WeatherConditions?
     @Published var communityReviews: [UserReview] = []
     @Published var isLoadingTimeline: Bool = false
     @Published var isFavorite: Bool = false
@@ -14,7 +13,6 @@ final class BarDetailViewModel: ObservableObject {
 
     private let context: NSManagedObjectContext
     private let shadow = ShadowCalculatorService.shared
-    private let weather = WeatherService.shared
 
     init(bar: Bar, context: NSManagedObjectContext) {
         self.bar = bar
@@ -28,7 +26,6 @@ final class BarDetailViewModel: ObservableObject {
     func loadAll() async {
         await withTaskGroup(of: Void.self) { group in
             group.addTask { await self.loadSunTimeline() }
-            group.addTask { await self.loadWeather() }
             group.addTask { await self.loadCommunityReviews() }
         }
     }
@@ -37,8 +34,8 @@ final class BarDetailViewModel: ObservableObject {
         isLoadingTimeline = true
         defer { isLoadingTimeline = false }
 
-        let buildings = (try? await OSMService.shared.fetchBuildings(near: bar.coordinate, context: context)) ?? []
-        let cloudCover = weatherConditions?.cloudCoverFraction ?? 0
+        let buildings = (try? await OSMService.shared.fetchBuildings(near: bar.coordinate)) ?? []
+        let cloudCover: Double = 0
 
         let timeline = shadow.generateTimeline(
             forBar: bar,
@@ -53,10 +50,6 @@ final class BarDetailViewModel: ObservableObject {
             date: Date(),
             cloudCover: cloudCover
         )
-    }
-
-    func loadWeather() async {
-        weatherConditions = await weather.fetchConditions(for: bar.coordinate)
     }
 
     func loadCommunityReviews() async {

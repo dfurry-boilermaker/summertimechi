@@ -4,6 +4,7 @@ import Combine
 
 @MainActor
 final class AppState: ObservableObject {
+    @Published var showSplash: Bool = true
     @Published var userLocation: CLLocationCoordinate2D?
     @Published var locationAuthorizationStatus: CLAuthorizationStatus = .notDetermined
     @Published var isLoadingBars: Bool = false

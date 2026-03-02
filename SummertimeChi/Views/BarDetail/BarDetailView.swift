@@ -20,12 +20,6 @@ struct BarDetailView: View {
                     statusHeader
                     Divider()
                     timelineSection
-                    Divider()
-                    weatherSection
-                    Divider()
-                    yelpSection
-                    Divider()
-                    ReviewsView(barID: viewModel.bar.id, reviews: viewModel.communityReviews)
                 }
                 .padding()
             }
@@ -89,58 +83,6 @@ struct BarDetailView: View {
                 ProgressView("Calculating…")
                     .frame(maxWidth: .infinity, alignment: .center)
             }
-        }
-    }
-
-    // MARK: - Weather
-
-    private var weatherSection: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text("Weather")
-                .font(.headline)
-            if let wx = viewModel.weatherConditions {
-                HStack(spacing: 20) {
-                    Label("\(Int(wx.cloudCoverFraction * 100))% clouds", systemImage: "cloud")
-                    if let temp = wx.temperatureFahrenheit {
-                        Label("\(Int(temp))°F", systemImage: "thermometer")
-                    }
-                }
-                .font(.subheadline)
-                .foregroundStyle(.secondary)
-            } else {
-                Text("Weather unavailable")
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
-            }
-        }
-    }
-
-    // MARK: - Yelp
-
-    private var yelpSection: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text("Yelp")
-                .font(.headline)
-            HStack {
-                if viewModel.bar.yelpRating > 0 {
-                    Image(systemName: "star.fill")
-                        .foregroundStyle(.yellow)
-                    Text(String(format: "%.1f", viewModel.bar.yelpRating))
-                        .font(.subheadline.bold())
-                    Text("(\(viewModel.bar.yelpReviewCount) reviews)")
-                        .font(.subheadline)
-                        .foregroundStyle(.secondary)
-                }
-                Spacer()
-                if let yelpURL = viewModel.bar.yelpURL {
-                    Link("View on Yelp", destination: yelpURL)
-                        .font(.subheadline)
-                }
-            }
-            // Yelp ToS attribution
-            Text("Reviews powered by Yelp")
-                .font(.caption2)
-                .foregroundStyle(.tertiary)
         }
     }
 

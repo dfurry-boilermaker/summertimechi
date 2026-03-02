@@ -13,6 +13,11 @@ final class OSMService {
     /// Deduplicates concurrent building fetch requests for the same ~200m grid cell.
     private let buildingDeduplicator = InFlightDeduplicator<String, [OSMBuilding]>()
 
+    /// Private background context for cache reads/writes — never touches the main viewContext.
+    private lazy var cacheContext: NSManagedObjectContext = {
+        PersistenceController.shared.container.newBackgroundContext()
+    }()
+
     // MARK: - Bar Query
 
     /// Fetches Chicago bars/pubs/biergarens with confirmed outdoor seating from OSM.
@@ -80,22 +85,20 @@ final class OSMService {
     /// Concurrent requests for the same ~200 m grid cell are deduplicated: only
     /// one Overpass request fires; all callers share its result.
     func fetchBuildings(
-        near coordinate: CLLocationCoordinate2D,
-        context: NSManagedObjectContext
+        near coordinate: CLLocationCoordinate2D
     ) async throws -> [OSMBuilding] {
-        if let cached = cachedBuildings(near: coordinate, context: context) {
+        if let cached = cachedBuildings(near: coordinate) {
             return cached
         }
 
         let key = gridKey(for: coordinate)
         return try await buildingDeduplicator.deduplicate(key: key) {
-            try await self.fetchBuildingsFromOverpass(near: coordinate, context: context)
+            try await self.fetchBuildingsFromOverpass(near: coordinate)
         }
     }
 
     private func fetchBuildingsFromOverpass(
-        near coordinate: CLLocationCoordinate2D,
-        context: NSManagedObjectContext
+        near coordinate: CLLocationCoordinate2D
     ) async throws -> [OSMBuilding] {
         let lat = coordinate.latitude
         let lon = coordinate.longitude
@@ -131,8 +134,7 @@ final class OSMService {
     }
 
     private func cachedBuildings(
-        near coordinate: CLLocationCoordinate2D,
-        context: NSManagedObjectContext
+        near coordinate: CLLocationCoordinate2D
     ) -> [OSMBuilding]? {
         let sevenDaysAgo = Date().addingTimeInterval(-7 * 24 * 3600)
         let radius = 0.002
@@ -145,8 +147,12 @@ final class OSMService {
             sevenDaysAgo as NSDate
         )
 
-        guard let entities = try? context.fetch(request), !entities.isEmpty else { return nil }
-        return entities.compactMap { OSMBuilding(entity: $0) }
+        var result: [OSMBuilding]? = nil
+        cacheContext.performAndWait {
+            guard let entities = try? cacheContext.fetch(request), !entities.isEmpty else { return }
+            result = entities.compactMap { OSMBuilding(entity: $0) }
+        }
+        return result
     }
 
     // MARK: - Grid Key (for deduplication)

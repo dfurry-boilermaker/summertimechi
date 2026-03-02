@@ -43,6 +43,7 @@
 		A1000038 /* SeedDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE000001 /* SeedDataService.swift */; };
 		A1000039 /* NetworkRetry.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000039 /* NetworkRetry.swift */; };
 		A1000040 /* ArcGISBuildingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000040 /* ArcGISBuildingService.swift */; };
+		A1000041 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF000001 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -96,6 +97,7 @@
 		A3000003 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AC000001 /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Secrets.xcconfig; path = SummertimeChi/Resources/Secrets.xcconfig; sourceTree = SOURCE_ROOT; };
 		AD000001 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Resources/Assets.xcassets; sourceTree = "<group>"; };
+		AF000001 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Resources/LaunchScreen.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +143,7 @@
 				A3000003 /* Info.plist */,
 				AC000001 /* Secrets.xcconfig */,
 				AD000001 /* Assets.xcassets */,
+				AF000001 /* LaunchScreen.storyboard */,
 			);
 			path = SummertimeChi;
 			sourceTree = "<group>";
@@ -358,6 +361,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A1000037 /* Assets.xcassets in Resources */,
+				A1000041 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -558,7 +562,7 @@
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = SummertimeChi/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = NO;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = NO;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -589,7 +593,7 @@
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = SummertimeChi/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = NO;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = NO;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

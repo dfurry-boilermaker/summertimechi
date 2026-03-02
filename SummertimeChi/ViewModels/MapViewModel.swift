@@ -50,6 +50,12 @@ final class MapViewModel: ObservableObject {
             for idx in bars.indices {
                 bars[idx].cachedSunStatus = .belowHorizon
             }
+        } else {
+            // Optimistic daytime default: show sunlit instead of ? until shadow computation runs.
+            // recomputeShadowOverlays() will correct specific bars to .shaded as it processes them.
+            for idx in bars.indices where bars[idx].cachedSunStatus == nil || bars[idx].cachedSunStatus == .unknown {
+                bars[idx].cachedSunStatus = .sunlit
+            }
         }
     }
 
@@ -92,17 +98,21 @@ final class MapViewModel: ObservableObject {
     // MARK: - Shadow Overlay Computation
 
     func recomputeShadowOverlays() async {
-        // Cap at 8 nearest bars to prevent runaway network calls and computation
-        let visible = Array(visibleBars(in: region).prefix(8))
+        // ArcGIS now has a 5s timeout so each bar takes at most ~11s (2 attempts).
+        // Cap at 15 to cover dense areas like Wrigleyville without queuing too many requests.
+        let visible = Array(visibleBars(in: region).prefix(15))
         let solar = SolarCalculatorService.shared.solarPosition(at: region.center, date: Date())
 
         guard solar.isAboveHorizon else {
             shadowOverlays = []
+            var statuses: [UUID: SunStatus] = [:]
             for bar in visible {
                 if let idx = bars.firstIndex(where: { $0.id == bar.id }) {
                     bars[idx].cachedSunStatus = .belowHorizon
                 }
+                statuses[bar.id] = .belowHorizon
             }
+            persistStatuses(statuses)
             return
         }
 
@@ -116,10 +126,10 @@ final class MapViewModel: ObservableObject {
             await Task.yield()
 
             let bbox = boundingBox(near: bar.coordinate, radiusMeters: 250)
-            let arcgisBuildings = await ArcGISBuildingService.shared.fetchBuildings(in: bbox, context: context)
+            let arcgisBuildings = await ArcGISBuildingService.shared.fetchBuildings(in: bbox)
             let buildings: [OSMBuilding]
             if arcgisBuildings.isEmpty {
-                buildings = (try? await OSMService.shared.fetchBuildings(near: bar.coordinate, context: context)) ?? []
+                buildings = (try? await OSMService.shared.fetchBuildings(near: bar.coordinate)) ?? []
             } else {
                 buildings = arcgisBuildings
             }
@@ -161,6 +171,30 @@ final class MapViewModel: ObservableObject {
         for (barID, status) in barStatuses {
             if let idx = bars.firstIndex(where: { $0.id == barID }) {
                 bars[idx].cachedSunStatus = status
+            }
+        }
+        // Save computed statuses to CoreData so bars show their last-known status on next launch
+        // instead of reverting to the optimistic default every time.
+        persistStatuses(barStatuses)
+    }
+
+    // MARK: - Status Persistence
+
+    private func persistStatuses(_ statuses: [UUID: SunStatus]) {
+        guard !statuses.isEmpty else { return }
+        Task {
+            let bgContext = PersistenceController.shared.container.newBackgroundContext()
+            await bgContext.perform {
+                let req = BarEntity.fetchRequest()
+                req.predicate = NSPredicate(format: "id IN %@", Array(statuses.keys))
+                guard let entities = try? bgContext.fetch(req) else { return }
+                let now = Date()
+                for entity in entities {
+                    guard let id = entity.id, let status = statuses[id] else { continue }
+                    entity.cachedSunStatus = status.rawValue
+                    entity.cachedStatusTimestamp = now
+                }
+                try? bgContext.save()
             }
         }
     }

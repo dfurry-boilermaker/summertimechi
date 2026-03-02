@@ -16,27 +16,30 @@ final class ArcGISBuildingService {
     /// Deduplicates concurrent requests for the same bounding-box cell.
     private let deduplicator = InFlightDeduplicator<String, [OSMBuilding]>()
 
+    /// Private background context for cache reads/writes — never touches the main viewContext.
+    private lazy var cacheContext: NSManagedObjectContext = {
+        PersistenceController.shared.container.newBackgroundContext()
+    }()
+
     // MARK: - Public API
 
     func fetchBuildings(
-        in bbox: (minLat: Double, minLon: Double, maxLat: Double, maxLon: Double),
-        context: NSManagedObjectContext
+        in bbox: (minLat: Double, minLon: Double, maxLat: Double, maxLon: Double)
     ) async -> [OSMBuilding] {
-        if let cached = cachedBuildings(in: bbox, context: context) {
+        if let cached = cachedBuildings(in: bbox) {
             return cached
         }
 
         let key = bboxKey(bbox)
         return (try? await deduplicator.deduplicate(key: key) {
-            try await self.fetchFromArcGIS(bbox: bbox, context: context)
+            try await self.fetchFromArcGIS(bbox: bbox)
         }) ?? []
     }
 
     // MARK: - ArcGIS Network Request
 
     private func fetchFromArcGIS(
-        bbox: (minLat: Double, minLon: Double, maxLat: Double, maxLon: Double),
-        context: NSManagedObjectContext
+        bbox: (minLat: Double, minLon: Double, maxLat: Double, maxLon: Double)
     ) async throws -> [OSMBuilding] {
         let geometryJSON = """
         {"xmin":\(bbox.minLon),"ymin":\(bbox.minLat),"xmax":\(bbox.maxLon),"ymax":\(bbox.maxLat),"spatialReference":{"wkid":4326}}
@@ -56,9 +59,10 @@ final class ArcGISBuildingService {
         guard let url = components.url else { throw ArcGISError.invalidURL }
 
         var request = URLRequest(url: url)
-        request.timeoutInterval = 30
+        // Short timeout so we fail fast and let OSM take over rather than blocking for 30s.
+        request.timeoutInterval = 5
 
-        let buildings = try await withRetry(maxAttempts: 2, initialDelay: 1.0) {
+        let buildings = try await withRetry(maxAttempts: 1, initialDelay: 0) {
             let (data, response) = try await URLSession.shared.data(for: request)
             guard let httpResponse = response as? HTTPURLResponse,
                   (200...299).contains(httpResponse.statusCode) else {
@@ -117,8 +121,7 @@ final class ArcGISBuildingService {
     // MARK: - CoreData Cache (30-day TTL)
 
     private func cachedBuildings(
-        in bbox: (minLat: Double, minLon: Double, maxLat: Double, maxLon: Double),
-        context: NSManagedObjectContext
+        in bbox: (minLat: Double, minLon: Double, maxLat: Double, maxLon: Double)
     ) -> [OSMBuilding]? {
         let thirtyDaysAgo = Date().addingTimeInterval(-30 * 24 * 3600)
         let centerLat = (bbox.minLat + bbox.maxLat) / 2
@@ -133,8 +136,13 @@ final class ArcGISBuildingService {
             centerLon - lonRadius, centerLon + lonRadius,
             thirtyDaysAgo as NSDate
         )
-        guard let entities = try? context.fetch(request), !entities.isEmpty else { return nil }
-        return entities.compactMap { OSMBuilding(entity: $0) }
+
+        var result: [OSMBuilding]? = nil
+        cacheContext.performAndWait {
+            guard let entities = try? cacheContext.fetch(request), !entities.isEmpty else { return }
+            result = entities.compactMap { OSMBuilding(entity: $0) }
+        }
+        return result
     }
 
     private func persistBuildings(_ buildings: [OSMBuilding]) async {

@@ -44,9 +44,14 @@ struct MapView: View {
                         .padding(.bottom, 20)
                 }
             }
-            .navigationTitle("SummertimeChi")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
+                ToolbarItem(placement: .principal) {
+                    Image("SummertimeChi")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(height: 28)
+                }
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
                         Task { await viewModel.refreshData() }
@@ -64,7 +69,7 @@ struct MapView: View {
             }
             .sheet(item: $selectedBar) { (bar: Bar) in
                 BarDetailView(bar: bar)
-                    .presentationDetents([.medium, .large])
+                    .presentationDetents([.fraction(0.55), .large])
                     .presentationDragIndicator(.visible)
             }
             .alert("Error", isPresented: Binding(
@@ -80,9 +85,16 @@ struct MapView: View {
             appState.requestLocationPermission()
             viewModel.loadBars()
             if viewModel.bars.isEmpty {
-                Task { await viewModel.refreshData() }
+                Task {
+                    await viewModel.refreshData()
+                    withAnimation(.easeOut(duration: 0.4)) { appState.showSplash = false }
+                }
             } else {
                 viewModel.triggerShadowRecomputation()
+                Task {
+                    try? await Task.sleep(for: .milliseconds(800))
+                    withAnimation(.easeOut(duration: 0.4)) { appState.showSplash = false }
+                }
             }
         }
         .onChange(of: viewModel.is3DMode) { _, is3D in
@@ -115,17 +127,16 @@ struct MapView: View {
                     }
                 }
             }
-            // Shadow polygons (semi-transparent dark fill, no stroke)
-            ForEach(viewModel.shadowOverlays.indices, id: \.self) { idx in
-                MapPolygon(coordinates: viewModel.shadowOverlays[idx].coordinates)
+            // Shadow polygons (semi-transparent dark fill, no stroke).
+            // enumerated() snapshots the array so stale indices never subscript a shorter array.
+            ForEach(Array(viewModel.shadowOverlays.enumerated()), id: \.offset) { _, overlay in
+                MapPolygon(coordinates: overlay.coordinates)
                     .foregroundStyle(.black.opacity(0.35))
                     .stroke(.clear, lineWidth: 0)
             }
         }
         .mapStyle(.standard(elevation: .realistic))
-        .mapControls {
-            MapCompass()
-        }
+        .mapControls {}
         .ignoresSafeArea(edges: .top)
         .onMapCameraChange(frequency: .onEnd) { context in
             currentCamera = context.camera

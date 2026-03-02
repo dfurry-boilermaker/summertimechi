@@ -1,0 +1,26 @@
+APP NAME
+────────
+SummertimeChi
+
+SUBTITLE (30 chars max — 28 used)
+──────────────────────────────────
+Chicago Patio Sun Finder
+
+PROMOTIONAL TEXT (170 chars max — 150 used)
+────────────────────────────────────────────
+Find Chicago's sunniest patios in seconds. Real-time shadow maps show exactly which outdoor bars are in the sun right now — or at any time you choose.
+
+KEYWORDS (100 chars max — 97 used)
+────────────────────────────────────
+bar,patio,outdoor,sun,shade,Chicago,nightlife,map,brewery,rooftop,sunny,weather,happy hour,drinks
+
+DESCRIPTION
+────────────
+See description.txt
+
+NOTES
+─────
+- Promotional text can be updated without a new build (A/B test seasonally).
+- "Chicago" in subtitle boosts keyword indexing even without it in the keyword field.
+- Description is plain text only — App Store does not render markdown.
+- App is free, no account required.

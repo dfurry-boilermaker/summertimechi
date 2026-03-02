@@ -64,7 +64,7 @@ struct SearchView: View {
             .searchable(text: $searchText, prompt: "Bar name or neighborhood…")
             .sheet(item: $selectedBar) { (bar: Bar) in
                 BarDetailView(bar: bar)
-                    .presentationDetents([.medium, .large])
+                    .presentationDetents([.fraction(0.55), .large])
                     .presentationDragIndicator(.visible)
             }
         }
@@ -173,7 +173,7 @@ struct FilterChip: View {
                 .font(.subheadline)
                 .padding(.horizontal, 14)
                 .padding(.vertical, 6)
-                .background(isSelected ? Color.yellow : Color(white: 0.15))
+                .background(isSelected ? Color.yellow : Color(.secondarySystemFill))
                 .foregroundStyle(isSelected ? Color.black : Color.primary)
                 .clipShape(Capsule())
         }

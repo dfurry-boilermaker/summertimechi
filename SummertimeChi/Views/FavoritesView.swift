@@ -24,7 +24,7 @@ struct FavoritesView: View {
             .navigationTitle("Favorites")
             .sheet(item: $selectedBar) { (bar: Bar) in
                 BarDetailView(bar: bar)
-                    .presentationDetents([.medium, .large])
+                    .presentationDetents([.fraction(0.55), .large])
                     .presentationDragIndicator(.visible)
             }
             .onAppear { viewModel.loadFavorites() }
@@ -36,8 +36,10 @@ struct FavoritesView: View {
 
     private var favoritesList: some View {
         List {
-            Section {
-                weatherCard
+            if viewModel.isLoadingWeather || viewModel.weather != nil {
+                Section {
+                    weatherCard
+                }
             }
             ForEach(viewModel.favoriteBars) { bar in
                 HStack {
@@ -106,11 +108,6 @@ struct FavoritesView: View {
                     .background(suitabilityColor(for: wx).opacity(0.15), in: Capsule())
             }
             .padding(.vertical, 6)
-        } else {
-            Label("Weather unavailable", systemImage: "exclamationmark.triangle")
-                .font(.subheadline)
-                .foregroundStyle(.secondary)
-                .padding(.vertical, 8)
         }
     }
 
@@ -136,11 +133,13 @@ struct FavoritesView: View {
 
     private var emptyState: some View {
         VStack(spacing: 0) {
-            List {
-                Section { weatherCard }
+            if viewModel.isLoadingWeather || viewModel.weather != nil {
+                List {
+                    Section { weatherCard }
+                }
+                .listStyle(.plain)
+                .frame(height: 100)
             }
-            .listStyle(.plain)
-            .frame(height: 100)
 
             VStack(spacing: 16) {
                 Image(systemName: "heart.slash")

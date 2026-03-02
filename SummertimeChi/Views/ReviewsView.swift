@@ -3,21 +3,10 @@ import SwiftUI
 struct ReviewsView: View {
     let barID: UUID
     let reviews: [UserReview]
-    @State private var showingAddReview = false
-
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
-            HStack {
-                Text("Community Reviews")
-                    .font(.headline)
-                Spacer()
-                Button {
-                    showingAddReview = true
-                } label: {
-                    Label("Write Review", systemImage: "square.and.pencil")
-                        .font(.subheadline)
-                }
-            }
+            Text("Community Reviews")
+                .font(.headline)
 
             if reviews.isEmpty {
                 Text("No reviews yet. Be the first to review this patio's sun situation!")
@@ -29,9 +18,6 @@ struct ReviewsView: View {
                     Divider()
                 }
             }
-        }
-        .sheet(isPresented: $showingAddReview) {
-            AddReviewView(barID: barID)
         }
     }
 }
@@ -78,97 +64,6 @@ struct SunRatingView: View {
     }
 }
 
-// MARK: - Add Review Sheet
-
-struct AddReviewView: View {
-    let barID: UUID
-    @Environment(\.dismiss) private var dismiss
-    @State private var sunRating = 3
-    @State private var reviewText = ""
-    @State private var authorName = ""
-    @State private var isSubmitting = false
-    @State private var submitError: String?
-
-    var body: some View {
-        NavigationStack {
-            Form {
-                Section("Sun Rating") {
-                    HStack {
-                        Text("How sunny is this patio?")
-                            .font(.subheadline)
-                        Spacer()
-                        HStack(spacing: 4) {
-                            ForEach(1...5, id: \.self) { star in
-                                Button {
-                                    sunRating = star
-                                } label: {
-                                    Image(systemName: star <= sunRating ? "sun.max.fill" : "sun.max")
-                                        .foregroundStyle(star <= sunRating ? .yellow : .gray)
-                                        .font(.title3)
-                                }
-                                .buttonStyle(.plain)
-                            }
-                        }
-                    }
-                }
-
-                Section("Your Review (optional)") {
-                    TextField("Describe the patio's sun situation…", text: $reviewText, axis: .vertical)
-                        .lineLimit(3...6)
-                }
-
-                Section("Display Name") {
-                    TextField("Your name or nickname", text: $authorName)
-                }
-
-                if let error = submitError {
-                    Section {
-                        Text(error)
-                            .foregroundStyle(.red)
-                            .font(.footnote)
-                    }
-                }
-            }
-            .navigationTitle("Write a Review")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    Button("Cancel") { dismiss() }
-                }
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button("Submit") {
-                        Task { await submitReview() }
-                    }
-                    .disabled(authorName.isEmpty || isSubmitting)
-                    .bold()
-                }
-            }
-            .overlay {
-                if isSubmitting {
-                    ProgressView("Submitting…")
-                        .padding()
-                        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 12))
-                }
-            }
-        }
-    }
-
-    private func submitReview() async {
-        isSubmitting = true
-        defer { isSubmitting = false }
-        do {
-            try await ReviewService.shared.submitReview(
-                barID: barID,
-                sunRating: sunRating,
-                reviewText: reviewText.isEmpty ? nil : reviewText,
-                authorDisplayName: authorName
-            )
-            dismiss()
-        } catch {
-            submitError = error.localizedDescription
-        }
-    }
-}
 
 #Preview {
     ReviewsView(barID: UUID(), reviews: [
