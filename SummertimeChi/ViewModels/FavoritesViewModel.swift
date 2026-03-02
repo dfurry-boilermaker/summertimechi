@@ -1,14 +1,26 @@
 import Foundation
 import CoreData
+import CoreLocation
 
 @MainActor
 final class FavoritesViewModel: ObservableObject {
     @Published var favoriteBars: [Bar] = []
+    @Published var weather: WeatherService.WeatherConditions?
+    @Published var isLoadingWeather: Bool = false
 
     private let context: NSManagedObjectContext
+    // Central Chicago coordinate — representative for all city bars
+    private static let chicagoCoord = CLLocationCoordinate2D(latitude: 41.8827, longitude: -87.6233)
 
     init(context: NSManagedObjectContext) {
         self.context = context
+    }
+
+    func loadWeather() async {
+        guard weather == nil else { return }  // don't refetch if already loaded
+        isLoadingWeather = true
+        defer { isLoadingWeather = false }
+        weather = await WeatherService.shared.fetchConditions(for: Self.chicagoCoord)
     }
 
     func loadFavorites() {

@@ -28,6 +28,7 @@ struct FavoritesView: View {
                     .presentationDragIndicator(.visible)
             }
             .onAppear { viewModel.loadFavorites() }
+            .task { await viewModel.loadWeather() }
         }
     }
 
@@ -35,6 +36,9 @@ struct FavoritesView: View {
 
     private var favoritesList: some View {
         List {
+            Section {
+                weatherCard
+            }
             ForEach(viewModel.favoriteBars) { bar in
                 HStack {
                     BarListRow(bar: bar)
@@ -63,22 +67,95 @@ struct FavoritesView: View {
         .listStyle(.plain)
     }
 
+    // MARK: - Weather Card
+
+    @ViewBuilder
+    private var weatherCard: some View {
+        if viewModel.isLoadingWeather {
+            HStack {
+                ProgressView()
+                Text("Loading weather…")
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+            }
+            .padding(.vertical, 8)
+        } else if let wx = viewModel.weather {
+            VStack(alignment: .leading, spacing: 12) {
+                HStack {
+                    Label("Chicago Weather", systemImage: weatherIcon(for: wx))
+                        .font(.headline)
+                    Spacer()
+                    if let temp = wx.temperatureFahrenheit {
+                        Text("\(Int(temp))°F")
+                            .font(.title2.bold())
+                    }
+                }
+
+                HStack(spacing: 20) {
+                    Label("\(Int(wx.cloudCoverFraction * 100))% clouds", systemImage: "cloud")
+                    Text(wx.conditionDescription)
+                }
+                .font(.subheadline)
+                .foregroundStyle(.secondary)
+
+                Text(patioSuitability(for: wx))
+                    .font(.subheadline.bold())
+                    .foregroundStyle(suitabilityColor(for: wx))
+                    .padding(.horizontal, 10)
+                    .padding(.vertical, 5)
+                    .background(suitabilityColor(for: wx).opacity(0.15), in: Capsule())
+            }
+            .padding(.vertical, 6)
+        } else {
+            Label("Weather unavailable", systemImage: "exclamationmark.triangle")
+                .font(.subheadline)
+                .foregroundStyle(.secondary)
+                .padding(.vertical, 8)
+        }
+    }
+
+    private func weatherIcon(for wx: WeatherService.WeatherConditions) -> String {
+        if wx.cloudCoverFraction > 0.8 { return "cloud.fill" }
+        if wx.cloudCoverFraction > 0.4 { return "cloud.sun.fill" }
+        return "sun.max.fill"
+    }
+
+    private func patioSuitability(for wx: WeatherService.WeatherConditions) -> String {
+        if wx.cloudCoverFraction > 0.8 { return "Overcast — shade likely everywhere" }
+        if wx.cloudCoverFraction > 0.4 { return "Partly cloudy — good patio weather" }
+        return "Sunny — check shade status per bar"
+    }
+
+    private func suitabilityColor(for wx: WeatherService.WeatherConditions) -> Color {
+        if wx.cloudCoverFraction > 0.8 { return .blue }
+        if wx.cloudCoverFraction > 0.4 { return .orange }
+        return .yellow
+    }
+
     // MARK: - Empty State
 
     private var emptyState: some View {
-        VStack(spacing: 16) {
-            Image(systemName: "heart.slash")
-                .font(.system(size: 48))
-                .foregroundStyle(.secondary)
-            Text("No favorites yet")
-                .font(.headline)
-            Text("Tap the heart icon on any bar to save it here and get sun alerts.")
-                .font(.subheadline)
-                .foregroundStyle(.secondary)
-                .multilineTextAlignment(.center)
-                .padding(.horizontal, 40)
+        VStack(spacing: 0) {
+            List {
+                Section { weatherCard }
+            }
+            .listStyle(.plain)
+            .frame(height: 100)
+
+            VStack(spacing: 16) {
+                Image(systemName: "heart.slash")
+                    .font(.system(size: 48))
+                    .foregroundStyle(.secondary)
+                Text("No favorites yet")
+                    .font(.headline)
+                Text("Tap the heart icon on any bar to save it here and get sun alerts.")
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal, 40)
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
 
