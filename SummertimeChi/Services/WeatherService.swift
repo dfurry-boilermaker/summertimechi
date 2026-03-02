@@ -47,8 +47,7 @@ final class WeatherService: ObservableObject {
             cache[key] = conditions
             return conditions
         } catch {
-            // WeatherKit may fail in simulator or when entitlement is absent; return cached
-            // stale data if available, otherwise nil.
+            print("[WeatherService] fetch failed: \(error)")
             return cache[key]
         }
     }
