@@ -9,13 +9,75 @@ struct SeedBarData {
     let neighborhood: String
 }
 
+// MARK: - Remote JSON Models
+
+private struct RemoteBarData: Codable {
+    let version: Int
+    let permanentlyClosed: [String]
+    let bars: [RemoteSeedBar]
+}
+
+private struct RemoteSeedBar: Codable {
+    let name: String
+    let lat: Double
+    let lon: Double
+    let address: String
+    let neighborhood: String
+}
+
+// MARK: - Service
+
 final class SeedDataService {
     static let shared = SeedDataService()
-    private init() {}
+
+    /// Remote JSON URL — edit `Data/bars.json` in the GitHub repo to update without a new build.
+    static let remoteURL = URL(string: "https://raw.githubusercontent.com/dfurry-boilermaker/summertimechi/main/Data/bars.json")!
+
+    private static var cacheFileURL: URL {
+        FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0]
+            .appendingPathComponent("bars_remote_v1.json")
+    }
+
+    private var remoteData: RemoteBarData?
+
+    private init() {
+        loadCachedData()
+    }
+
+    // MARK: - Remote Refresh
+
+    /// Fetches the latest bar list from GitHub and caches it to disk.
+    /// Safe to call from any async context; updates take effect immediately.
+    /// Returns `true` if the remote data was successfully fetched and applied.
+    @MainActor
+    @discardableResult
+    func refreshFromRemote() async -> Bool {
+        guard let (data, response) = try? await URLSession.shared.data(from: Self.remoteURL),
+              (response as? HTTPURLResponse)?.statusCode == 200,
+              let fetched = try? JSONDecoder().decode(RemoteBarData.self, from: data) else {
+            return false
+        }
+        try? data.write(to: Self.cacheFileURL, options: .atomic)
+        remoteData = fetched
+        return true
+    }
+
+    private func loadCachedData() {
+        guard let data = try? Data(contentsOf: Self.cacheFileURL),
+              let cached = try? JSONDecoder().decode(RemoteBarData.self, from: data) else { return }
+        remoteData = cached
+    }
+
+    // MARK: - Public Data
 
     /// Bar names that are permanently closed and must never appear in the app.
     /// These are deleted from CoreData on every refresh, even if OSM still lists them.
-    let permanentlyClosedNames: Set<String> = [
+    var permanentlyClosedNames: Set<String> {
+        if let remote = remoteData { return Set(remote.permanentlyClosed) }
+        return hardcodedClosedNames
+    }
+
+    private let hardcodedClosedNames: Set<String> = [
         "ZED451",
         "McGinny's Tap",
         "Wells on Wells",
@@ -41,7 +103,16 @@ final class SeedDataService {
     ]
 
     var curatedBars: [Bar] {
-        bars.map { seed in
+        let seeds: [SeedBarData]
+        if let remote = remoteData {
+            seeds = remote.bars.map {
+                SeedBarData(name: $0.name, latitude: $0.lat, longitude: $0.lon,
+                            address: $0.address, neighborhood: $0.neighborhood)
+            }
+        } else {
+            seeds = hardcodedBars
+        }
+        return seeds.map { seed in
             Bar(
                 id: UUID(),
                 name: seed.name,
@@ -62,8 +133,8 @@ final class SeedDataService {
         }
     }
 
-    // 622 venues sourced from Chicago Patios map + Chi Bar Project
-    private let bars: [SeedBarData] = [
+    // 600 venues sourced from Chicago Patios map + Chi Bar Project (fallback if remote unavailable)
+    private let hardcodedBars: [SeedBarData] = [
         SeedBarData(name: "City Winery Chicago", latitude: 41.884588, longitude: -87.6571111, address: "", neighborhood: "River West"),
         SeedBarData(name: "m.henry", latitude: 41.9856429, longitude: -87.6690756, address: "", neighborhood: "Edgewater"),
         SeedBarData(name: "Bang Bang Pie & Biscuits", latitude: 41.9190185, longitude: -87.6971122, address: "", neighborhood: "Bucktown"),

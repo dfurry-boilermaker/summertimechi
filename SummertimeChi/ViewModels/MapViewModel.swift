@@ -66,7 +66,11 @@ final class MapViewModel: ObservableObject {
         error = nil
         defer { isLoading = false }
 
-        let osmBars = (try? await OSMService.shared.fetchBars()) ?? []
+        // Fetch OSM data and refresh remote bar list concurrently
+        async let remoteRefresh = SeedDataService.shared.refreshFromRemote()
+        async let osmFetch = OSMService.shared.fetchBars()
+        _ = await remoteRefresh
+        let osmBars = (try? await osmFetch) ?? []
 
         if osmBars.isEmpty {
             error = "Could not load bar data. Check your connection and try again."
