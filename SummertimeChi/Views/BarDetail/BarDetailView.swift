@@ -63,12 +63,39 @@ struct BarDetailView: View {
                     .foregroundStyle(.secondary)
             }
 
+            hoursRow
+
             if let transition = viewModel.nextTransitionDescription {
                 Label(transition, systemImage: "clock")
                     .font(.footnote)
                     .foregroundStyle(.secondary)
             }
         }
+    }
+
+    // MARK: - Hours
+
+    @ViewBuilder
+    private var hoursRow: some View {
+        if let open = viewModel.bar.openHour, let close = viewModel.bar.closeHour {
+            let currentHour = Calendar.current.component(.hour, from: Date())
+            let isOpen = viewModel.bar.isOpen(atHour: currentHour)
+            HStack(spacing: 4) {
+                Label("\(formatHour(open)) – \(formatHour(close))", systemImage: "clock")
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+                Text(isOpen ? "· Open now" : "· Closed now")
+                    .font(.subheadline.weight(.medium))
+                    .foregroundStyle(isOpen ? .green : .red)
+            }
+        }
+    }
+
+    private func formatHour(_ hour: Int) -> String {
+        let h = hour % 24
+        if h == 0 { return "12 AM" }
+        if h == 12 { return "12 PM" }
+        return h < 12 ? "\(h) AM" : "\(h - 12) PM"
     }
 
     // MARK: - Timeline
