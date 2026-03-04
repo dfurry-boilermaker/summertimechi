@@ -42,6 +42,14 @@ final class MapViewModel: ObservableObject {
         guard let entities = try? context.fetch(request) else { return }
         bars = entities.map { Bar(entity: $0) }
 
+        // Overlay operating hours from remote JSON (not stored in CoreData)
+        for idx in bars.indices {
+            if let h = SeedDataService.shared.hours(forBarNamed: bars[idx].name) {
+                bars[idx].openHour = h.open
+                bars[idx].closeHour = h.close
+            }
+        }
+
         // Immediately correct stale cached statuses without waiting for network.
         // If the sun is below the horizon right now, every bar must show the moon — no
         // cached "sunlit" value from earlier in the day should survive into the night.
@@ -130,6 +138,11 @@ final class MapViewModel: ObservableObject {
             if Task.isCancelled { return }
             // Yield to the main actor between bars so gesture input stays responsive
             await Task.yield()
+
+            // Skip shadow computation for bars that are currently closed
+            if !bar.isOpen(atHour: currentHour) {
+                continue
+            }
 
             // Check for a manual JSON override before running expensive shadow computation
             if let overrideStatus = SeedDataService.shared.sunOverride(forBarNamed: bar.name, atHour: currentHour) {

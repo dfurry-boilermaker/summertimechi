@@ -24,6 +24,8 @@ private struct RemoteSeedBar: Codable {
     let lon: Double
     let address: String
     let neighborhood: String
+    let openHour: Int?
+    let closeHour: Int?
 }
 
 /// A manual sun status override for a specific bar during a range of hours.
@@ -77,6 +79,16 @@ final class SeedDataService {
         guard let data = try? Data(contentsOf: Self.cacheFileURL),
               let cached = try? JSONDecoder().decode(RemoteBarData.self, from: data) else { return }
         remoteData = cached
+    }
+
+    // MARK: - Hours Lookup
+
+    /// Returns operating hours for a bar by name, or nil if unknown (treat as always open).
+    func hours(forBarNamed name: String) -> (open: Int, close: Int)? {
+        guard let bars = remoteData?.bars,
+              let match = bars.first(where: { $0.name == name }),
+              let open = match.openHour, let close = match.closeHour else { return nil }
+        return (open, close)
     }
 
     // MARK: - Sun Override Lookup
@@ -137,8 +149,16 @@ final class SeedDataService {
         } else {
             seeds = hardcodedBars
         }
+        let hoursByName: [String: (Int, Int)] = remoteData.map { data in
+            Dictionary(uniqueKeysWithValues: data.bars.compactMap { b in
+                guard let o = b.openHour, let c = b.closeHour else { return nil }
+                return (b.name, (o, c))
+            })
+        } ?? [:]
+
         return seeds.map { seed in
-            Bar(
+            let h = hoursByName[seed.name]
+            return Bar(
                 id: UUID(),
                 name: seed.name,
                 coordinate: CLLocationCoordinate2D(latitude: seed.latitude, longitude: seed.longitude),
@@ -153,7 +173,9 @@ final class SeedDataService {
                 isFavorite: false,
                 sunAlertsEnabled: false,
                 cachedSunStatus: nil,
-                cachedStatusTimestamp: nil
+                cachedStatusTimestamp: nil,
+                openHour: h?.0,
+                closeHour: h?.1
             )
         }
     }

@@ -20,6 +20,20 @@ struct Bar: Identifiable, Hashable {
     var sunAlertsEnabled: Bool
     var cachedSunStatus: SunStatus?
     var cachedStatusTimestamp: Date?
+    /// Operating hours from remote JSON (24h). Not persisted to CoreData.
+    var openHour: Int?
+    var closeHour: Int?
+
+    /// Returns true if the bar is open at the given hour (24h). Nil hours = always open.
+    func isOpen(atHour hour: Int) -> Bool {
+        guard let open = openHour, let close = closeHour else { return true }
+        if close > open {
+            return hour >= open && hour < close
+        } else {
+            // Handles overnight bars e.g. open=20, close=2 → open 20:00–01:59
+            return hour >= open || hour < close
+        }
+    }
 
     // MARK: - Data Source Bitmask
 
@@ -65,6 +79,9 @@ extension Bar {
         self.sunAlertsEnabled = entity.sunAlertsEnabled
         self.cachedSunStatus = SunStatus(rawValue: entity.cachedSunStatus ?? "")
         self.cachedStatusTimestamp = entity.cachedStatusTimestamp
+        // openHour/closeHour are overlaid from SeedDataService after loadBars()
+        self.openHour = nil
+        self.closeHour = nil
     }
 
     func apply(to entity: BarEntity) {
