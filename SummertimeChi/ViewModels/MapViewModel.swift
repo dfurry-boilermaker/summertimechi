@@ -124,10 +124,21 @@ final class MapViewModel: ObservableObject {
         var processedBuildingIDs = Set<Int64>()
         var barStatuses: [UUID: SunStatus] = [:]
 
+        let currentHour = Calendar.current.component(.hour, from: Date())
+
         for bar in visible {
             if Task.isCancelled { return }
             // Yield to the main actor between bars so gesture input stays responsive
             await Task.yield()
+
+            // Check for a manual JSON override before running expensive shadow computation
+            if let overrideStatus = SeedDataService.shared.sunOverride(forBarNamed: bar.name, atHour: currentHour) {
+                barStatuses[bar.id] = overrideStatus
+                if let idx = bars.firstIndex(where: { $0.id == bar.id }) {
+                    bars[idx].cachedSunStatus = overrideStatus
+                }
+                continue
+            }
 
             let bbox = boundingBox(near: bar.coordinate, radiusMeters: 250)
             let arcgisBuildings = await ArcGISBuildingService.shared.fetchBuildings(in: bbox)

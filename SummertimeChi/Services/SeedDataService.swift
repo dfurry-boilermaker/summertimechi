@@ -15,6 +15,7 @@ private struct RemoteBarData: Codable {
     let version: Int
     let permanentlyClosed: [String]
     let bars: [RemoteSeedBar]
+    let sunOverrides: [RemoteSunOverride]?
 }
 
 private struct RemoteSeedBar: Codable {
@@ -23,6 +24,16 @@ private struct RemoteSeedBar: Codable {
     let lon: Double
     let address: String
     let neighborhood: String
+}
+
+/// A manual sun status override for a specific bar during a range of hours.
+/// Hours are 24-hour local time (Chicago). `fromHour` is inclusive, `toHour` is exclusive.
+/// Example: fromHour=12, toHour=17, status="sunlit" → overrides 12:00–16:59.
+private struct RemoteSunOverride: Codable {
+    let barName: String
+    let fromHour: Int   // 0–23, inclusive
+    let toHour: Int     // 0–23, exclusive
+    let status: String  // "sunlit" or "shaded"
 }
 
 // MARK: - Service
@@ -66,6 +77,20 @@ final class SeedDataService {
         guard let data = try? Data(contentsOf: Self.cacheFileURL),
               let cached = try? JSONDecoder().decode(RemoteBarData.self, from: data) else { return }
         remoteData = cached
+    }
+
+    // MARK: - Sun Override Lookup
+
+    /// Returns a manually overridden sun status for the given bar at the given hour (24h local),
+    /// or `nil` if no override applies. When non-nil, the caller should skip shadow computation.
+    func sunOverride(forBarNamed name: String, atHour hour: Int) -> SunStatus? {
+        guard let overrides = remoteData?.sunOverrides else { return nil }
+        for entry in overrides where entry.barName == name {
+            if hour >= entry.fromHour && hour < entry.toHour {
+                return SunStatus(rawValue: entry.status)
+            }
+        }
+        return nil
     }
 
     // MARK: - Public Data
