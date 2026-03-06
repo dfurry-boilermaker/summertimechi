@@ -19,8 +19,7 @@ final class ShadowCalculatorService {
         cloudCover: Double = 0.0
     ) -> SunStatus {
         // Cloud cover override
-        if cloudCover > 0.8 { return .cloudy }
-        if cloudCover > 0.4 { return .partialSun }
+        if cloudCover > 0.4 { return .cloudy }
 
         let solarPos = solar.solarPosition(at: patio, date: date)
         guard solarPos.isAboveHorizon else { return .belowHorizon }
@@ -33,11 +32,15 @@ final class ShadowCalculatorService {
     }
 
     /// Generates a 15-minute resolution timeline for a full day.
+    /// - Parameters:
+    ///   - cloudCover: Used when `cloudCoverByHour` is nil (e.g. tests).
+    ///   - cloudCoverByHour: Optional per-hour cloud cover from WeatherKit. When provided, overrides `cloudCover` per slot.
     func generateTimeline(
         forBar bar: Bar,
         buildings: [OSMBuilding],
         date: Date,
-        cloudCover: Double = 0.0
+        cloudCover: Double = 0.0,
+        cloudCoverByHour: [Int: Double]? = nil
     ) -> SunTimeline {
         let calendar = Calendar.current
         let startOfDay = calendar.startOfDay(for: date)
@@ -46,11 +49,13 @@ final class ShadowCalculatorService {
         // 96 entries × 15 min = 24 hours
         for i in 0..<96 {
             let entryDate = startOfDay.addingTimeInterval(Double(i) * 15 * 60)
+            let hour = calendar.component(.hour, from: entryDate)
+            let effectiveCloudCover = cloudCoverByHour?[hour] ?? cloudCover
             let status = sunStatus(
                 forPatio: bar.coordinate,
                 buildings: buildings,
                 date: entryDate,
-                cloudCover: cloudCover
+                cloudCover: effectiveCloudCover
             )
             entries.append(SunTimelineEntry(date: entryDate, status: status))
         }

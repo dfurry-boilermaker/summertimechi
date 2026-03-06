@@ -1,32 +1,5 @@
 {
   "version": 1,
-  "permanentlyClosed": [
-    "ZED451",
-    "McGinny's Tap",
-    "Wells on Wells",
-    "Old Town Pour House",
-    "Old Town Brasserie",
-    "Rocco Ranalli's",
-    "Etta Bucktown",
-    "Cy's Crab House",
-    "Crossing",
-    "Caf\u00e9 Bernard",
-    "Caf\u00e9 Adriatic",
-    "Cabana Club",
-    "Duchamp",
-    "Edgewater Lounge",
-    "Fiorentino's Cucina",
-    "Cooper's",
-    "Abbey Pub",
-    "Betty's Blue Star Lounge",
-    "Angels & Mariachis",
-    "Bad Dog Tavern",
-    "Boston Blackie's",
-    "O'Brien's Riverwalk Caf\u00e9",
-    "DueLire Vino & Cucina",
-    "Cerise Rooftop",
-    "Tatas Tacos - Cantina Lakeview"
-  ],
   "bars": [
     {
       "name": "City Winery Chicago",
@@ -50,7 +23,7 @@
       "name": "Bang Bang Pie & Biscuits",
       "lat": 41.9190185,
       "lon": -87.6971122,
-      "address": "North California Avenue",
+      "address": "2051 North California Avenue",
       "neighborhood": "Bucktown",
       "openHour": 9,
       "closeHour": 18
@@ -140,7 +113,7 @@
       "name": "Drew's on Halsted",
       "lat": 41.9401276,
       "lon": -87.6490726,
-      "address": "West Belmont Avenue",
+      "address": "3201 North Halsted Street",
       "neighborhood": "Wrigleyville",
       "openHour": 16,
       "closeHour": 22
@@ -200,7 +173,7 @@
       "closeHour": 2
     },
     {
-      "name": "Maison Parisienne - French Caf\u00e9",
+      "name": "Maison Parisienne - French Café",
       "lat": 41.9420258,
       "lon": -87.6521259,
       "address": "3307 North Clark Street",
@@ -312,14 +285,18 @@
       "lat": 41.8957371,
       "lon": -87.6800025,
       "address": "2109 West Chicago Avenue",
-      "neighborhood": "Ukrainian Village"
+      "neighborhood": "Ukrainian Village",
+      "openHour": 12,
+      "closeHour": 22
     },
     {
       "name": "Parson's Chicken & Fish",
       "lat": 41.9861142,
       "lon": -87.669107,
       "address": "5721 North Clark Street",
-      "neighborhood": "Edgewater"
+      "neighborhood": "Edgewater",
+      "openHour": 12,
+      "closeHour": 22
     },
     {
       "name": "Hexe Coffee Co.",
@@ -334,7 +311,7 @@
       "name": "Old Crow Smokehouse - Wrigleyville",
       "lat": 41.945776,
       "lon": -87.655655,
-      "address": "North Clark Street",
+      "address": "3506 North Clark Street",
       "neighborhood": "Wrigleyville",
       "openHour": 16,
       "closeHour": 1
@@ -374,13 +351,6 @@
       "neighborhood": "Logan Square",
       "openHour": 15,
       "closeHour": 23
-    },
-    {
-      "name": "DueLire Vino & Cucina",
-      "lat": 41.9637792,
-      "lon": -87.685528,
-      "address": "4520 North Lincoln Avenue",
-      "neighborhood": "Lincoln Square"
     },
     {
       "name": "Pilot Project Brewing",
@@ -426,13 +396,6 @@
       "neighborhood": "Roscoe Village",
       "openHour": 11,
       "closeHour": 21
-    },
-    {
-      "name": "Cerise Rooftop",
-      "lat": 41.8860366,
-      "lon": -87.6259928,
-      "address": "203 North Wabash Avenue",
-      "neighborhood": "Loop"
     },
     {
       "name": "Trader Todd's",
@@ -492,7 +455,7 @@
       "name": "Daily Bar & Grill",
       "lat": 41.9646474,
       "lon": -87.6861564,
-      "address": "West Wilson Avenue",
+      "address": "4560 North Lincoln Avenue",
       "neighborhood": "Lincoln Square",
       "openHour": 16,
       "closeHour": 21
@@ -582,7 +545,7 @@
       "name": "Spoke & Bird Cafe (South Loop)",
       "lat": 41.857757,
       "lon": -87.6219582,
-      "address": "East 18th Street",
+      "address": "205 East 18th Street",
       "neighborhood": "South Loop",
       "openHour": 7,
       "closeHour": 19
@@ -669,7 +632,7 @@
       "closeHour": 22
     },
     {
-      "name": "La Cr\u00eaperie Chicago Restaurant",
+      "name": "La Crêperie Chicago Restaurant",
       "lat": 41.9340989,
       "lon": -87.6455685,
       "address": "2845 North Clark Street",
@@ -835,7 +798,9 @@
       "lat": 41.964857,
       "lon": -87.63615,
       "address": "200 West Montrose Harbor Drive",
-      "neighborhood": "Wrigleyville"
+      "neighborhood": "Wrigleyville",
+      "openHour": 11,
+      "closeHour": 22
     },
     {
       "name": "Half Acre Beer Co",
@@ -854,13 +819,6 @@
       "neighborhood": "Lincoln Park",
       "openHour": 15,
       "closeHour": 4
-    },
-    {
-      "name": "Tatas Tacos - Cantina Lakeview",
-      "lat": 41.9331007,
-      "lon": -87.659729,
-      "address": "North Lincoln Avenue",
-      "neighborhood": "Lake View"
     },
     {
       "name": "Chief O'Neill's Pub Restaurant Beer Garden",
@@ -1016,13 +974,6 @@
       "closeHour": 0
     },
     {
-      "name": "The Freeze",
-      "lat": 41.9173444,
-      "lon": -87.6981028,
-      "address": "2815 West Armitage Avenue",
-      "neighborhood": "Bucktown"
-    },
-    {
       "name": "Outside Voices",
       "lat": 41.917601,
       "lon": -87.7073905,
@@ -1086,13 +1037,6 @@
       "closeHour": 2
     },
     {
-      "name": "HERBIVORE",
-      "lat": 41.8381435,
-      "lon": -87.6512729,
-      "address": "964 West 31st Street",
-      "neighborhood": "Bronzeville"
-    },
-    {
       "name": "Le Midi Wine",
       "lat": 41.9033121,
       "lon": -87.6801256,
@@ -1151,7 +1095,9 @@
       "lat": 41.9800139,
       "lon": -87.668105,
       "address": "5401 North Clark Street",
-      "neighborhood": "Edgewater"
+      "neighborhood": "Edgewater",
+      "openHour": 12,
+      "closeHour": 23
     },
     {
       "name": "Los Arcos",
@@ -1436,7 +1382,7 @@
       "name": "GO Tavern & Liquors",
       "lat": 41.9172895,
       "lon": -87.7078111,
-      "address": "West Armitage Avenue",
+      "address": "3219 West Armitage Avenue",
       "neighborhood": "Bucktown",
       "openHour": 11,
       "closeHour": 2
@@ -1454,7 +1400,7 @@
       "name": "Caffe Oliva",
       "lat": 41.8931081,
       "lon": -87.6128897,
-      "address": "Lakefront Trail Connector",
+      "address": "550 East Grand Avenue",
       "neighborhood": "River North",
       "openHour": 11,
       "closeHour": 22
@@ -1539,11 +1485,13 @@
       "closeHour": 0
     },
     {
-      "name": "Phyllis\u2019 Musical Inn",
+      "name": "Phyllis' Musical Inn",
       "lat": 41.9034362,
       "lon": -87.6725435,
       "address": "1800 West Division Street",
-      "neighborhood": "Wicker Park"
+      "neighborhood": "Wicker Park",
+      "openHour": 16,
+      "closeHour": 2
     },
     {
       "name": "Parlor Pizza Bar Wicker Park",
@@ -1559,7 +1507,9 @@
       "lat": 41.952492,
       "lon": -87.7672333,
       "address": "3938 North Central Avenue",
-      "neighborhood": "Lincoln Square"
+      "neighborhood": "Lincoln Square",
+      "openHour": 11,
+      "closeHour": 22
     },
     {
       "name": "Eggsperience Irving Park",
@@ -1571,7 +1521,7 @@
       "closeHour": 15
     },
     {
-      "name": "B\u00e0rbaro Taqueria",
+      "name": "Bàrbaro Taqueria",
       "lat": 41.9101064,
       "lon": -87.690782,
       "address": "2525 West North Avenue",
@@ -1589,13 +1539,6 @@
       "closeHour": 1
     },
     {
-      "name": "The Rambler Kitchen & Tap",
-      "lat": 41.9567257,
-      "lon": -87.6808462,
-      "address": "4128 North Lincoln Avenue",
-      "neighborhood": "Lincoln Square"
-    },
-    {
       "name": "Baker Miller",
       "lat": 41.9663921,
       "lon": -87.6868274,
@@ -1608,7 +1551,7 @@
       "name": "Cobblestone",
       "lat": 41.9605819,
       "lon": -87.6830807,
-      "address": "West Pensacola Avenue",
+      "address": "4337 North Lincoln Avenue",
       "neighborhood": "Lincoln Square",
       "openHour": 16,
       "closeHour": 21
@@ -1699,7 +1642,9 @@
       "lat": 41.9034379,
       "lon": -87.6726928,
       "address": "1804 West Division Street",
-      "neighborhood": "Wicker Park"
+      "neighborhood": "Wicker Park",
+      "openHour": 11,
+      "closeHour": 22
     },
     {
       "name": "Ten Cat Tavern",
@@ -1711,7 +1656,7 @@
       "closeHour": 2
     },
     {
-      "name": "Mi Tocaya Antojer\u00eda",
+      "name": "Mi Tocaya Antojería",
       "lat": 41.9288865,
       "lon": -87.6976843,
       "address": "2800 West Logan Boulevard",
@@ -1732,7 +1677,7 @@
       "name": "The SoFo Tap",
       "lat": 41.9724308,
       "lon": -87.6676099,
-      "address": "North Clark Street",
+      "address": "4923 North Clark Street",
       "neighborhood": "Andersonville",
       "openHour": 17,
       "closeHour": 2
@@ -1747,13 +1692,6 @@
       "closeHour": 2
     },
     {
-      "name": "Ropa Cabana",
-      "lat": 42.0106343,
-      "lon": -87.6601883,
-      "address": "West Greenleaf Avenue",
-      "neighborhood": "Rogers Park"
-    },
-    {
       "name": "Tiztal Cafe",
       "lat": 41.966197,
       "lon": -87.6666762,
@@ -1766,7 +1704,7 @@
       "name": "Bagel Miller",
       "lat": 41.9664,
       "lon": -87.6868295,
-      "address": "North Lincoln Avenue",
+      "address": "4655 North Lincoln Avenue",
       "neighborhood": "Lincoln Square",
       "openHour": 8,
       "closeHour": 15
@@ -1820,7 +1758,7 @@
       "name": "Streeterville Social",
       "lat": 41.8900678,
       "lon": -87.6188832,
-      "address": "East Lower North Water Street",
+      "address": "455 North Park Drive",
       "neighborhood": "River North",
       "openHour": 16,
       "closeHour": 0
@@ -1934,7 +1872,7 @@
       "closeHour": 22
     },
     {
-      "name": "Barra \u00d1",
+      "name": "Barra Ñ",
       "lat": 41.9356577,
       "lon": -87.6925653,
       "address": "2977 North Elston Avenue",
@@ -1988,11 +1926,13 @@
       "closeHour": 22
     },
     {
-      "name": "The Butcher\u2019s Tap",
+      "name": "The Butcher's Tap",
       "lat": 41.9467867,
       "lon": -87.663725,
       "address": "3553 North Southport Avenue",
-      "neighborhood": "Lake View"
+      "neighborhood": "Lake View",
+      "openHour": 11,
+      "closeHour": 2
     },
     {
       "name": "Alma",
@@ -2088,7 +2028,7 @@
       "name": "Ascione Bistro",
       "lat": 41.7953227,
       "lon": -87.5886498,
-      "address": "East 55th Street",
+      "address": "1500 East 55th Street",
       "neighborhood": "Hyde Park",
       "openHour": 11,
       "closeHour": 22
@@ -2106,7 +2046,7 @@
       "name": "Replay Lakeview",
       "lat": 41.9447863,
       "lon": -87.6492256,
-      "address": "North Halsted Street",
+      "address": "3439 North Halsted Street",
       "neighborhood": "Wrigleyville",
       "openHour": 14,
       "closeHour": 2
@@ -2275,7 +2215,7 @@
       "name": "MAHARI",
       "lat": 41.7954642,
       "lon": -87.5886482,
-      "address": "",
+      "address": "1504 East 55th Street",
       "neighborhood": "Hyde Park",
       "openHour": 11,
       "closeHour": 22
@@ -2302,7 +2242,7 @@
       "name": "Community Tavern",
       "lat": 41.9541155,
       "lon": -87.7487216,
-      "address": "North Milwaukee Avenue",
+      "address": "4038 North Milwaukee Avenue",
       "neighborhood": "Lincoln Square",
       "openHour": 17,
       "closeHour": 21
@@ -2326,7 +2266,7 @@
       "closeHour": 19
     },
     {
-      "name": "Caf\u00e9 Touch\u00e9",
+      "name": "Café Touché",
       "lat": 42.003559,
       "lon": -87.816943,
       "address": "6731 North Northwest Highway",
@@ -2446,7 +2386,7 @@
       "name": "The Walk In",
       "lat": 41.9308298,
       "lon": -87.7099462,
-      "address": "North Milwaukee Avenue",
+      "address": "2727 North Milwaukee Avenue",
       "neighborhood": "Logan Square",
       "openHour": 12,
       "closeHour": 2
@@ -2527,7 +2467,7 @@
       "name": "Dash of Salt and Pepper Diner",
       "lat": 41.9222606,
       "lon": -87.6440452,
-      "address": "North Geneva Terrace",
+      "address": "2201 North Lincoln Avenue",
       "neighborhood": "Lincoln Park",
       "openHour": 8,
       "closeHour": 15
@@ -2699,371 +2639,450 @@
       "lat": 41.9543967,
       "lon": -87.6814438,
       "address": "2100 West Irving Park Road",
-      "neighborhood": "Lincoln Square"
+      "neighborhood": "Lincoln Square",
+      "openHour": 11,
+      "closeHour": 2
     },
     {
       "name": "Burke's Public House",
       "lat": 41.9801139,
       "lon": -87.6596917,
       "address": "5401-5403;5401 North Broadway",
-      "neighborhood": "Edgewater"
+      "neighborhood": "Edgewater",
+      "openHour": 16,
+      "closeHour": 23
     },
     {
       "name": "Tweet",
       "lat": 41.9739945,
       "lon": -87.6552682,
       "address": "5020 North Sheridan Road",
-      "neighborhood": "Andersonville"
+      "neighborhood": "Andersonville",
+      "openHour": 9,
+      "closeHour": 15
     },
     {
       "name": "Umai",
       "lat": 41.8725288,
       "lon": -87.6308608,
       "address": "730 South Clark Street",
-      "neighborhood": "Loop"
-    },
-    {
-      "name": "Sociale Chicago",
-      "lat": 41.8717573,
-      "lon": -87.630913,
-      "address": "800 South Clark Street",
-      "neighborhood": "Loop"
+      "neighborhood": "Loop",
+      "openHour": 11,
+      "closeHour": 22
     },
     {
       "name": "Paisans Pizzeria",
       "lat": 41.8732967,
       "lon": -87.6307898,
       "address": "700 South Clark Street",
-      "neighborhood": "Loop"
+      "neighborhood": "Loop",
+      "openHour": 11,
+      "closeHour": 22
     },
     {
       "name": "Four Moon Tavern",
       "lat": 41.9430298,
       "lon": -87.6758638,
       "address": "1847 West Roscoe Street",
-      "neighborhood": "Roscoe Village"
+      "neighborhood": "Roscoe Village",
+      "openHour": 12,
+      "closeHour": 1
     },
     {
       "name": "First Draft",
       "lat": 41.8734567,
       "lon": -87.6305,
       "address": "649-651 South Clark Street",
-      "neighborhood": "Loop"
+      "neighborhood": "Loop",
+      "openHour": 11,
+      "closeHour": 2
     },
     {
       "name": "Rockwell's Neighborhood Grill",
       "lat": 41.9658519,
       "lon": -87.6938468,
       "address": "2608 West Eastwood Avenue",
-      "neighborhood": "Lincoln Square"
+      "neighborhood": "Lincoln Square",
+      "openHour": 11,
+      "closeHour": 22
     },
     {
       "name": "Bitter Pops",
       "lat": 41.9431545,
       "lon": -87.6708106,
       "address": "3357 North Lincoln Avenue",
-      "neighborhood": "Roscoe Village"
+      "neighborhood": "Roscoe Village",
+      "openHour": 11,
+      "closeHour": 23
     },
     {
       "name": "Basil Leaf Cafe",
       "lat": 41.9272732,
       "lon": -87.6413781,
       "address": "457-459 West Roslyn Place",
-      "neighborhood": "Lincoln Park"
+      "neighborhood": "Lincoln Park",
+      "openHour": 11,
+      "closeHour": 22
     },
     {
       "name": "Cesar's Killer Margaritas - Broadway",
       "lat": 41.9357037,
       "lon": -87.6444198,
-      "address": "West Oakdale Avenue",
-      "neighborhood": "Lake View"
+      "address": "2924 North Broadway",
+      "neighborhood": "Lake View",
+      "openHour": 12,
+      "closeHour": 23
     },
     {
       "name": "Farm Bar",
       "lat": 41.9363515,
       "lon": -87.6614204,
       "address": "1300 West Wellington Avenue",
-      "neighborhood": "Lake View"
+      "neighborhood": "Lake View",
+      "openHour": 11,
+      "closeHour": 22
     },
     {
       "name": "GEMINI",
       "lat": 41.919968,
       "lon": -87.640866,
       "address": "2075 North Lincoln Avenue",
-      "neighborhood": "Lincoln Park"
+      "neighborhood": "Lincoln Park",
+      "openHour": 16,
+      "closeHour": 23
     },
     {
       "name": "ROCKS lakeview",
       "lat": 41.9450508,
       "lon": -87.6456566,
       "address": "3463 North Broadway",
-      "neighborhood": "Wrigleyville"
+      "neighborhood": "Wrigleyville",
+      "openHour": 11,
+      "closeHour": 0
     },
     {
       "name": "XOchimilco Mexican Restaurant",
       "lat": 41.9616808,
       "lon": -87.680264,
       "address": "2022-2036 West Montrose Avenue",
-      "neighborhood": "Lincoln Square"
+      "neighborhood": "Lincoln Square",
+      "openHour": 16,
+      "closeHour": 22
     },
     {
       "name": "Old Pueblo Cantina",
       "lat": 41.9218607,
       "lon": -87.6584957,
       "address": "1200 West Webster Avenue",
-      "neighborhood": "River West"
-    },
-    {
-      "name": "Dom's Kitchen & Market",
-      "lat": 41.9324289,
-      "lon": -87.649256,
-      "address": "West Diversey Parkway",
-      "neighborhood": "Lake View"
+      "neighborhood": "River West",
+      "openHour": 16,
+      "closeHour": 23
     },
     {
       "name": "Happy Camper Pizza",
       "lat": 41.90428,
       "lon": -87.6343128,
       "address": "1209 North Wells Street",
-      "neighborhood": "River North"
+      "neighborhood": "River North",
+      "openHour": 10,
+      "closeHour": 2
     },
     {
       "name": "Fireside Restaurant & Lounge",
       "lat": 41.986208,
       "lon": -87.6744778,
       "address": "5739 North Ravenswood Avenue",
-      "neighborhood": "Edgewater"
+      "neighborhood": "Edgewater",
+      "openHour": 11,
+      "closeHour": 2
     },
     {
       "name": "Lady Gregory's Irish Bar & Restaurant",
       "lat": 41.977892,
       "lon": -87.66856,
       "address": "5260 North Clark Street",
-      "neighborhood": "Andersonville"
+      "neighborhood": "Andersonville",
+      "openHour": 12,
+      "closeHour": 23
     },
     {
       "name": "Ella Elli",
       "lat": 41.9451534,
       "lon": -87.6634667,
       "address": "1349 West Cornelia Avenue",
-      "neighborhood": "Lake View"
+      "neighborhood": "Lake View",
+      "openHour": 16,
+      "closeHour": 22
     },
     {
       "name": "Andros Taverna",
       "lat": 41.9273607,
       "lon": -87.7048376,
       "address": "2542 North Milwaukee Avenue",
-      "neighborhood": "Logan Square"
+      "neighborhood": "Logan Square",
+      "openHour": 11,
+      "closeHour": 23
     },
     {
       "name": "Coda di Volpe",
       "lat": 41.9426398,
       "lon": -87.663589,
       "address": "3335 North Southport Avenue",
-      "neighborhood": "Lake View"
+      "neighborhood": "Lake View",
+      "openHour": 16,
+      "closeHour": 23
     },
     {
       "name": "Colectivo Coffee of Andersonville",
       "lat": 41.9805961,
       "lon": -87.6681113,
       "address": "5423-5425 North Clark Street",
-      "neighborhood": "Edgewater"
+      "neighborhood": "Edgewater",
+      "openHour": 6,
+      "closeHour": 19
     },
     {
       "name": "Blue Line Lounge & Grill",
       "lat": 41.9095818,
       "lon": -87.6777204,
       "address": "1542 North Damen Avenue",
-      "neighborhood": "Wicker Park"
+      "neighborhood": "Wicker Park",
+      "openHour": 16,
+      "closeHour": 2
     },
     {
       "name": "Corridor Brewery & Provisions",
       "lat": 41.9447567,
       "lon": -87.6641486,
       "address": "3446 North Southport Avenue",
-      "neighborhood": "Lake View"
+      "neighborhood": "Lake View",
+      "openHour": 11,
+      "closeHour": 22
     },
     {
       "name": "Fish Bar",
       "lat": 41.9361475,
       "lon": -87.654148,
       "address": "2956 North Sheffield Avenue",
-      "neighborhood": "Lake View"
+      "neighborhood": "Lake View",
+      "openHour": 11,
+      "closeHour": 22
     },
     {
       "name": "Avli Taverna",
       "lat": 41.9286547,
       "lon": -87.6623906,
       "address": "1335 West Wrightwood Avenue",
-      "neighborhood": "Noble Square"
+      "neighborhood": "Noble Square",
+      "openHour": 11,
+      "closeHour": 22
     },
     {
       "name": "Maison Marcel",
       "lat": 41.9381728,
       "lon": -87.644511,
       "address": "3114 North Broadway",
-      "neighborhood": "Lake View"
+      "neighborhood": "Lake View",
+      "openHour": 7,
+      "closeHour": 15
     },
     {
       "name": "Wakamono",
       "lat": 41.9424833,
       "lon": -87.6442806,
-      "address": "North Broadway",
-      "neighborhood": "Wrigleyville"
+      "address": "3313 North Broadway",
+      "neighborhood": "Wrigleyville",
+      "openHour": 16,
+      "closeHour": 23
     },
     {
       "name": "Esencia Urban Kitchen",
       "lat": 41.943171,
       "lon": -87.644568,
-      "address": "North Broadway",
-      "neighborhood": "Wrigleyville"
+      "address": "3351 North Broadway",
+      "neighborhood": "Wrigleyville",
+      "openHour": 8,
+      "closeHour": 14
     },
     {
       "name": "Pick Me Up Cafe",
       "lat": 41.9712284,
       "lon": -87.668092,
       "address": "4882 North Clark Street",
-      "neighborhood": "Andersonville"
+      "neighborhood": "Andersonville",
+      "openHour": 10,
+      "closeHour": 22
     },
     {
       "name": "Le Sud Mediterranean Kitchen",
       "lat": 41.942847,
       "lon": -87.6858752,
       "address": "2301 West Roscoe Street",
-      "neighborhood": "Roscoe Village"
+      "neighborhood": "Roscoe Village",
+      "openHour": 16,
+      "closeHour": 22
     },
     {
       "name": "Dear Margaret",
       "lat": 41.9358605,
       "lon": -87.6629129,
       "address": "2965 North Lincoln Avenue",
-      "neighborhood": "Lake View"
+      "neighborhood": "Lake View",
+      "openHour": 17,
+      "closeHour": 22
     },
     {
       "name": "Vaughan's Pub",
       "lat": 41.9349966,
       "lon": -87.6537787,
       "address": "2917 North Sheffield Avenue",
-      "neighborhood": "Lake View"
+      "neighborhood": "Lake View",
+      "openHour": 12,
+      "closeHour": 1
     },
     {
       "name": "Kie-Gol-Lanee",
       "lat": 41.9735653,
       "lon": -87.6550888,
       "address": "5004 North Sheridan Road",
-      "neighborhood": "Andersonville"
+      "neighborhood": "Andersonville",
+      "openHour": 15,
+      "closeHour": 22
     },
     {
       "name": "Roscoe's Tavern",
       "lat": 41.9434929,
       "lon": -87.6495816,
       "address": "3356 North Halsted Street",
-      "neighborhood": "Wrigleyville"
+      "neighborhood": "Wrigleyville",
+      "openHour": 12,
+      "closeHour": 1
     },
     {
       "name": "Jake Melnick's Corner Tap",
       "lat": 41.895538,
       "lon": -87.6265138,
       "address": "41 East Superior Street",
-      "neighborhood": "River North"
+      "neighborhood": "River North",
+      "openHour": 11,
+      "closeHour": 2
     },
     {
       "name": "Jennivee's Bakery",
       "lat": 41.9419149,
       "lon": -87.6538832,
       "address": "3307 North Sheffield Avenue",
-      "neighborhood": "Wrigleyville"
+      "neighborhood": "Wrigleyville",
+      "openHour": 12,
+      "closeHour": 0
     },
     {
       "name": "Wilde Bar & Restaurant",
       "lat": 41.9386917,
       "lon": -87.6445083,
       "address": "3130 North Broadway",
-      "neighborhood": "Lake View"
+      "neighborhood": "Lake View",
+      "openHour": 12,
+      "closeHour": 23
     },
     {
       "name": "Intelligentsia Coffee Broadway Coffeebar",
       "lat": 41.9382904,
       "lon": -87.644182,
       "address": "3123 North Broadway",
-      "neighborhood": "Lake View"
+      "neighborhood": "Lake View",
+      "openHour": 7,
+      "closeHour": 19
     },
     {
       "name": "Stella's Diner",
       "lat": 41.93776,
       "lon": -87.644538,
       "address": "3040 North Broadway",
-      "neighborhood": "Lake View"
+      "neighborhood": "Lake View",
+      "openHour": 9,
+      "closeHour": 20
     },
     {
       "name": "Tuman's Tap and Grill",
       "lat": 41.8956882,
       "lon": -87.6817697,
       "address": "2159 West Chicago Avenue",
-      "neighborhood": "Ukrainian Village"
+      "neighborhood": "Ukrainian Village",
+      "openHour": 11,
+      "closeHour": 3
     },
     {
       "name": "West Town Bakery & Diner",
       "lat": 41.896158,
       "lon": -87.675407,
       "address": "1916 West Chicago Avenue",
-      "neighborhood": "Ukrainian Village"
+      "neighborhood": "Ukrainian Village",
+      "openHour": 7,
+      "closeHour": 15
     },
     {
       "name": "All Together Now",
       "lat": 41.8956527,
       "lon": -87.680383,
       "address": "2119 West Chicago Avenue",
-      "neighborhood": "Ukrainian Village"
-    },
-    {
-      "name": "Split-Rail",
-      "lat": 41.8959317,
-      "lon": -87.6895912,
-      "address": "2500 West Chicago Avenue",
-      "neighborhood": "Ukrainian Village"
+      "neighborhood": "Ukrainian Village",
+      "openHour": 10,
+      "closeHour": 21
     },
     {
       "name": "Printer's Row Brewing",
       "lat": 41.967949,
       "lon": -87.7772749,
       "address": "4801 North Austin Avenue",
-      "neighborhood": "Lincoln Square"
+      "neighborhood": "Lincoln Square",
+      "openHour": 15,
+      "closeHour": 0
     },
     {
       "name": "Tatas Tacos- Kitchen & Social",
       "lat": 41.9534232,
       "lon": -87.7696836,
       "address": "5700-5702 West Irving Park Road",
-      "neighborhood": "Lincoln Square"
+      "neighborhood": "Lincoln Square",
+      "openHour": 11,
+      "closeHour": 23
     },
     {
       "name": "Easy Street Pizza & Patio",
       "lat": 41.9541937,
       "lon": -87.7017427,
       "address": "2922 West Irving Park Road",
-      "neighborhood": "Lincoln Square"
+      "neighborhood": "Lincoln Square",
+      "openHour": 16,
+      "closeHour": 23
     },
     {
       "name": "Portage Grounds",
       "lat": 41.9530632,
       "lon": -87.7647698,
       "address": "3958 North Linder Avenue",
-      "neighborhood": "Lincoln Square"
+      "neighborhood": "Lincoln Square",
+      "openHour": 7,
+      "closeHour": 17
     },
     {
       "name": "Forno Rosso Pizzeria Napoletana",
       "lat": 41.8846823,
       "lon": -87.6541832,
       "address": "1048 West Randolph Street",
-      "neighborhood": "River West"
+      "neighborhood": "River West",
+      "openHour": 11,
+      "closeHour": 22
     },
     {
       "name": "Forno Rosso Pizzeria Napoletana",
       "lat": 41.947658,
       "lon": -87.806747,
       "address": "3701-3723 North Harlem Avenue",
-      "neighborhood": "Avondale"
+      "neighborhood": "Avondale",
+      "openHour": 11,
+      "closeHour": 22
     },
     {
       "name": "The Windsor Tavern and Grill",
@@ -3077,168 +3096,180 @@
       "lat": 41.9530117,
       "lon": -87.7617277,
       "address": "5353 West Irving Park Road",
-      "neighborhood": "Lincoln Square"
+      "neighborhood": "Lincoln Square",
+      "openHour": 11,
+      "closeHour": 2
     },
     {
       "name": "Land & Lake Kitchen",
       "lat": 41.8877775,
       "lon": -87.6255015,
       "address": "81 East Upper Wacker Drive",
-      "neighborhood": "Loop"
+      "neighborhood": "Loop",
+      "openHour": 7,
+      "closeHour": 22
     },
     {
       "name": "Forbidden Root Restaurant & Brewery",
       "lat": 41.896238,
       "lon": -87.671559,
       "address": "1746 West Chicago Avenue",
-      "neighborhood": "Ukrainian Village"
+      "neighborhood": "Ukrainian Village",
+      "openHour": 11,
+      "closeHour": 23
     },
     {
       "name": "The Whale",
       "lat": 41.9254885,
       "lon": -87.7011997,
       "address": "2427 North Milwaukee Avenue",
-      "neighborhood": "Logan Square"
+      "neighborhood": "Logan Square",
+      "openHour": 10,
+      "closeHour": 1
     },
     {
       "name": "Lula Cafe",
       "lat": 41.9276583,
       "lon": -87.7067917,
       "address": "2537 North Kedzie Boulevard",
-      "neighborhood": "Logan Square"
-    },
-    {
-      "name": "Big Kids",
-      "lat": 41.9278168,
-      "lon": -87.706826,
-      "address": "2545 North Kedzie Boulevard",
-      "neighborhood": "Logan Square"
+      "neighborhood": "Logan Square",
+      "openHour": 9,
+      "closeHour": 23
     },
     {
       "name": "Lardon",
       "lat": 41.9217938,
       "lon": -87.6974593,
       "address": "2200 North California Avenue",
-      "neighborhood": "Logan Square"
-    },
-    {
-      "name": "Second Generation",
-      "lat": 41.9279602,
-      "lon": -87.7047721,
-      "address": "3057 West Logan Boulevard",
-      "neighborhood": "Logan Square"
+      "neighborhood": "Logan Square",
+      "openHour": 8,
+      "closeHour": 22
     },
     {
       "name": "Websters Wine Bar Chicago",
       "lat": 41.9289723,
       "lon": -87.7069424,
       "address": "2610 North Milwaukee Avenue",
-      "neighborhood": "Logan Square"
-    },
-    {
-      "name": "Dos Urban Cantina",
-      "lat": 41.9173333,
-      "lon": -87.6984194,
-      "address": "2829 West Armitage Avenue",
-      "neighborhood": "Bucktown"
+      "neighborhood": "Logan Square",
+      "openHour": 16,
+      "closeHour": 3
     },
     {
       "name": "Craft Pizza",
       "lat": 41.9048917,
       "lon": -87.6774336,
       "address": "1252 North Damen Avenue",
-      "neighborhood": "Wicker Park"
+      "neighborhood": "Wicker Park",
+      "openHour": 9,
+      "closeHour": 23
     },
     {
       "name": "Innjoy",
       "lat": 41.9029882,
       "lon": -87.6792612,
       "address": "2051 West Division Street",
-      "neighborhood": "Wicker Park"
+      "neighborhood": "Wicker Park",
+      "openHour": 11,
+      "closeHour": 3
     },
     {
       "name": "Fatpour Tap Works - Wicker Park",
       "lat": 41.9029889,
       "lon": -87.6776167,
       "address": "2005 West Division Street",
-      "neighborhood": "Wicker Park"
+      "neighborhood": "Wicker Park",
+      "openHour": 11,
+      "closeHour": 3
     },
     {
       "name": "Gracie O' Malley's- Wicker Park",
       "lat": 41.911238,
       "lon": -87.6784739,
       "address": "1635 North Milwaukee Avenue",
-      "neighborhood": "Bucktown"
+      "neighborhood": "Bucktown",
+      "openHour": 11,
+      "closeHour": 2
     },
     {
       "name": "DSTRKT Bar & Grill",
       "lat": 41.9093324,
       "lon": -87.6762451,
       "address": "1540 North Milwaukee Avenue",
-      "neighborhood": "Wicker Park"
+      "neighborhood": "Wicker Park",
+      "openHour": 16,
+      "closeHour": 2
     },
     {
       "name": "Lone Owl",
       "lat": 41.9097565,
       "lon": -87.6760519,
       "address": "1547 North Milwaukee Avenue",
-      "neighborhood": "Wicker Park"
-    },
-    {
-      "name": "The Fifty/50",
-      "lat": 41.9029936,
-      "lon": -87.6790664,
-      "address": "2041-2047 West Division Street",
-      "neighborhood": "Wicker Park"
+      "neighborhood": "Wicker Park",
+      "openHour": 12,
+      "closeHour": 1
     },
     {
       "name": "Cafe Istanbul",
       "lat": 41.903386,
       "lon": -87.6778378,
       "address": "2014 West Division Street",
-      "neighborhood": "Wicker Park"
+      "neighborhood": "Wicker Park",
+      "openHour": 11,
+      "closeHour": 22
     },
     {
       "name": "Little Wok - Wicker Park",
       "lat": 41.9033844,
       "lon": -87.6769543,
       "address": "1950 West Division Street",
-      "neighborhood": "Wicker Park"
+      "neighborhood": "Wicker Park",
+      "openHour": 11,
+      "closeHour": 23
     },
     {
       "name": "Little Wok - Lakeview",
       "lat": 41.9390403,
       "lon": -87.6444995,
       "address": "3144 North Broadway",
-      "neighborhood": "Lake View"
+      "neighborhood": "Lake View",
+      "openHour": 11,
+      "closeHour": 23
     },
     {
       "name": "Janik's Cafe",
       "lat": 41.9030212,
       "lon": -87.6777642,
       "address": "2011 West Division Street",
-      "neighborhood": "Wicker Park"
+      "neighborhood": "Wicker Park",
+      "openHour": 7,
+      "closeHour": 14
     },
     {
       "name": "Folklore | Argentine Restaurant",
       "lat": 41.9033182,
       "lon": -87.6798869,
       "address": "2100 West Division Street",
-      "neighborhood": "Wicker Park"
+      "neighborhood": "Wicker Park",
+      "openHour": 17,
+      "closeHour": 22
     },
     {
       "name": "Easy Bar",
       "lat": 41.9033373,
       "lon": -87.6766132,
       "address": "1944 West Division Street",
-      "neighborhood": "Wicker Park"
+      "neighborhood": "Wicker Park",
+      "openHour": 16,
+      "closeHour": 2
     },
     {
       "name": "Via Carducci La Sorella",
       "lat": 41.9033539,
       "lon": -87.6759751,
       "address": "1928 West Division Street",
-      "neighborhood": "Wicker Park"
+      "neighborhood": "Wicker Park",
+      "openHour": 11,
+      "closeHour": 23
     },
     {
       "name": "Little Victories",
@@ -3252,350 +3283,441 @@
       "lat": 41.903454,
       "lon": -87.670302,
       "address": "1670 West Division Street",
-      "neighborhood": "Wicker Park"
+      "neighborhood": "Wicker Park",
+      "openHour": 14,
+      "closeHour": 2
     },
     {
       "name": "Tortello",
       "lat": 41.9035048,
       "lon": -87.6718648,
       "address": "1746 West Division Street",
-      "neighborhood": "Wicker Park"
+      "neighborhood": "Wicker Park",
+      "openHour": 8,
+      "closeHour": 21
     },
     {
       "name": "Sushi Taku - Wicker Park",
       "lat": 41.9033716,
       "lon": -87.6751109,
       "address": "1904 West Division Street",
-      "neighborhood": "Wicker Park"
+      "neighborhood": "Wicker Park",
+      "openHour": 12,
+      "closeHour": 22
     },
     {
       "name": "Vincent",
       "lat": 41.9797424,
       "lon": -87.6677757,
       "address": "1477 West Balmoral Avenue",
-      "neighborhood": "Andersonville"
+      "neighborhood": "Andersonville",
+      "openHour": 11,
+      "closeHour": 1
     },
     {
       "name": "Bar Roma",
       "lat": 41.9744963,
       "lon": -87.6680821,
       "address": "5101 North Clark Street",
-      "neighborhood": "Andersonville"
+      "neighborhood": "Andersonville",
+      "openHour": 10,
+      "closeHour": 22
     },
     {
       "name": "Little Bad Wolf",
       "lat": 41.9833483,
       "lon": -87.6690624,
       "address": "1541 West Bryn Mawr Avenue",
-      "neighborhood": "Edgewater"
+      "neighborhood": "Edgewater",
+      "openHour": 11,
+      "closeHour": 3
     },
     {
       "name": "Uvae Kitchen and Wine Bar",
       "lat": 41.9833723,
       "lon": -87.6685482,
       "address": "5553 North Clark Street",
-      "neighborhood": "Edgewater"
+      "neighborhood": "Edgewater",
+      "openHour": 15,
+      "closeHour": 23
     },
     {
       "name": "Yellowtail Sushi Bar & Asian Kitchen",
       "lat": 41.9387933,
       "lon": -87.6445207,
       "address": "3136 North Broadway",
-      "neighborhood": "Lake View"
+      "neighborhood": "Lake View",
+      "openHour": 16,
+      "closeHour": 23
     },
     {
       "name": "DryHop Brewers",
       "lat": 41.9393174,
       "lon": -87.6441967,
       "address": "3155 North Broadway",
-      "neighborhood": "Lake View"
+      "neighborhood": "Lake View",
+      "openHour": 11,
+      "closeHour": 22
     },
     {
       "name": "bartaco",
       "lat": 41.9115342,
       "lon": -87.6772531,
       "address": "1635-1637 North Damen Avenue",
-      "neighborhood": "Bucktown"
+      "neighborhood": "Bucktown",
+      "openHour": 11,
+      "closeHour": 23
     },
     {
       "name": "Ina Mae",
       "lat": 41.907664,
       "lon": -87.6721947,
       "address": "1415 North Wood Street",
-      "neighborhood": "Wicker Park"
+      "neighborhood": "Wicker Park",
+      "openHour": 11,
+      "closeHour": 22
     },
     {
       "name": "Lottie's Pub",
       "lat": 41.9157902,
       "lon": -87.6761834,
       "address": "1925 West Cortland Street",
-      "neighborhood": "Bucktown"
+      "neighborhood": "Bucktown",
+      "openHour": 11,
+      "closeHour": 2
     },
     {
       "name": "Club Lucky",
       "lat": 41.9125167,
       "lon": -87.6736917,
       "address": "1824 West Wabansia Avenue",
-      "neighborhood": "Bucktown"
+      "neighborhood": "Bucktown",
+      "openHour": 11,
+      "closeHour": 23
     },
     {
       "name": "Bronzeville Winery",
       "lat": 41.8142126,
       "lon": -87.6069235,
       "address": "4424 South Cottage Grove Avenue",
-      "neighborhood": "Hyde Park"
+      "neighborhood": "Hyde Park",
+      "openHour": 16,
+      "closeHour": 23
     },
     {
       "name": "Ja' Grill Hyde Park",
       "lat": 41.8004929,
       "lon": -87.5886243,
       "address": "1510 East Harper Court",
-      "neighborhood": "Hyde Park"
+      "neighborhood": "Hyde Park",
+      "openHour": 11,
+      "closeHour": 22
     },
     {
       "name": "Norman's Bistro",
       "lat": 41.8167265,
       "lon": -87.6016437,
       "address": "1001-1013 East 43rd Street",
-      "neighborhood": "Hyde Park"
+      "neighborhood": "Hyde Park",
+      "openHour": 15,
+      "closeHour": 22
     },
     {
       "name": "Daisy's Po-Boy and Tavern",
       "lat": 41.8004309,
       "lon": -87.5889202,
       "address": "5215 South Harper Avenue",
-      "neighborhood": "Hyde Park"
+      "neighborhood": "Hyde Park",
+      "openHour": 11,
+      "closeHour": 22
     },
     {
       "name": "La Palapa",
       "lat": 41.832427,
       "lon": -87.675546,
       "address": "2000 West 34th Street",
-      "neighborhood": "Bronzeville"
+      "neighborhood": "Bronzeville",
+      "openHour": 10,
+      "closeHour": 23
     },
     {
       "name": "5 Rabanitos Restaurante & Taqueria",
       "lat": 41.858,
       "lon": -87.6709447,
       "address": "1758 West 18th Street",
-      "neighborhood": "Pilsen"
+      "neighborhood": "Pilsen",
+      "openHour": 11,
+      "closeHour": 21
     },
     {
       "name": "Franco's Ristorante",
       "lat": 41.8383615,
       "lon": -87.6343646,
       "address": "300 West 31st Street",
-      "neighborhood": "Bridgeport"
+      "neighborhood": "Bridgeport",
+      "openHour": 11,
+      "closeHour": 22
     },
     {
       "name": "Turtle's Bar & Grill",
       "lat": 41.8346954,
       "lon": -87.6330665,
       "address": "238 West 33rd Street",
-      "neighborhood": "Bridgeport"
+      "neighborhood": "Bridgeport",
+      "openHour": 11,
+      "closeHour": 2
     },
     {
       "name": "Al Bawadi Grill",
       "lat": 41.7338135,
       "lon": -87.8012114,
       "address": "7216 West 87th Street",
-      "neighborhood": "Chicago"
+      "neighborhood": "Chicago",
+      "openHour": 10,
+      "closeHour": 23
     },
     {
       "name": "Jimmy's Pizza Cafe",
       "lat": 41.9615397,
       "lon": -87.690125,
       "address": "2434 West Montrose Avenue",
-      "neighborhood": "Lincoln Square"
+      "neighborhood": "Lincoln Square",
+      "openHour": 9,
+      "closeHour": 21
     },
     {
       "name": "Cafe Beograd",
       "lat": 41.9537535,
       "lon": -87.7021033,
       "address": "2933 West Irving Park Road",
-      "neighborhood": "Lincoln Square"
+      "neighborhood": "Lincoln Square",
+      "openHour": 8,
+      "closeHour": 0
     },
     {
       "name": "Mima's Taste Of Cuba",
       "lat": 41.9537291,
       "lon": -87.7017075,
       "address": "2925 West Irving Park Road",
-      "neighborhood": "Lincoln Square"
+      "neighborhood": "Lincoln Square",
+      "openHour": 11,
+      "closeHour": 21
     },
     {
       "name": "El Cid",
       "lat": 41.9297305,
       "lon": -87.7072083,
-      "address": "La Placita",
-      "neighborhood": "Logan Square"
+      "address": "2645 North Kedzie Avenue",
+      "neighborhood": "Logan Square",
+      "openHour": 10,
+      "closeHour": 23
     },
     {
       "name": "TIM TIM'S HALAL GRILL",
       "lat": 41.9610734,
       "lon": -87.7318769,
       "address": "4148 West Montrose Avenue",
-      "neighborhood": "Lincoln Square"
+      "neighborhood": "Lincoln Square",
+      "openHour": 11,
+      "closeHour": 22
     },
     {
       "name": "Navigator Taproom",
       "lat": 41.920928,
       "lon": -87.693845,
       "address": "2211 North Milwaukee Avenue",
-      "neighborhood": "Logan Square"
+      "neighborhood": "Logan Square",
+      "openHour": 12,
+      "closeHour": 2
     },
     {
       "name": "Mother's Ruin",
       "lat": 41.934971,
       "lon": -87.7164668,
       "address": "2943 North Milwaukee Avenue",
-      "neighborhood": "Avondale"
+      "neighborhood": "Avondale",
+      "openHour": 11,
+      "closeHour": 3
     },
     {
       "name": "Sushi Taku-Logan Square",
       "lat": 41.9226034,
       "lon": -87.696516,
       "address": "2283 North Milwaukee Avenue",
-      "neighborhood": "Logan Square"
+      "neighborhood": "Logan Square",
+      "openHour": 12,
+      "closeHour": 22
     },
     {
       "name": "Longman & Eagle",
       "lat": 41.9300853,
       "lon": -87.7071462,
       "address": "2657 North Kedzie Avenue",
-      "neighborhood": "Logan Square"
+      "neighborhood": "Logan Square",
+      "openHour": 11,
+      "closeHour": 1
     },
     {
       "name": "Reno",
       "lat": 41.9291558,
       "lon": -87.7071787,
       "address": "2607 North Milwaukee Avenue",
-      "neighborhood": "Logan Square"
+      "neighborhood": "Logan Square",
+      "openHour": 9,
+      "closeHour": 22
     },
     {
       "name": "Frank and Mary's Tavern",
       "lat": 41.9342697,
       "lon": -87.6905625,
       "address": "2905 North Elston Avenue",
-      "neighborhood": "Logan Square"
+      "neighborhood": "Logan Square",
+      "openHour": 11,
+      "closeHour": 3
     },
     {
       "name": "Alulu Brewery and Pub",
       "lat": 41.854742,
       "lon": -87.6634119,
       "address": "2011 South Laflin Street",
-      "neighborhood": "Pilsen"
+      "neighborhood": "Pilsen",
+      "openHour": 15,
+      "closeHour": 0
     },
     {
       "name": "The Bar on Buena",
       "lat": 41.9586012,
       "lon": -87.6535884,
       "address": "910 West Buena Avenue",
-      "neighborhood": "Wrigleyville"
+      "neighborhood": "Wrigleyville",
+      "openHour": 11,
+      "closeHour": 1
     },
     {
       "name": "Holiday Club",
       "lat": 41.954588,
       "lon": -87.654726,
       "address": "4000 North Sheridan Road",
-      "neighborhood": "Wrigleyville"
+      "neighborhood": "Wrigleyville",
+      "openHour": 13,
+      "closeHour": 3
     },
     {
       "name": "The Reservoir",
       "lat": 41.9620847,
       "lon": -87.6517652,
       "address": "844 West Montrose Avenue",
-      "neighborhood": "Wrigleyville"
+      "neighborhood": "Wrigleyville",
+      "openHour": 11,
+      "closeHour": 0
     },
     {
       "name": "Michael's Original Pizzeria & Tavern",
       "lat": 41.9568838,
       "lon": -87.6517546,
       "address": "4091 North Broadway",
-      "neighborhood": "Wrigleyville"
+      "neighborhood": "Wrigleyville",
+      "openHour": 11,
+      "closeHour": 0
     },
     {
       "name": "Port & Park Bistro & Bar",
       "lat": 41.954514,
       "lon": -87.6644832,
       "address": "4000 North Southport Avenue",
-      "neighborhood": "Lake View"
+      "neighborhood": "Lake View",
+      "openHour": 11,
+      "closeHour": 22
     },
     {
       "name": "Wrigleyville North",
       "lat": 41.9528615,
       "lon": -87.6547795,
       "address": "3902 North Sheridan Road",
-      "neighborhood": "Wrigleyville"
+      "neighborhood": "Wrigleyville",
+      "openHour": 14,
+      "closeHour": 2
     },
     {
       "name": "A Taste of Heaven",
       "lat": 41.9799916,
       "lon": -87.6680196,
       "address": "5401 North Clark Street",
-      "neighborhood": "Andersonville"
+      "neighborhood": "Andersonville",
+      "openHour": 8,
+      "closeHour": 21
     },
     {
       "name": "Kopi Cafe",
       "lat": 41.9785917,
       "lon": -87.6681583,
       "address": "1553 North Clark Street",
-      "neighborhood": "Andersonville"
+      "neighborhood": "Andersonville",
+      "openHour": 10,
+      "closeHour": 20
     },
     {
       "name": "Eggsperience Cafe - Lakeview",
       "lat": 41.9410085,
       "lon": -87.6442497,
       "address": "3233 North Broadway",
-      "neighborhood": "Wrigleyville"
+      "neighborhood": "Wrigleyville",
+      "openHour": 7,
+      "closeHour": 15
     },
     {
       "name": "Rogers Park Social",
       "lat": 42.0073911,
       "lon": -87.6662572,
       "address": "6920 North Glenwood Avenue",
-      "neighborhood": "Rogers Park"
+      "neighborhood": "Rogers Park",
+      "openHour": 15,
+      "closeHour": 2
     },
     {
       "name": "Web Pub Bucktown",
       "lat": 41.9214968,
       "lon": -87.6788471,
       "address": "2026 West Webster Avenue",
-      "neighborhood": "Bucktown"
+      "neighborhood": "Bucktown",
+      "openHour": 12,
+      "closeHour": 2
     },
     {
       "name": "Brownstone",
       "lat": 41.9533808,
       "lon": -87.6779202,
       "address": "3937 North Lincoln Avenue",
-      "neighborhood": "North Center"
+      "neighborhood": "North Center",
+      "openHour": 11,
+      "closeHour": 1
     },
     {
       "name": "ROCKS Northcenter",
       "lat": 41.9569889,
       "lon": -87.6809849,
       "address": "4138 North Lincoln Avenue",
-      "neighborhood": "Lincoln Square"
-    },
-    {
-      "name": "Don Pedro Mexican Restaurant",
-      "lat": 41.9558307,
-      "lon": -87.6801799,
-      "address": "4064 North Lincoln Avenue",
-      "neighborhood": "Lincoln Square"
+      "neighborhood": "Lincoln Square",
+      "openHour": 16,
+      "closeHour": 0
     },
     {
       "name": "Kraken Sushi & Beyond",
       "lat": 41.9548156,
       "lon": -87.6888566,
-      "address": "West Cuyler Avenue",
-      "neighborhood": "Lincoln Square"
+      "address": "4022 North Western Avenue",
+      "neighborhood": "Lincoln Square",
+      "openHour": 11,
+      "closeHour": 21
     },
     {
       "name": "ROJO GUSANO",
       "lat": 41.9584455,
       "lon": -87.6736955,
       "address": "1770 West Berteau Avenue",
-      "neighborhood": "North Center"
+      "neighborhood": "North Center",
+      "openHour": 17,
+      "closeHour": 23
     },
     {
       "name": "Mezcala Agave Bar & Kitchen",
@@ -3609,147 +3731,189 @@
       "lat": 41.9475469,
       "lon": -87.6642316,
       "address": "3612 North Southport Avenue",
-      "neighborhood": "Lake View"
+      "neighborhood": "Lake View",
+      "openHour": 6,
+      "closeHour": 20
     },
     {
       "name": "D'Agostino's Pizza and Pub Wrigleyville",
       "lat": 41.9468886,
       "lon": -87.6636778,
       "address": "1351 West Addison Street",
-      "neighborhood": "Lake View"
+      "neighborhood": "Lake View",
+      "openHour": 11,
+      "closeHour": 0
     },
     {
       "name": "Coalfire",
       "lat": 41.949185,
       "lon": -87.6637704,
       "address": "3707 North Southport Avenue",
-      "neighborhood": "Lake View"
+      "neighborhood": "Lake View",
+      "openHour": 12,
+      "closeHour": 23
     },
     {
-      "name": "Do\u00f1a Tola",
+      "name": "Doña Tola",
       "lat": 41.950413,
       "lon": -87.6638338,
       "address": "3751 North Southport Avenue",
-      "neighborhood": "Lake View"
+      "neighborhood": "Lake View",
+      "openHour": 17,
+      "closeHour": 22
     },
     {
       "name": "Tango Sur",
       "lat": 41.950742,
       "lon": -87.663864,
       "address": "3767 North Southport Avenue",
-      "neighborhood": "Lake View"
+      "neighborhood": "Lake View",
+      "openHour": 17,
+      "closeHour": 0
     },
     {
       "name": "Sushi Mura",
       "lat": 41.9484917,
       "lon": -87.6638861,
       "address": "3647 North Southport Avenue",
-      "neighborhood": "Lake View"
+      "neighborhood": "Lake View",
+      "openHour": 16,
+      "closeHour": 22
     },
     {
       "name": "Crosby's Kitchen",
       "lat": 41.9450902,
       "lon": -87.6637174,
       "address": "3455 North Southport Avenue",
-      "neighborhood": "Lake View"
+      "neighborhood": "Lake View",
+      "openHour": 11,
+      "closeHour": 22
     },
     {
       "name": "Tuco And Blondie",
       "lat": 41.943315,
       "lon": -87.6640819,
       "address": "3358 North Southport Avenue",
-      "neighborhood": "Lake View"
+      "neighborhood": "Lake View",
+      "openHour": 11,
+      "closeHour": 22
     },
     {
       "name": "R Public House",
       "lat": 42.0162849,
       "lon": -87.6685864,
       "address": "1508 West Jarvis Avenue",
-      "neighborhood": "Rogers Park"
+      "neighborhood": "Rogers Park",
+      "openHour": 15,
+      "closeHour": 0
     },
     {
       "name": "Jarvis Square Tavern",
       "lat": 42.0162636,
       "lon": -87.6684901,
       "address": "7404 North Greenview Avenue",
-      "neighborhood": "Rogers Park"
+      "neighborhood": "Rogers Park",
+      "openHour": 11,
+      "closeHour": 2
     },
     {
       "name": "Charmers Cafe",
       "lat": 42.0161854,
       "lon": -87.6683297,
       "address": "7404 North Greenview Avenue",
-      "neighborhood": "Rogers Park"
+      "neighborhood": "Rogers Park",
+      "openHour": 7,
+      "closeHour": 17
     },
     {
       "name": "Le Piano",
       "lat": 42.0087316,
       "lon": -87.6663314,
       "address": "6970 North Glenwood Avenue",
-      "neighborhood": "Rogers Park"
+      "neighborhood": "Rogers Park",
+      "openHour": 18,
+      "closeHour": 0
     },
     {
       "name": "Spacca Napoli Pizzeria",
       "lat": 41.9631881,
       "lon": -87.6737274,
       "address": "1769 West Sunnyside Avenue",
-      "neighborhood": "North Center"
+      "neighborhood": "North Center",
+      "openHour": 11,
+      "closeHour": 21
     },
     {
       "name": "Cafe El Tapatio",
       "lat": 41.943492,
       "lon": -87.66908,
       "address": "1604 West Roscoe Street",
-      "neighborhood": "Lake View"
+      "neighborhood": "Lake View",
+      "openHour": 11,
+      "closeHour": 22
     },
     {
       "name": "Frasca Pizzeria & Wine Bar",
       "lat": 41.9432039,
       "lon": -87.6713328,
       "address": "3358 North Paulina Street",
-      "neighborhood": "Roscoe Village"
+      "neighborhood": "Roscoe Village",
+      "openHour": 16,
+      "closeHour": 22
     },
     {
       "name": "PR Italian Bistro",
       "lat": 41.9530746,
       "lon": -87.6547562,
       "address": "3908 North Sheridan Road",
-      "neighborhood": "Wrigleyville"
+      "neighborhood": "Wrigleyville",
+      "openHour": 17,
+      "closeHour": 22
     },
     {
       "name": "Fat Cat",
       "lat": 41.970098,
       "lon": -87.6599373,
       "address": "4840 North Broadway",
-      "neighborhood": "Andersonville"
+      "neighborhood": "Andersonville",
+      "openHour": 11,
+      "closeHour": 3
     },
     {
       "name": "Rootstock Wine & Beer Bar",
       "lat": 41.8990434,
       "lon": -87.6970562,
       "address": "954 North California Avenue",
-      "neighborhood": "Ukrainian Village"
+      "neighborhood": "Ukrainian Village",
+      "openHour": 17,
+      "closeHour": 23
     },
     {
       "name": "The Aberdeen Tap",
       "lat": 41.8901494,
       "lon": -87.6550042,
       "address": "440 North Aberdeen Street",
-      "neighborhood": "River West"
+      "neighborhood": "River West",
+      "openHour": 11,
+      "closeHour": 2
     },
     {
       "name": "Wildberry Pancakes & Cafe",
       "lat": 41.8847209,
       "lon": -87.6228606,
-      "address": "East Randolph Street East Randolph Street",
-      "neighborhood": "Loop"
+      "address": "130 East Randolph Street",
+      "neighborhood": "Loop",
+      "openHour": 6,
+      "closeHour": 15
     },
     {
       "name": "Avli River North",
       "lat": 41.8949625,
       "lon": -87.6344994,
       "address": "702 North Wells Street",
-      "neighborhood": "River North"
+      "neighborhood": "River North",
+      "openHour": 11,
+      "closeHour": 23
     },
     {
       "name": "Carlucci Restaurant Chicago",
@@ -3762,253 +3926,325 @@
       "name": "Tacos Tequilas",
       "lat": 41.9344223,
       "lon": -87.7158281,
-      "address": "North Milwaukee Avenue",
-      "neighborhood": "Avondale"
+      "address": "2919 North Milwaukee Avenue",
+      "neighborhood": "Avondale",
+      "openHour": 11,
+      "closeHour": 22
     },
     {
       "name": "Crawford's Food & Spirits",
       "lat": 41.9410966,
       "lon": -87.7264423,
-      "address": "West School Street",
-      "neighborhood": "Avondale"
+      "address": "3938 West School Street",
+      "neighborhood": "Avondale",
+      "openHour": 11,
+      "closeHour": 1
     },
     {
       "name": "La Celia Latin Kitchen",
       "lat": 41.9337552,
       "lon": -87.7154691,
       "address": "2890 North Milwaukee Avenue",
-      "neighborhood": "Avondale"
+      "neighborhood": "Avondale",
+      "openHour": 10,
+      "closeHour": 21
     },
     {
       "name": "The Aviary",
       "lat": 41.8865074,
       "lon": -87.6519833,
       "address": "955 West Fulton Market",
-      "neighborhood": "River West"
+      "neighborhood": "River West",
+      "openHour": 17,
+      "closeHour": 1
     },
     {
       "name": "Five Star Bar",
       "lat": 41.896379,
       "lon": -87.6634469,
       "address": "1424 West Chicago Avenue",
-      "neighborhood": "Noble Square"
+      "neighborhood": "Noble Square",
+      "openHour": 17,
+      "closeHour": 1
     },
     {
       "name": "Breakfast House",
       "lat": 41.9387598,
       "lon": -87.7454079,
       "address": "4725 West Belmont Avenue",
-      "neighborhood": "Avondale"
+      "neighborhood": "Avondale",
+      "openHour": 7,
+      "closeHour": 15
     },
     {
       "name": "Dunning Pour House",
       "lat": 41.9453574,
       "lon": -87.8204284,
       "address": "7718 West Addison Street",
-      "neighborhood": "Avondale"
+      "neighborhood": "Avondale",
+      "openHour": 13,
+      "closeHour": 23
     },
     {
       "name": "Breakfast House",
       "lat": 41.9361711,
       "lon": -87.6681863,
       "address": "3001 North Ashland Avenue",
-      "neighborhood": "Lake View"
+      "neighborhood": "Lake View",
+      "openHour": 7,
+      "closeHour": 15
     },
     {
       "name": "Cafe Urbano",
       "lat": 41.956658,
       "lon": -87.7238115,
       "address": "4176 North Elston Avenue",
-      "neighborhood": "Lincoln Square"
+      "neighborhood": "Lincoln Square",
+      "openHour": 6,
+      "closeHour": 19
     },
     {
       "name": "Sfera Sicilian Street Food",
       "lat": 41.9871154,
       "lon": -87.6598145,
       "address": "5759 North Broadway",
-      "neighborhood": "Edgewater"
+      "neighborhood": "Edgewater",
+      "openHour": 10,
+      "closeHour": 18
     },
     {
       "name": "Regalia bar & restaurant",
       "lat": 41.9906259,
       "lon": -87.6600204,
       "address": "5959 North Broadway",
-      "neighborhood": "Edgewater"
+      "neighborhood": "Edgewater",
+      "openHour": 17,
+      "closeHour": 23
     },
     {
       "name": "Itoko",
       "lat": 41.9422969,
       "lon": -87.6636994,
       "address": "3323 North Southport Avenue",
-      "neighborhood": "Lake View"
+      "neighborhood": "Lake View",
+      "openHour": 16,
+      "closeHour": 22
     },
     {
       "name": "Oak and Honey",
       "lat": 41.9384546,
       "lon": -87.6446285,
       "address": "3124 North Broadway",
-      "neighborhood": "Lake View"
+      "neighborhood": "Lake View",
+      "openHour": 9,
+      "closeHour": 21
     },
     {
       "name": "Strapoli Pizzeria",
       "lat": 41.9326967,
       "lon": -87.643098,
       "address": "553 West Diversey Parkway",
-      "neighborhood": "Lake View"
+      "neighborhood": "Lake View",
+      "openHour": 11,
+      "closeHour": 22
     },
     {
       "name": "Cara Cara Club",
       "lat": 41.9277119,
       "lon": -87.7067453,
       "address": "2535-2547 North Kedzie Boulevard",
-      "neighborhood": "Logan Square"
+      "neighborhood": "Logan Square",
+      "openHour": 17,
+      "closeHour": 1
     },
     {
       "name": "Avenue Tap and Kitchen",
       "lat": 41.9435579,
       "lon": -87.6709717,
       "address": "3407 North Paulina Street",
-      "neighborhood": "Roscoe Village"
+      "neighborhood": "Roscoe Village",
+      "openHour": 16,
+      "closeHour": 1
     },
     {
       "name": "Tryzub Ukrainian Kitchen",
       "lat": 41.8956611,
       "lon": -87.6821111,
       "address": "2201 West Chicago Avenue",
-      "neighborhood": "Ukrainian Village"
+      "neighborhood": "Ukrainian Village",
+      "openHour": 10,
+      "closeHour": 23
     },
     {
       "name": "Chile Toreado",
       "lat": 41.8305054,
       "lon": -87.6762836,
-      "address": "West 35th Street",
-      "neighborhood": "Bronzeville"
+      "address": "2022 West 35th Street",
+      "neighborhood": "McKinley Park",
+      "openHour": 11,
+      "closeHour": 21
     },
     {
       "name": "Maplewood Brewery & Distillery",
       "lat": 41.930889,
       "lon": -87.6913468,
       "address": "2717 North Maplewood Avenue",
-      "neighborhood": "Logan Square"
+      "neighborhood": "Logan Square",
+      "openHour": 11,
+      "closeHour": 0
     },
     {
       "name": "The Harding Tavern",
       "lat": 41.9307704,
       "lon": -87.7103996,
       "address": "2732 North Milwaukee Avenue",
-      "neighborhood": "Avondale"
+      "neighborhood": "Avondale",
+      "openHour": 12,
+      "closeHour": 2
     },
     {
       "name": "Smack Dab Chicago",
       "lat": 42.0044516,
       "lon": -87.6731663,
       "address": "6714-6730 North Clark Street",
-      "neighborhood": "Rogers Park"
+      "neighborhood": "Rogers Park",
+      "openHour": 8,
+      "closeHour": 14
     },
     {
       "name": "Red June Cafe",
       "lat": 41.9183072,
       "lon": -87.682681,
       "address": "2020 North Leavitt Street",
-      "neighborhood": "Bucktown"
+      "neighborhood": "Bucktown",
+      "openHour": 6,
+      "closeHour": 16
     },
     {
       "name": "Printers Row Wine Bar and Shop",
       "lat": 41.8729785,
       "lon": -87.629016,
       "address": "701-721 South Dearborn Street",
-      "neighborhood": "Loop"
+      "neighborhood": "Loop",
+      "openHour": 12,
+      "closeHour": 0
     },
     {
       "name": "Gracie O'Malley's Portage Park",
       "lat": 41.9543621,
       "lon": -87.7492787,
       "address": "4058 North Milwaukee Avenue",
-      "neighborhood": "Lincoln Square"
+      "neighborhood": "Lincoln Square",
+      "openHour": 11,
+      "closeHour": 2
     },
     {
       "name": "Moonflower",
       "lat": 41.9603178,
       "lon": -87.7540484,
       "address": "4359 North Milwaukee Avenue",
-      "neighborhood": "Lincoln Square"
+      "neighborhood": "Lincoln Square",
+      "openHour": 16,
+      "closeHour": 0
     },
     {
       "name": "Junebug Cafe Six Corners",
       "lat": 41.9541593,
       "lon": -87.7487733,
       "address": "4058 North Milwaukee Avenue",
-      "neighborhood": "Lincoln Square"
+      "neighborhood": "Lincoln Square",
+      "openHour": 8,
+      "closeHour": 15
     },
     {
-      "name": "Sim\u00f2n Tacos",
+      "name": "Simòn Tacos",
       "lat": 41.9586767,
       "lon": -87.752287,
       "address": "4263 North Milwaukee Avenue",
-      "neighborhood": "Lincoln Square"
+      "neighborhood": "Lincoln Square",
+      "openHour": 11,
+      "closeHour": 21
     },
     {
       "name": "Las Tablas",
       "lat": 41.9536111,
       "lon": -87.7508333,
       "address": "4920 West Irving Park Road",
-      "neighborhood": "Lincoln Square"
+      "neighborhood": "Lincoln Square",
+      "openHour": 12,
+      "closeHour": 22
     },
     {
       "name": "BRGRBELLY",
       "lat": 41.9529851,
       "lon": -87.7709558,
       "address": "5739 West Irving Park Road",
-      "neighborhood": "Lincoln Square"
+      "neighborhood": "Lincoln Square",
+      "openHour": 12,
+      "closeHour": 21
     },
     {
       "name": "Uncle Mike's Place",
       "lat": 41.8910764,
       "lon": -87.6699019,
       "address": "1700 West Grand Avenue",
-      "neighborhood": "Noble Square"
+      "neighborhood": "Noble Square",
+      "openHour": 6,
+      "closeHour": 14
     },
     {
       "name": "Filonek's Bar and Grill",
       "lat": 41.9942708,
       "lon": -87.7844894,
       "address": "6213 North Milwaukee Avenue",
-      "neighborhood": "Lincoln Square"
+      "neighborhood": "Lincoln Square",
+      "openHour": 12,
+      "closeHour": 2
     },
     {
       "name": "Liberation Kitchen",
       "lat": 41.890979,
       "lon": -87.679076,
       "address": "2054 West Grand Avenue",
-      "neighborhood": "Ukrainian Village"
+      "neighborhood": "Ukrainian Village",
+      "openHour": 9,
+      "closeHour": 19
     },
     {
       "name": "Rebel & Rye",
       "lat": 41.891395,
       "lon": -87.6470038,
       "address": "726 West Grand Avenue",
-      "neighborhood": "River West"
+      "neighborhood": "River West",
+      "openHour": 13,
+      "closeHour": 2
     },
     {
       "name": "Maxwells Trading",
       "lat": 41.8876644,
       "lon": -87.6652479,
       "address": "1516 West Carroll Avenue",
-      "neighborhood": "West Loop"
+      "neighborhood": "West Loop",
+      "openHour": 17,
+      "closeHour": 22
     },
     {
       "name": "Alcock's",
       "lat": 41.8764187,
       "lon": -87.6335258,
       "address": "411 S. Wells St.",
-      "neighborhood": "Loop"
+      "neighborhood": "Loop",
+      "openHour": 10,
+      "closeHour": 2
     },
     {
       "name": "Franklin Tap",
       "lat": 41.8777297,
       "lon": -87.6350867,
       "address": "325 S. Franklin St.",
-      "neighborhood": "Loop"
+      "neighborhood": "Loop",
+      "openHour": 11,
+      "closeHour": 0
     },
     {
       "name": "Green at Grant Park",
@@ -4022,224 +4258,180 @@
       "lat": 41.8815863,
       "lon": -87.636141,
       "address": "1 S. Wacker Dr.",
-      "neighborhood": "Loop"
-    },
-    {
-      "name": "Poag Mahone's",
-      "lat": 41.877664,
-      "lon": -87.6336054,
-      "address": "333 S. Wells St.",
-      "neighborhood": "Loop"
+      "neighborhood": "Loop",
+      "openHour": 11,
+      "closeHour": 21
     },
     {
       "name": "Rivers",
       "lat": 41.8808631,
       "lon": -87.6375286,
       "address": "30 S. Wacker Dr.",
-      "neighborhood": "Loop"
-    },
-    {
-      "name": "Salseria Cantina & Grill",
-      "lat": 41.8787381,
-      "lon": -87.6359612,
-      "address": "233 S. Wacker Dr.",
-      "neighborhood": "Loop"
+      "neighborhood": "Loop",
+      "openHour": 7,
+      "closeHour": 21
     },
     {
       "name": "Athena Restaurant",
       "lat": 41.8787225,
       "lon": -87.6476234,
       "address": "212 S. Halsted St.",
-      "neighborhood": "Greektown"
+      "neighborhood": "Greektown",
+      "openHour": 11,
+      "closeHour": 22
     },
     {
       "name": "Bottom Lounge",
       "lat": 41.8851506,
       "lon": -87.6618035,
       "address": "1375 W. Lake St.",
-      "neighborhood": "West Loop"
-    },
-    {
-      "name": "Fulton Lounge",
-      "lat": 41.8864563,
-      "lon": -87.6520185,
-      "address": "955 W. Fulton Mkt.",
-      "neighborhood": "West Loop"
+      "neighborhood": "West Loop",
+      "openHour": 17,
+      "closeHour": 2
     },
     {
       "name": "Greek Islands",
       "lat": 41.8789853,
       "lon": -87.6475092,
       "address": "200 S. Halsted St.",
-      "neighborhood": "Greektown"
+      "neighborhood": "Greektown",
+      "openHour": 11,
+      "closeHour": 23
     },
     {
       "name": "Pegasus Restaurant & Taverna",
       "lat": 41.8800805,
       "lon": -87.6474185,
       "address": "130 S. Halsted St.",
-      "neighborhood": "Greektown"
-    },
-    {
-      "name": "Union Park",
-      "lat": 41.878113,
-      "lon": -87.657139,
-      "address": "228 S. Racine Ave.",
-      "neighborhood": "West Loop"
+      "neighborhood": "Greektown",
+      "openHour": 11,
+      "closeHour": 0
     },
     {
       "name": "Blackie's",
       "lat": 41.8724347,
       "lon": -87.630304,
       "address": "755 S. Clark St.",
-      "neighborhood": "South Loop"
+      "neighborhood": "South Loop",
+      "openHour": 16,
+      "closeHour": 22
     },
     {
       "name": "Hackney's",
       "lat": 41.8729784,
       "lon": -87.6290456,
       "address": "733 S. Dearborn St.",
-      "neighborhood": "South Loop"
-    },
-    {
-      "name": "Via Ventuno",
-      "lat": 41.8540264,
-      "lon": -87.6256347,
-      "address": "2110 S. Wabash Ave.",
-      "neighborhood": "South Loop"
-    },
-    {
-      "name": "Flatwater",
-      "lat": 41.8881696,
-      "lon": -87.6306139,
-      "address": "321 N. Clark St.",
-      "neighborhood": "River North"
-    },
-    {
-      "name": "Fulton's on the River",
-      "lat": 41.8878923,
-      "lon": -87.6323948,
-      "address": "315 N. LaSalle St.",
-      "neighborhood": "River North"
+      "neighborhood": "South Loop",
+      "openHour": 11,
+      "closeHour": 0
     },
     {
       "name": "Gilt Bar",
       "lat": 41.8892822,
       "lon": -87.6351136,
       "address": "230 W. Kinzie St.",
-      "neighborhood": "River North"
-    },
-    {
-      "name": "Joynt",
-      "lat": 41.8938569,
-      "lon": -87.6299761,
-      "address": "650 N. Dearborn St.",
-      "neighborhood": "River North"
+      "neighborhood": "River North",
+      "openHour": 17,
+      "closeHour": 0
     },
     {
       "name": "Kerryman",
       "lat": 41.8941753,
       "lon": -87.6309917,
       "address": "661 N. Clark St.",
-      "neighborhood": "River North"
-    },
-    {
-      "name": "Martini Ranch",
-      "lat": 41.896328,
-      "lon": -87.6362385,
-      "address": "311 W. Chicago Ave.",
-      "neighborhood": "River North"
-    },
-    {
-      "name": "Naniwa",
-      "lat": 41.8927063,
-      "lon": -87.6337894,
-      "address": "607 N. Wells St.",
-      "neighborhood": "River North"
-    },
-    {
-      "name": "Rock Bottom",
-      "lat": 41.8914012,
-      "lon": -87.6284125,
-      "address": "1 W. Grand Ave.",
-      "neighborhood": "River North"
+      "neighborhood": "River North",
+      "openHour": 11,
+      "closeHour": 2
     },
     {
       "name": "Pippin's Tavern",
       "lat": 41.8970321,
       "lon": -87.6259225,
       "address": "806 N. Rush St.",
-      "neighborhood": "Gold Coast"
+      "neighborhood": "Gold Coast",
+      "openHour": 11,
+      "closeHour": 2
     },
     {
       "name": "Rosebud on Rush",
       "lat": 41.895595,
       "lon": -87.6258346,
       "address": "720 N. Rush St.",
-      "neighborhood": "Gold Coast"
+      "neighborhood": "Gold Coast",
+      "openHour": 11,
+      "closeHour": 23
     },
     {
       "name": "Burton Place",
       "lat": 41.9090324,
       "lon": -87.6343154,
       "address": "1447 N. Wells St.",
-      "neighborhood": "Old Town"
+      "neighborhood": "Old Town",
+      "openHour": 17,
+      "closeHour": 4
     },
     {
       "name": "Fireplace Inn",
       "lat": 41.9090911,
       "lon": -87.6349971,
       "address": "1448 N. Wells St.",
-      "neighborhood": "Old Town"
+      "neighborhood": "Old Town",
+      "openHour": 16,
+      "closeHour": 2
     },
     {
       "name": "Orso's",
       "lat": 41.9077806,
       "lon": -87.6343086,
       "address": "1401 N. Wells St.",
-      "neighborhood": "Old Town"
+      "neighborhood": "Old Town",
+      "openHour": 11,
+      "closeHour": 22
     },
     {
       "name": "Topo Gigio Ristorante",
       "lat": 41.9096419,
       "lon": -87.6349973,
       "address": "1516 N. Wells St.",
-      "neighborhood": "Old Town"
+      "neighborhood": "Old Town",
+      "openHour": 11,
+      "closeHour": 22
     },
     {
       "name": "Joe's",
       "lat": 41.9101115,
       "lon": -87.6521126,
       "address": "940 W. Weed St.",
-      "neighborhood": "Lincoln Park"
-    },
-    {
-      "name": "Red Canary",
-      "lat": 41.8945638,
-      "lon": -87.6526456,
-      "address": "695 N. Milwaukee Ave.",
-      "neighborhood": "River West"
+      "neighborhood": "Lincoln Park",
+      "openHour": 16,
+      "closeHour": 2
     },
     {
       "name": "Corcoran's Grill & Pub",
       "lat": 41.9115994,
       "lon": -87.6340281,
       "address": "1615 N. Wells St.",
-      "neighborhood": "Old Town"
+      "neighborhood": "Old Town",
+      "openHour": 11,
+      "closeHour": 2
     },
     {
       "name": "Twin Anchors",
       "lat": 41.9127037,
       "lon": -87.6383321,
       "address": "1655 N. Sedgwick St.",
-      "neighborhood": "Old Town"
+      "neighborhood": "Old Town",
+      "openHour": 16,
+      "closeHour": 22
     },
     {
       "name": "Castaways",
       "lat": 41.914957,
       "lon": -87.6263188,
       "address": "1603 N. Lake Shore Dr.",
-      "neighborhood": "Lincoln Park"
+      "neighborhood": "Lincoln Park",
+      "openHour": 11,
+      "closeHour": 21
     },
     {
       "name": "Forno Diablo",
@@ -4249,144 +4441,139 @@
       "neighborhood": "Lincoln Park"
     },
     {
-      "name": "John Barleycorn",
-      "lat": 41.9237973,
-      "lon": -87.6461095,
-      "address": "658 W. Belden Ave.",
-      "neighborhood": "Lincoln Park"
-    },
-    {
       "name": "Manhandler",
       "lat": 41.9174001,
       "lon": -87.6487959,
       "address": "1948 N. Halsted St.",
-      "neighborhood": "Lincoln Park"
-    },
-    {
-      "name": "Mickey's",
-      "lat": 41.9268031,
-      "lon": -87.6415082,
-      "address": "2450 N. Clark St.",
-      "neighborhood": "Lincoln Park"
+      "neighborhood": "Lincoln Park",
+      "openHour": 12,
+      "closeHour": 5
     },
     {
       "name": "Pars Cove",
       "lat": 41.9325882,
       "lon": -87.6408456,
       "address": "435 W. Diversey Pkwy.",
-      "neighborhood": "Lincoln Park"
+      "neighborhood": "Lincoln Park",
+      "openHour": 16,
+      "closeHour": 22
     },
     {
-      "name": "Caf\u00e9 Ba-Ba-Reeba!",
+      "name": "Café Ba-Ba-Reeba!",
       "lat": 41.9189677,
       "lon": -87.6488891,
       "address": "2024 N. Halsted St.",
-      "neighborhood": "Lincoln Park"
-    },
-    {
-      "name": "Clybar and Grille",
-      "lat": 41.9257458,
-      "lon": -87.6698008,
-      "address": "2417 N. Clybourn Ave.",
-      "neighborhood": "Lincoln Park"
+      "neighborhood": "Lincoln Park",
+      "openHour": 11,
+      "closeHour": 23
     },
     {
       "name": "King Crab Tavern",
       "lat": 41.9143547,
       "lon": -87.6486669,
       "address": "1816 N. Halsted St.",
-      "neighborhood": "Lincoln Park"
+      "neighborhood": "Lincoln Park",
+      "openHour": 11,
+      "closeHour": 0
     },
     {
       "name": "Tripoli Tap",
       "lat": 41.9179216,
       "lon": -87.6571757,
       "address": "1147 W. Armitage Ave.",
-      "neighborhood": "Lincoln Park"
-    },
-    {
-      "name": "Lincoln Station",
-      "lat": 41.9261095,
-      "lon": -87.650008,
-      "address": "2432 N. Lincoln Ave.",
-      "neighborhood": "Lincoln Park"
+      "neighborhood": "Lincoln Park",
+      "openHour": 15,
+      "closeHour": 2
     },
     {
       "name": "Seven Ten Lounge",
       "lat": 41.9316698,
       "lon": -87.6573105,
       "address": "2747 N. Lincoln Ave.",
-      "neighborhood": "Lincoln Park"
+      "neighborhood": "Lincoln Park",
+      "openHour": 17,
+      "closeHour": 2
     },
     {
       "name": "Duke of Perth",
       "lat": 41.93525,
       "lon": -87.646598,
       "address": "2913 N. Clark St.",
-      "neighborhood": "Lake View"
+      "neighborhood": "Lake View",
+      "openHour": 16,
+      "closeHour": 1
     },
     {
       "name": "El Nuevo Mexicano",
       "lat": 41.9353036,
       "lon": -87.6471628,
       "address": "2914 N. Clark St.",
-      "neighborhood": "Lake View"
+      "neighborhood": "Lake View",
+      "openHour": 12,
+      "closeHour": 22
     },
     {
       "name": "F.O. Mahony's",
       "lat": 41.9494171,
       "lon": -87.6483014,
       "address": "3701 N. Broadway",
-      "neighborhood": "Lake View"
+      "neighborhood": "Lake View",
+      "openHour": 12,
+      "closeHour": 2
     },
     {
       "name": "Mayan Palace",
       "lat": 41.9317245,
       "lon": -87.6486746,
       "address": "2703 N. Halsted St.",
-      "neighborhood": "Lake View"
+      "neighborhood": "Lake View",
+      "openHour": 11,
+      "closeHour": 23
     },
     {
       "name": "Renaldi's Pizza",
       "lat": 41.9338338,
       "lon": -87.6443079,
       "address": "2827 N. Broadway",
-      "neighborhood": "Lake View"
+      "neighborhood": "Lake View",
+      "openHour": 11,
+      "closeHour": 1
     },
     {
-      "name": "Caf\u00e9 Orchid",
+      "name": "Café Orchid",
       "lat": 41.9470147,
       "lon": -87.6731341,
       "address": "1746 W. Addison St.",
-      "neighborhood": "Lake View"
+      "neighborhood": "Lake View",
+      "openHour": 11,
+      "closeHour": 22
     },
     {
       "name": "Grand River",
       "lat": 41.9367709,
       "lon": -87.6649807,
       "address": "3032 N. Lincoln Ave.",
-      "neighborhood": "Lake View"
+      "neighborhood": "Lake View",
+      "openHour": 12,
+      "closeHour": 2
     },
     {
       "name": "Hungry Brain",
       "lat": 41.9392772,
       "lon": -87.6864288,
       "address": "2319 W. Belmont Ave.",
-      "neighborhood": "Lake View"
+      "neighborhood": "Lake View",
+      "openHour": 20,
+      "closeHour": 2
     },
     {
       "name": "Matilda",
       "lat": 41.9382088,
       "lon": -87.6538954,
       "address": "3101 N. Sheffield Ave.",
-      "neighborhood": "Lake View"
-    },
-    {
-      "name": "Pour Drinks & Eats",
-      "lat": 41.9432168,
-      "lon": -87.6690575,
-      "address": "3358 N. Ashland Ave.",
-      "neighborhood": "Lake View"
+      "neighborhood": "Lake View",
+      "openHour": 17,
+      "closeHour": 2
     },
     {
       "name": "Union",
@@ -4400,56 +4587,45 @@
       "lat": 41.93485,
       "lon": -87.6615865,
       "address": "2913 N. Lincoln Ave.",
-      "neighborhood": "Lake View"
+      "neighborhood": "Lake View",
+      "openHour": 12,
+      "closeHour": 2
     },
     {
       "name": "Bernie's Tap & Grill",
       "lat": 41.9487946,
       "lon": -87.6581049,
       "address": "3664 N. Clark St.",
-      "neighborhood": "Wrigleyville"
+      "neighborhood": "Wrigleyville",
+      "openHour": 15,
+      "closeHour": 1
     },
     {
       "name": "Casey Moran's",
       "lat": 41.9486558,
       "lon": -87.6580598,
       "address": "3660 N. Clark St.",
-      "neighborhood": "Wrigleyville"
+      "neighborhood": "Wrigleyville",
+      "openHour": 10,
+      "closeHour": 2
     },
     {
       "name": "Cubby Bear",
       "lat": 41.9469428,
       "lon": -87.6566341,
       "address": "1059 W. Addison St.",
-      "neighborhood": "Wrigleyville"
+      "neighborhood": "Wrigleyville",
+      "openHour": 11,
+      "closeHour": 2
     },
     {
       "name": "Dark Horse Tap & Grill",
       "lat": 41.944868,
       "lon": -87.6540224,
       "address": "3443 N. Sheffield Ave.",
-      "neighborhood": "Wrigleyville"
-    },
-    {
-      "name": "Deleece Grill Pub",
-      "lat": 41.9421958,
-      "lon": -87.6523157,
-      "address": "3313 N. Clark St.",
-      "neighborhood": "Wrigleyville"
-    },
-    {
-      "name": "Goose Island Wrigleyville",
-      "lat": 41.9460496,
-      "lon": -87.6554599,
-      "address": "3535 N. Clark St.",
-      "neighborhood": "Wrigleyville"
-    },
-    {
-      "name": "Mullen's on Clark",
-      "lat": 41.9460022,
-      "lon": -87.6554217,
-      "address": "3527 N. Clark St.",
-      "neighborhood": "Wrigleyville"
+      "neighborhood": "Wrigleyville",
+      "openHour": 17,
+      "closeHour": 2
     },
     {
       "name": "Piano Man",
@@ -4459,109 +4635,76 @@
       "neighborhood": "Wrigleyville"
     },
     {
-      "name": "Redmond's",
-      "lat": 41.9428003,
-      "lon": -87.6543055,
-      "address": "3358 N. Sheffield Ave.",
-      "neighborhood": "Wrigleyville"
-    },
-    {
       "name": "Vines on Clark",
       "lat": 41.9466762,
       "lon": -87.6562226,
       "address": "3554 N. Clark St.",
-      "neighborhood": "Wrigleyville"
+      "neighborhood": "Wrigleyville",
+      "openHour": 16,
+      "closeHour": 1
     },
     {
       "name": "Yak-zies on Clark",
       "lat": 41.9493082,
       "lon": -87.6584942,
       "address": "3710 N. Clark St.",
-      "neighborhood": "Wrigleyville"
-    },
-    {
-      "name": "Bucks Saloon",
-      "lat": 41.9447878,
-      "lon": -87.6491698,
-      "address": "3439 N. Halsted St.",
-      "neighborhood": "Boystown"
-    },
-    {
-      "name": "Halsted's Bar + Grill",
-      "lat": 41.944889,
-      "lon": -87.6492509,
-      "address": "3441 N. Halsted St.",
-      "neighborhood": "Boystown"
+      "neighborhood": "Wrigleyville",
+      "openHour": 11,
+      "closeHour": 1
     },
     {
       "name": "Blue Bayou",
       "lat": 41.9499649,
       "lon": -87.6644599,
       "address": "3734 N. Southport Ave.",
-      "neighborhood": "Lake View"
-    },
-    {
-      "name": "Justin's",
-      "lat": 41.9433087,
-      "lon": -87.6640752,
-      "address": "3358 N. Southport Ave.",
-      "neighborhood": "Lake View"
-    },
-    {
-      "name": "Mystic Celt",
-      "lat": 41.9447252,
-      "lon": -87.6635883,
-      "address": "3443 N. Southport Ave.",
-      "neighborhood": "Lake View"
-    },
-    {
-      "name": "Schoolyard Tavern",
-      "lat": 41.941467,
-      "lon": -87.6641554,
-      "address": "3258 N. Southport Ave.",
-      "neighborhood": "Lake View"
-    },
-    {
-      "name": "Southport Lanes",
-      "lat": 41.9423668,
-      "lon": -87.6637206,
-      "address": "3325 N. Southport Ave.",
-      "neighborhood": "Lake View"
+      "neighborhood": "Lake View",
+      "openHour": 11,
+      "closeHour": 2
     },
     {
       "name": "Beat Kitchen",
       "lat": 41.9397346,
       "lon": -87.6809524,
       "address": "2100 W. Belmont Ave.",
-      "neighborhood": "Roscoe Village"
+      "neighborhood": "Roscoe Village",
+      "openHour": 16,
+      "closeHour": 2
     },
     {
       "name": "Kitsch'n on Roscoe",
       "lat": 41.9430031,
       "lon": -87.6787943,
       "address": "2005 W. Roscoe St.",
-      "neighborhood": "Roscoe Village"
+      "neighborhood": "Roscoe Village",
+      "openHour": 8,
+      "closeHour": 14
     },
     {
       "name": "Que Rico",
       "lat": 41.9428539,
       "lon": -87.6858857,
       "address": "2301 W. Roscoe St.",
-      "neighborhood": "Roscoe Village"
+      "neighborhood": "Roscoe Village",
+      "openHour": 16,
+      "closeHour": 22
     },
     {
       "name": "Riverview Tavern",
       "lat": 41.9433545,
       "lon": -87.6782948,
       "address": "1958 W. Roscoe St.",
-      "neighborhood": "Roscoe Village"
+      "neighborhood": "Roscoe Village",
+      "openHour": 11,
+      "closeHour": 2
     },
     {
       "name": "Chicago Joe's",
       "lat": 41.9541508,
       "lon": -87.6853332,
       "address": "2256 W. Irving Park Rd.",
-      "neighborhood": "North Center"
+      "neighborhood": "North Center",
+      "openHour": 11,
+      "closeHour": 22
     },
     {
       "name": "Jury's",
@@ -4575,35 +4718,36 @@
       "lat": 41.9538877,
       "lon": -87.6819932,
       "address": "2119 W. Irving Park Rd.",
-      "neighborhood": "North Center"
-    },
-    {
-      "name": "Bowman's Bar",
-      "lat": 41.9611831,
-      "lon": -87.6840178,
-      "address": "4356 N. Leavitt St.",
-      "neighborhood": "Lincoln Square"
+      "neighborhood": "North Center",
+      "openHour": 12,
+      "closeHour": 2
     },
     {
       "name": "Bistro Compagne",
       "lat": 41.9636419,
       "lon": -87.6856278,
       "address": "4518 N. Lincoln Ave.",
-      "neighborhood": "Lincoln Square"
+      "neighborhood": "Lincoln Square",
+      "openHour": 17,
+      "closeHour": 21
     },
     {
       "name": "O'Shaughnessy's Pub",
       "lat": 41.9650164,
       "lon": -87.673635,
       "address": "4557 N. Ravenswood Ave.",
-      "neighborhood": "Ravenswood"
+      "neighborhood": "Ravenswood",
+      "openHour": 9,
+      "closeHour": 2
     },
     {
       "name": "Ravenswood Pub",
       "lat": 41.9813329,
       "lon": -87.6742489,
       "address": "5455 N. Ravenswood Ave.",
-      "neighborhood": "Ravenswood"
+      "neighborhood": "Ravenswood",
+      "openHour": 14,
+      "closeHour": 2
     },
     {
       "name": "Sunnyside Tap",
@@ -4624,175 +4768,126 @@
       "lat": 41.9785777,
       "lon": -87.6684866,
       "address": "5316 N. Clark St.",
-      "neighborhood": "Andersonville"
+      "neighborhood": "Andersonville",
+      "openHour": 17,
+      "closeHour": 21
     },
     {
       "name": "In Fine Spirits",
       "lat": 41.9804725,
       "lon": -87.6685868,
       "address": "5420 N. Clark St.",
-      "neighborhood": "Andersonville"
-    },
-    {
-      "name": "Joie de Vine",
-      "lat": 41.9798802,
-      "lon": -87.6741256,
-      "address": "1744 W. Balmoral Ave.",
-      "neighborhood": "Andersonville"
+      "neighborhood": "Andersonville",
+      "openHour": 11,
+      "closeHour": 21
     },
     {
       "name": "SoFo",
       "lat": 41.9724246,
       "lon": -87.6676699,
       "address": "4923 N. Clark St.",
-      "neighborhood": "Andersonville"
+      "neighborhood": "Andersonville",
+      "openHour": 15,
+      "closeHour": 2
     },
     {
       "name": "Fireside Restaurant",
       "lat": 41.9862289,
       "lon": -87.6743927,
       "address": "5739 N. Ravenswood Ave.",
-      "neighborhood": "Edgewater"
-    },
-    {
-      "name": "Pumping Company",
-      "lat": 41.9939521,
-      "lon": -87.6601108,
-      "address": "6157 N. Broadway",
-      "neighborhood": "Edgewater"
-    },
-    {
-      "name": "Heartland Caf\u00e9",
-      "lat": 42.009241,
-      "lon": -87.666334,
-      "address": "7000 N. Glenwood Ave.",
-      "neighborhood": "Rogers Park"
-    },
-    {
-      "name": "Hop H\u00e4us",
-      "lat": 42.0186015,
-      "lon": -87.6758706,
-      "address": "7545 N. Clark St.",
-      "neighborhood": "Rogers Park"
+      "neighborhood": "Edgewater",
+      "openHour": 11,
+      "closeHour": 2
     },
     {
       "name": "Jackhammer",
       "lat": 41.9983713,
       "lon": -87.6709397,
       "address": "6406 N. Clark St.",
-      "neighborhood": "Rogers Park"
-    },
-    {
-      "name": "Pitchfork Saloon",
-      "lat": 41.954188,
-      "lon": -87.7017101,
-      "address": "2922 W. Irving Park Rd.",
-      "neighborhood": "Albany Park"
+      "neighborhood": "Rogers Park",
+      "openHour": 19,
+      "closeHour": 2
     },
     {
       "name": "Cobra Lounge",
       "lat": 41.8863879,
       "lon": -87.6667177,
       "address": "235 N. Ashland Ave.",
-      "neighborhood": "West Town"
-    },
-    {
-      "name": "Happy Village",
-      "lat": 41.9012796,
-      "lon": -87.6745795,
-      "address": "1059 N. Wolcott Ave.",
-      "neighborhood": "Ukrainian Village"
+      "neighborhood": "West Town",
+      "openHour": 11,
+      "closeHour": 2
     },
     {
       "name": "Old Oak Tap",
       "lat": 41.8956186,
       "lon": -87.6799577,
       "address": "2109 W. Chicago Ave.",
-      "neighborhood": "Ukrainian Village"
+      "neighborhood": "Ukrainian Village",
+      "openHour": 11,
+      "closeHour": 2
     },
     {
       "name": "Boundary",
       "lat": 41.9033893,
       "lon": -87.6762203,
       "address": "1932 W. Division St.",
-      "neighborhood": "Wicker Park"
+      "neighborhood": "Wicker Park",
+      "openHour": 11,
+      "closeHour": 2
     },
     {
       "name": "Enoteca Roma",
       "lat": 41.9033412,
       "lon": -87.6815533,
       "address": "2146 W. Division St.",
-      "neighborhood": "Wicker Park"
-    },
-    {
-      "name": "Moonshine",
-      "lat": 41.9034707,
-      "lon": -87.6734502,
-      "address": "1824 W. Division St.",
-      "neighborhood": "Wicker Park"
-    },
-    {
-      "name": "Northside Caf\u00e9",
-      "lat": 41.9115666,
-      "lon": -87.6771517,
-      "address": "1635 N. Damen Ave.",
-      "neighborhood": "Wicker Park"
-    },
-    {
-      "name": "Spring Restaurant",
-      "lat": 41.9103756,
-      "lon": -87.678902,
-      "address": "2039 W. North Ave.",
-      "neighborhood": "Wicker Park"
+      "neighborhood": "Wicker Park",
+      "openHour": 16,
+      "closeHour": 22
     },
     {
       "name": "Cortland Garage",
       "lat": 41.9159176,
       "lon": -87.6695803,
       "address": "1645 W. Cortland St.",
-      "neighborhood": "Bucktown"
+      "neighborhood": "Bucktown",
+      "openHour": 11,
+      "closeHour": 2
     },
     {
       "name": "Floyd's Pub",
       "lat": 41.9174886,
       "lon": -87.6851722,
       "address": "1944 N. Oakley Ave.",
-      "neighborhood": "Bucktown"
-    },
-    {
-      "name": "Dunlay's on the Square",
-      "lat": 41.9277163,
-      "lon": -87.706427,
-      "address": "3137 W. Logan Blvd.",
-      "neighborhood": "Logan Square"
+      "neighborhood": "Bucktown",
+      "openHour": 17,
+      "closeHour": 2
     },
     {
       "name": "Bristol Lounge",
       "lat": 41.9370294,
       "lon": -87.7209972,
       "address": "3084 N. Milwaukee Ave.",
-      "neighborhood": "Avondale"
-    },
-    {
-      "name": "Orbit Room",
-      "lat": 41.935612,
-      "lon": -87.69751,
-      "address": "2959 N. California Ave.",
-      "neighborhood": "Avondale"
+      "neighborhood": "Avondale",
+      "openHour": 10,
+      "closeHour": 2
     },
     {
       "name": "Cork & Kerry",
       "lat": 41.7004465,
       "lon": -87.6817644,
       "address": "10614 S. Western Ave.",
-      "neighborhood": "Beverly"
+      "neighborhood": "Beverly",
+      "openHour": 14,
+      "closeHour": 2
     },
     {
       "name": "Rosebud",
       "lat": 41.8694789,
       "lon": -87.6642957,
       "address": "1500 W. Taylor St.",
-      "neighborhood": "Little Italy"
+      "neighborhood": "Little Italy",
+      "openHour": 16,
+      "closeHour": 22
     }
   ],
   "sunOverrides": []

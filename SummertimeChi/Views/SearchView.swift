@@ -10,6 +10,7 @@ struct SearchView: View {
     enum SearchFilter: String, CaseIterable {
         case all        = "All"
         case inSunNow   = "In Sun Now"
+        case mostSun    = "Most Sun"
         case inShade    = "In Shade"
         case favorites  = "Favorites"
     }
@@ -22,21 +23,31 @@ struct SearchView: View {
     private var barEntities: FetchedResults<BarEntity>
 
     private var filteredBars: [Bar] {
-        let allBars = barEntities.map { Bar(entity: $0) }
+        let curatedNames = SeedDataService.shared.curatedBarNames
+        var allBars = barEntities
+            .map { entity -> Bar in
+                var bar = Bar(entity: entity)
+                if let h = SeedDataService.shared.hours(forBarNamed: bar.name, neighborhood: bar.neighborhood) {
+                    bar.openHour = h.open
+                    bar.closeHour = h.close
+                }
+                return bar
+            }
+            .filter { curatedNames.isEmpty || curatedNames.contains($0.name) }
 
-        return allBars.filter { bar in
-            // Text filter
+        allBars = allBars.filter { bar in
             let matchesText = searchText.isEmpty ||
                 bar.name.localizedCaseInsensitiveContains(searchText) ||
                 (bar.neighborhood?.localizedCaseInsensitiveContains(searchText) ?? false)
 
-            // Category filter
             let matchesFilter: Bool
             switch selectedFilter {
             case .all:
                 matchesFilter = true
             case .inSunNow:
-                matchesFilter = bar.cachedSunStatus == .sunlit || bar.cachedSunStatus == .partialSun
+                matchesFilter = bar.cachedSunStatus == .sunlit
+            case .mostSun:
+                matchesFilter = (bar.sunlightHours(on: Date()) ?? 0) > 0
             case .inShade:
                 matchesFilter = bar.cachedSunStatus == .shaded
             case .favorites:
@@ -45,6 +56,15 @@ struct SearchView: View {
 
             return matchesText && matchesFilter
         }
+
+        if selectedFilter == .mostSun {
+            let now = Date()
+            allBars.sort { a, b in
+                (a.sunlightHours(on: now) ?? 0) > (b.sunlightHours(on: now) ?? 0)
+            }
+        }
+
+        return allBars
     }
 
     var body: some View {
@@ -88,7 +108,7 @@ struct SearchView: View {
 
     private var barList: some View {
         List(filteredBars) { bar in
-            BarListRow(bar: bar)
+            BarListRow(bar: bar, showSunlightHours: selectedFilter == .mostSun)
                 .contentShape(Rectangle())
                 .onTapGesture { selectedBar = bar }
         }
@@ -116,6 +136,7 @@ struct SearchView: View {
 
 struct BarListRow: View {
     let bar: Bar
+    var showSunlightHours: Bool = false
 
     var body: some View {
         HStack(spacing: 12) {
@@ -145,15 +166,27 @@ struct BarListRow: View {
 
             Spacer()
 
-            if bar.yelpRating > 0 {
-                HStack(spacing: 2) {
-                    Image(systemName: "star.fill")
-                        .font(.caption)
-                        .foregroundStyle(.yellow)
-                    Text(String(format: "%.1f", bar.yelpRating))
-                        .font(.caption)
+            VStack(alignment: .trailing, spacing: 2) {
+                if bar.yelpRating > 0 {
+                    HStack(spacing: 2) {
+                        Image(systemName: "star.fill")
+                            .font(.caption)
+                            .foregroundStyle(.yellow)
+                        Text(String(format: "%.1f", bar.yelpRating))
+                            .font(.caption)
+                    }
+                    .foregroundStyle(.secondary)
                 }
-                .foregroundStyle(.secondary)
+                if showSunlightHours, let text = bar.formattedSunlightHours(on: Date()) {
+                    HStack(spacing: 2) {
+                        Image(systemName: "sun.max.fill")
+                            .font(.caption2)
+                            .foregroundStyle(.yellow)
+                        Text(text)
+                            .font(.caption)
+                    }
+                    .foregroundStyle(.secondary)
+                }
             }
         }
         .padding(.vertical, 4)

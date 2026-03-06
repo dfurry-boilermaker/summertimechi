@@ -17,9 +17,9 @@
 	<key>CFBundlePackageType</key>
 	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>2.0</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>2</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSLocationWhenInUseUsageDescription</key>
@@ -49,7 +49,7 @@
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
 <key>WeatherKitUsageDescription</key>
-	<string>SummertimeChi uses WeatherKit to check cloud cover and improve sun/shade accuracy.</string>
+	<string>SummertimeChi uses WeatherKit for hourly cloud forecasts so the sun/shade timeline in each bar's detail view reflects today's weather, and to show patio suitability on the Favorites tab.</string>
 	<key>CHICAGO_APP_TOKEN</key>
 	<string>$(CHICAGO_APP_TOKEN)</string>
 	<key>YELP_API_KEY</key>

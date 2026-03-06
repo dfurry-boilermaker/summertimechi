@@ -28,7 +28,10 @@ struct FavoritesView: View {
                     .presentationDragIndicator(.visible)
             }
             .onAppear { viewModel.loadFavorites() }
-            .task { await viewModel.loadWeather() }
+            .task {
+                try? await Task.sleep(for: .milliseconds(400))
+                await viewModel.loadWeather()
+            }
         }
     }
 
@@ -36,7 +39,7 @@ struct FavoritesView: View {
 
     private var favoritesList: some View {
         List {
-            if viewModel.isLoadingWeather || viewModel.weather != nil {
+            if viewModel.isLoadingWeather || viewModel.weather != nil || viewModel.weatherError != nil {
                 Section {
                     weatherCard
                 }
@@ -81,33 +84,59 @@ struct FavoritesView: View {
                     .foregroundStyle(.secondary)
             }
             .padding(.vertical, 8)
+        } else if let error = viewModel.weatherError {
+            VStack(alignment: .leading, spacing: 8) {
+                Label("Weather unavailable", systemImage: "cloud.slash")
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+                Text(weatherErrorGuidance(error))
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                Button("Try again") {
+                    Task { await viewModel.loadWeather(forceRefresh: true) }
+                }
+                .font(.subheadline.bold())
+            }
+            .padding(.vertical, 8)
         } else if let wx = viewModel.weather {
-            VStack(alignment: .leading, spacing: 12) {
-                HStack {
-                    Label("Chicago Weather", systemImage: weatherIcon(for: wx))
-                        .font(.headline)
-                    Spacer()
-                    if let temp = wx.temperatureFahrenheit {
-                        Text("\(Int(temp))°F")
-                            .font(.title2.bold())
+            VStack(alignment: .leading, spacing: 14) {
+                HStack(alignment: .top) {
+                    Image(systemName: weatherIcon(for: wx))
+                        .font(.system(size: 32))
+                        .foregroundStyle(suitabilityColor(for: wx))
+                        .symbolRenderingMode(.hierarchical)
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text("Chicago")
+                            .font(.subheadline)
+                            .foregroundStyle(.secondary)
+                        if let temp = wx.temperatureFahrenheit {
+                            Text("\(Int(temp))°")
+                                .font(.system(size: 28, weight: .semibold, design: .rounded))
+                        }
                     }
+                    Spacer()
                 }
 
-                HStack(spacing: 20) {
-                    Label("\(Int(wx.cloudCoverFraction * 100))% clouds", systemImage: "cloud")
+                HStack(spacing: 6) {
+                    Text("\(Int(wx.cloudCoverFraction * 100))% clouds")
+                        .foregroundStyle(.secondary)
+                    Text("•")
+                        .foregroundStyle(.tertiary)
                     Text(wx.conditionDescription)
+                        .foregroundStyle(.secondary)
                 }
                 .font(.subheadline)
-                .foregroundStyle(.secondary)
 
                 Text(patioSuitability(for: wx))
-                    .font(.subheadline.bold())
+                    .font(.subheadline.weight(.medium))
                     .foregroundStyle(suitabilityColor(for: wx))
-                    .padding(.horizontal, 10)
-                    .padding(.vertical, 5)
-                    .background(suitabilityColor(for: wx).opacity(0.15), in: Capsule())
+                    .padding(.horizontal, 12)
+                    .padding(.vertical, 6)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .background(suitabilityColor(for: wx).opacity(0.12), in: RoundedRectangle(cornerRadius: 10))
             }
-            .padding(.vertical, 6)
+            .padding(16)
+            .background(Color(.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 14))
         }
     }
 
@@ -129,11 +158,18 @@ struct FavoritesView: View {
         return .yellow
     }
 
+    private func weatherErrorGuidance(_ error: String) -> String {
+        if error.contains("WDSJWTAuthenticator") || error.contains("error 2") {
+            return "JWT auth error: WeatherKit isn’t authorized for this app. At developer.apple.com → Identifiers → your App ID, enable WeatherKit under App Services. Then in Xcode: Product → Clean Build Folder, and re-run on device."
+        }
+        return error
+    }
+
     // MARK: - Empty State
 
     private var emptyState: some View {
         VStack(spacing: 0) {
-            if viewModel.isLoadingWeather || viewModel.weather != nil {
+            if viewModel.isLoadingWeather || viewModel.weather != nil || viewModel.weatherError != nil {
                 List {
                     Section { weatherCard }
                 }

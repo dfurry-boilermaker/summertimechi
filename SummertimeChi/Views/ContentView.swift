@@ -27,15 +27,16 @@ struct ContentView: View {
             .tint(.yellow)
 
             if appState.showSplash {
-                Image("LoadingIcon")
-                    .resizable()
-                    .scaledToFill()
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .clipped()
-                    .background(Color.black)
+                Color("LaunchBackground")
                     .ignoresSafeArea()
-                    .scaleEffect(splashPulse ? 1.04 : 1.0)
-                    .animation(.easeInOut(duration: 1.2).repeatForever(autoreverses: true), value: splashPulse)
+                    .overlay {
+                        Image("LoadingIcon")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 200, height: 200)
+                            .scaleEffect(splashPulse ? 1.04 : 1.0)
+                            .animation(.easeInOut(duration: 1.2).repeatForever(autoreverses: true), value: splashPulse)
+                    }
                     .onAppear { splashPulse = true }
                     .transition(.opacity)
             }

@@ -13,7 +13,6 @@ struct SeedBarData {
 
 private struct RemoteBarData: Codable {
     let version: Int
-    let permanentlyClosed: [String]
     let bars: [RemoteSeedBar]
     let sunOverrides: [RemoteSunOverride]?
 }
@@ -81,14 +80,37 @@ final class SeedDataService {
         remoteData = cached
     }
 
+    /// Removes the cached bars JSON so the next refresh fetches fresh data from GitHub.
+    func clearCache() {
+        try? FileManager.default.removeItem(at: Self.cacheFileURL)
+    }
+
     // MARK: - Hours Lookup
 
-    /// Returns operating hours for a bar by name, or nil if unknown (treat as always open).
-    func hours(forBarNamed name: String) -> (open: Int, close: Int)? {
-        guard let bars = remoteData?.bars,
-              let match = bars.first(where: { $0.name == name }),
-              let open = match.openHour, let close = match.closeHour else { return nil }
+    /// Returns operating hours for a bar by name (and optionally neighborhood for multi-location bars).
+    func hours(forBarNamed name: String, neighborhood: String? = nil) -> (open: Int, close: Int)? {
+        guard let bars = remoteData?.bars else { return nil }
+        let match: RemoteSeedBar?
+        if let nb = neighborhood, !nb.isEmpty {
+            match = bars.first(where: { $0.name == name && $0.neighborhood == nb })
+        } else {
+            match = bars.first(where: { $0.name == name })
+        }
+        guard let m = match, let open = m.openHour, let close = m.closeHour else { return nil }
         return (open, close)
+    }
+
+    /// Returns the address for a bar by name (and optionally neighborhood for multi-location bars).
+    func address(forBarNamed name: String, neighborhood: String? = nil) -> String? {
+        guard let bars = remoteData?.bars else { return nil }
+        let match: RemoteSeedBar?
+        if let nb = neighborhood, !nb.isEmpty {
+            match = bars.first(where: { $0.name == name && $0.neighborhood == nb })
+        } else {
+            match = bars.first(where: { $0.name == name })
+        }
+        guard let m = match, !m.address.isEmpty else { return nil }
+        return m.address
     }
 
     // MARK: - Sun Override Lookup
@@ -107,37 +129,11 @@ final class SeedDataService {
 
     // MARK: - Public Data
 
-    /// Bar names that are permanently closed and must never appear in the app.
-    /// These are deleted from CoreData on every refresh, even if OSM still lists them.
-    var permanentlyClosedNames: Set<String> {
-        if let remote = remoteData { return Set(remote.permanentlyClosed) }
-        return hardcodedClosedNames
+    /// Bar names from the curated bars.json. Used to filter out stale CoreData entries.
+    var curatedBarNames: Set<String> {
+        guard let remote = remoteData else { return Set(hardcodedBars.map(\.name)) }
+        return Set(remote.bars.map(\.name))
     }
-
-    private let hardcodedClosedNames: Set<String> = [
-        "ZED451",
-        "McGinny's Tap",
-        "Wells on Wells",
-        "Old Town Pour House",
-        "Old Town Brasserie",
-        "Rocco Ranalli's",
-        "Etta Bucktown",
-        "Cy's Crab House",
-        "Crossing",
-        "Café Bernard",
-        "Café Adriatic",
-        "Cabana Club",
-        "Duchamp",
-        "Edgewater Lounge",
-        "Fiorentino's Cucina",
-        "Cooper's",
-        "Abbey Pub",
-        "Betty's Blue Star Lounge",
-        "Angels & Mariachis",
-        "Bad Dog Tavern",
-        "Boston Blackie's",
-        "O'Brien's Riverwalk Café",
-    ]
 
     var curatedBars: [Bar] {
         let seeds: [SeedBarData]
@@ -149,15 +145,19 @@ final class SeedDataService {
         } else {
             seeds = hardcodedBars
         }
-        let hoursByName: [String: (Int, Int)] = remoteData.map { data in
-            Dictionary(uniqueKeysWithValues: data.bars.compactMap { b in
-                guard let o = b.openHour, let c = b.closeHour else { return nil }
-                return (b.name, (o, c))
-            })
+        let hoursByKey: [String: (Int, Int)] = remoteData.map { data in
+            var dict: [String: (Int, Int)] = [:]
+            for b in data.bars {
+                guard let o = b.openHour, let c = b.closeHour else { continue }
+                let key = b.neighborhood.isEmpty ? b.name : "\(b.name)|\(b.neighborhood)"
+                dict[key] = (o, c)
+            }
+            return dict
         } ?? [:]
 
         return seeds.map { seed in
-            let h = hoursByName[seed.name]
+            let key = seed.neighborhood.isEmpty ? seed.name : "\(seed.name)|\(seed.neighborhood)"
+            let h = hoursByKey[key]
             return Bar(
                 id: UUID(),
                 name: seed.name,

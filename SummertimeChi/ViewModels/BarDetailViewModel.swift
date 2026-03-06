@@ -3,6 +3,7 @@ import CoreData
 
 @MainActor
 final class BarDetailViewModel: ObservableObject {
+    private let weather = WeatherService.shared
     @Published var bar: Bar
     @Published var sunTimeline: SunTimeline?
     @Published var currentStatus: SunStatus = .unknown
@@ -11,44 +12,73 @@ final class BarDetailViewModel: ObservableObject {
     @Published var isFavorite: Bool = false
     @Published var sunAlertsEnabled: Bool = false
 
+    /// Today's daylight hours during the bar's operating window.
+    @Published var sunlightHoursToday: Double?
+    /// Fraction of operating hours in daylight (0.0–1.0).
+    @Published var sunlightFraction: Double?
+    /// Display-ready string, e.g. "6.5 hrs of sun".
+    @Published var formattedSunlight: String?
+
     private let context: NSManagedObjectContext
     private let shadow = ShadowCalculatorService.shared
 
     init(bar: Bar, context: NSManagedObjectContext) {
-        self.bar = bar
-        self.isFavorite = bar.isFavorite
-        self.sunAlertsEnabled = bar.sunAlertsEnabled
+        var enriched = bar
+        let seed = SeedDataService.shared
+        if enriched.openHour == nil, let h = seed.hours(forBarNamed: bar.name, neighborhood: bar.neighborhood) {
+            enriched.openHour = h.open
+            enriched.closeHour = h.close
+        }
+        if enriched.address == nil, let addr = seed.address(forBarNamed: bar.name, neighborhood: bar.neighborhood) {
+            enriched.address = addr
+        }
+        self.bar = enriched
+        self.isFavorite = enriched.isFavorite
+        self.sunAlertsEnabled = enriched.sunAlertsEnabled
         self.context = context
     }
 
     // MARK: - Load
 
     func loadAll() async {
+        computeSunlightHours()
         await withTaskGroup(of: Void.self) { group in
             group.addTask { await self.loadSunTimeline() }
             group.addTask { await self.loadCommunityReviews() }
         }
     }
 
+    private func computeSunlightHours() {
+        let today = Date()
+        sunlightHoursToday = bar.sunlightHours(on: today)
+        sunlightFraction = bar.sunlightFraction(on: today)
+        formattedSunlight = bar.formattedSunlightHours(on: today)
+    }
+
     func loadSunTimeline() async {
         isLoadingTimeline = true
         defer { isLoadingTimeline = false }
 
+        let today = Date()
         let buildings = (try? await OSMService.shared.fetchBuildings(near: bar.coordinate)) ?? []
-        let cloudCover: Double = 0
+        let hourlyCloudCover = await weather.fetchHourlyCloudCover(for: bar.coordinate, date: today)
 
         let timeline = shadow.generateTimeline(
             forBar: bar,
             buildings: buildings,
-            date: Date(),
-            cloudCover: cloudCover
+            date: today,
+            cloudCover: 0,
+            cloudCoverByHour: hourlyCloudCover
         )
         sunTimeline = timeline
+
+        let hour = Calendar.current.component(.hour, from: today)
+        let currentCloudCover = hourlyCloudCover?[hour] ?? 0
         currentStatus = shadow.sunStatus(
             forPatio: bar.coordinate,
             buildings: buildings,
-            date: Date(),
-            cloudCover: cloudCover
+            date: today,
+            cloudCover: currentCloudCover
         )
     }
 
@@ -83,7 +113,42 @@ final class BarDetailViewModel: ObservableObject {
         return f
     }()
 
-    var nextTransitionDescription: String? {
+    /// Subtext shown below the status. When below horizon, shows sunrise time; otherwise shows next transition.
+    var statusSubtext: String? {
+        if currentStatus == .belowHorizon {
+            return nextSunriseDescription
+        }
+        return nextTransitionDescription
+    }
+
+    private var nextSunriseDescription: String? {
+        let now = Date()
+        let solar = SolarCalculatorService.shared
+        let (sunrise, sunset) = solar.sunriseSunset(at: bar.coordinate, date: now)
+
+        let nextSunrise: Date?
+        if let sr = sunrise, let ss = sunset {
+            if now < sr {
+                nextSunrise = sr
+            } else if now > ss {
+                let calendar = Calendar.current
+                if let tomorrow = calendar.date(byAdding: .day, value: 1, to: now) {
+                    nextSunrise = solar.sunriseSunset(at: bar.coordinate, date: tomorrow).sunrise
+                } else {
+                    nextSunrise = nil
+                }
+            } else {
+                nextSunrise = nil  // daytime, shouldn't reach here when belowHorizon
+            }
+        } else {
+            nextSunrise = nil
+        }
+
+        guard let sr = nextSunrise else { return nil }
+        return "Sunrise at \(Self.transitionTimeFormatter.string(from: sr))"
+    }
+
+    private var nextTransitionDescription: String? {
         guard let timeline = sunTimeline,
               let (nextStatus, nextTime) = timeline.nextTransition(from: Date()) else {
             return nil

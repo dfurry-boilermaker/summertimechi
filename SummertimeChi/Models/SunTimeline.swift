@@ -39,7 +39,7 @@ struct SunTimeline {
     /// Returns `true` if the bar is in sunlight at the given date.
     func isInSun(at date: Date) -> Bool {
         guard let nearest = nearestEntry(to: date) else { return false }
-        return nearest.status == .sunlit || nearest.status == .partialSun
+        return nearest.status == .sunlit
     }
 
     /// Next transition time from current status.

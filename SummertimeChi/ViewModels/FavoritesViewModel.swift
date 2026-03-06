@@ -6,6 +6,7 @@ import CoreLocation
 final class FavoritesViewModel: ObservableObject {
     @Published var favoriteBars: [Bar] = []
     @Published var weather: WeatherService.WeatherConditions?
+    @Published var weatherError: String?
     @Published var isLoadingWeather: Bool = false
 
     private let context: NSManagedObjectContext
@@ -16,11 +17,17 @@ final class FavoritesViewModel: ObservableObject {
         self.context = context
     }
 
-    func loadWeather() async {
-        guard weather == nil else { return }  // don't refetch if already loaded
+    func loadWeather(forceRefresh: Bool = false) async {
+        guard forceRefresh || weather == nil else { return }
+        weatherError = nil
         isLoadingWeather = true
         defer { isLoadingWeather = false }
-        weather = await WeatherService.shared.fetchConditions(for: Self.chicagoCoord)
+        switch await WeatherService.shared.fetchConditionsWithResult(for: Self.chicagoCoord) {
+        case .success(let conditions):
+            weather = conditions
+        case .failure(let message):
+            weatherError = message
+        }
     }
 
     func loadFavorites() {
@@ -28,7 +35,17 @@ final class FavoritesViewModel: ObservableObject {
         request.predicate = NSPredicate(format: "isFavorite == YES")
         request.sortDescriptors = [NSSortDescriptor(keyPath: \BarEntity.name, ascending: true)]
         guard let entities = try? context.fetch(request) else { return }
-        favoriteBars = entities.map { Bar(entity: $0) }
+        let curatedNames = SeedDataService.shared.curatedBarNames
+        favoriteBars = entities
+            .filter { curatedNames.isEmpty || curatedNames.contains($0.name ?? "") }
+            .map { entity in
+            var bar = Bar(entity: entity)
+            if let h = SeedDataService.shared.hours(forBarNamed: bar.name, neighborhood: bar.neighborhood) {
+                bar.openHour = h.open
+                bar.closeHour = h.close
+            }
+            return bar
+        }
     }
 
     func removeFavorite(_ bar: Bar) {

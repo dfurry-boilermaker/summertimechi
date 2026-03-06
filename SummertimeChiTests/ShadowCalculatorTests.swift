@@ -143,13 +143,13 @@ final class ShadowCalculatorTests: XCTestCase {
         XCTAssertEqual(status, .cloudy)
     }
 
-    func testSunStatusPartialSunOverride() {
+    func testSunStatusCloudyOverride() {
         let components = DateComponents(
             timeZone: TimeZone(identifier: "UTC"),
             year: 2024, month: 6, day: 21, hour: 18, minute: 15
         )
         let date = Calendar(identifier: .gregorian).date(from: components)!
         let status = shadowCalc.sunStatus(forPatio: willisCoord, buildings: [], date: date, cloudCover: 0.6)
-        XCTAssertEqual(status, .partialSun)
+        XCTAssertEqual(status, .cloudy)
     }
 }

@@ -29,6 +29,30 @@ func withRetry<T>(
     throw lastError!
 }
 
+// MARK: - Throwing Timeout
+
+/// Runs `operation` with a hard deadline. If the operation doesn't finish
+/// within `seconds`, the child task is cancelled and a `TimeoutError` is thrown.
+func withThrowingTimeout<T: Sendable>(
+    seconds: TimeInterval,
+    operation: @escaping @Sendable () async throws -> T
+) async throws -> T {
+    try await withThrowingTaskGroup(of: T.self) { group in
+        group.addTask { try await operation() }
+        group.addTask {
+            try await Task.sleep(nanoseconds: UInt64(seconds * 1_000_000_000))
+            throw TimeoutError()
+        }
+        guard let result = try await group.next() else { throw TimeoutError() }
+        group.cancelAll()
+        return result
+    }
+}
+
+struct TimeoutError: LocalizedError {
+    var errorDescription: String? { "Operation timed out" }
+}
+
 // MARK: - In-Flight Request Deduplicator
 
 /// Deduplicates concurrent async requests with the same key.

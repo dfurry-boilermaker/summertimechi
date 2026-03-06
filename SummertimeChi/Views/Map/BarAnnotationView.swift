@@ -42,7 +42,7 @@ struct BarAnnotationView: View {
 
     private var pinForegroundColor: Color {
         switch status {
-        case .sunlit, .partialSun: return .black
+        case .sunlit: return .black
         default:                   return .white
         }
     }

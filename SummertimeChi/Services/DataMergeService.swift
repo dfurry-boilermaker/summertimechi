@@ -31,8 +31,7 @@ final class DataMergeService: @unchecked Sendable {
         isMerging = true
         defer { isMerging = false }
 
-        let blocked = SeedDataService.shared.permanentlyClosedNames
-        let allBars = (permits + osmBars + yelpBars).filter { !blocked.contains($0.name) }
+        let allBars = permits + osmBars + yelpBars
         let deduplicated = deduplicate(allBars)
 
         let bgContext = PersistenceController.shared.container.newBackgroundContext()
@@ -67,15 +66,8 @@ final class DataMergeService: @unchecked Sendable {
                 }
             }
 
-            // Delete stale bars that the user hasn't personalised
+            // Delete bars not in the curated list (source of truth)
             for entity in existing where !matchedIDs.contains(entity.objectID) {
-                if !entity.isFavorite && !entity.sunAlertsEnabled {
-                    bgContext.delete(entity)
-                }
-            }
-
-            // Hard-delete permanently closed bars regardless of personalisation
-            for entity in existing where blocked.contains(entity.name ?? "") {
                 bgContext.delete(entity)
             }
 

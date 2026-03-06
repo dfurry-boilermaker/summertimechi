@@ -40,11 +40,14 @@ final class MapViewModel: ObservableObject {
         request.predicate = NSPredicate(format: "hasPatioConfirmed == YES")
         request.sortDescriptors = [NSSortDescriptor(keyPath: \BarEntity.name, ascending: true)]
         guard let entities = try? context.fetch(request) else { return }
-        bars = entities.map { Bar(entity: $0) }
+        let curatedNames = SeedDataService.shared.curatedBarNames
+        bars = entities
+            .map { Bar(entity: $0) }
+            .filter { curatedNames.isEmpty || curatedNames.contains($0.name) }
 
         // Overlay operating hours from remote JSON (not stored in CoreData)
         for idx in bars.indices {
-            if let h = SeedDataService.shared.hours(forBarNamed: bars[idx].name) {
+            if let h = SeedDataService.shared.hours(forBarNamed: bars[idx].name, neighborhood: bars[idx].neighborhood) {
                 bars[idx].openHour = h.open
                 bars[idx].closeHour = h.close
             }
@@ -67,35 +70,41 @@ final class MapViewModel: ObservableObject {
         }
     }
 
-    func refreshData() async {
-        // Prevent concurrent refreshes — a second tap while loading is silently ignored
+    /// Refreshes the current viewport: reloads bars from CoreData and recomputes
+    /// sun/shade for the visible map region. Does not fetch from network.
+    func refreshViewport() async {
         guard !isLoading else { return }
         isLoading = true
         error = nil
         defer { isLoading = false }
 
-        // Fetch OSM data and refresh remote bar list concurrently
-        async let remoteRefresh = SeedDataService.shared.refreshFromRemote()
-        async let osmFetch = OSMService.shared.fetchBars()
-        _ = await remoteRefresh
-        let osmBars = (try? await osmFetch) ?? []
+        loadBars()
+        triggerShadowRecomputation()
+    }
 
-        if osmBars.isEmpty {
+    /// Full sync: fetches bars from remote JSON, merges into CoreData, then reloads.
+    /// Used only on first launch when the database is empty.
+    func refreshData() async {
+        guard !isLoading else { return }
+        isLoading = true
+        error = nil
+        defer { isLoading = false }
+
+        _ = await SeedDataService.shared.refreshFromRemote()
+
+        let curatedBars = SeedDataService.shared.curatedBars
+        if curatedBars.isEmpty {
             error = "Could not load bar data. Check your connection and try again."
             return
         }
 
-        let allBars = osmBars + SeedDataService.shared.curatedBars
-
         await DataMergeService.shared.mergeAndPersist(
             permits: [],
-            osmBars: allBars,
+            osmBars: curatedBars,
             yelpBars: []
         )
 
         loadBars()
-
-        // Kick off shadow computation now that bars are refreshed
         triggerShadowRecomputation()
     }
 

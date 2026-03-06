@@ -54,10 +54,12 @@ struct MapView: View {
                 }
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
-                        Task { await viewModel.refreshData() }
+                        Task { await viewModel.refreshViewport() }
                     } label: {
                         Image(systemName: "arrow.clockwise")
                     }
+                    .accessibilityLabel("Update current view")
+                    .disabled(viewModel.isLoading)
                 }
                 ToolbarItem(placement: .topBarLeading) {
                     Button {
@@ -153,9 +155,9 @@ struct MapView: View {
             withAnimation(.easeInOut(duration: 0.5)) {
                 cameraPosition = .camera(MapCamera(
                     centerCoordinate: coord,
-                    distance: currentCamera?.distance ?? 1_500,
+                    distance: 1_500,
                     heading: currentCamera?.heading ?? 0,
-                    pitch: currentCamera?.pitch ?? (viewModel.is3DMode ? 60 : 0)
+                    pitch: viewModel.is3DMode ? 60 : 0
                 ))
             }
         } label: {
