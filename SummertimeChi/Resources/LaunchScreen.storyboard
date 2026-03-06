@@ -14,16 +14,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" id="kId-c2-rCX" image="LoadingIcon">
-                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" id="kId-c2-rCX" image="LoadingIcon">
+                                <rect key="frame" x="96.5" y="326" width="200" height="200"/>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="kId-c2-rCX" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="Cc5-rb-4cO"/>
-                            <constraint firstItem="kId-c2-rCX" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="Wri-gT-ov4"/>
-                            <constraint firstAttribute="trailing" secondItem="kId-c2-rCX" secondAttribute="trailing" id="Oho-9X-zC1"/>
-                            <constraint firstAttribute="bottom" secondItem="kId-c2-rCX" secondAttribute="bottom" id="KoW-hh-tJX"/>
+                            <constraint firstItem="kId-c2-rCX" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="centerX"/>
+                            <constraint firstItem="kId-c2-rCX" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="centerY"/>
+                            <constraint firstItem="kId-c2-rCX" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" multiplier="0.51" id="width"/>
+                            <constraint firstItem="kId-c2-rCX" firstAttribute="height" secondItem="kId-c2-rCX" secondAttribute="width" multiplier="1" id="aspect"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Bcu-3y-fUS"/>
                     </view>

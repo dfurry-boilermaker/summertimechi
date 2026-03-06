@@ -38,7 +38,7 @@ struct ContentView: View {
                             .animation(.easeInOut(duration: 1.2).repeatForever(autoreverses: true), value: splashPulse)
                     }
                     .onAppear { splashPulse = true }
-                    .transition(.opacity)
+                    .transition(.opacity.animation(.easeOut(duration: 0.4)))
             }
         }
     }

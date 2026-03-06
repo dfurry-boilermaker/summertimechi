@@ -86,15 +86,21 @@ struct MapView: View {
         .onAppear {
             appState.requestLocationPermission()
             viewModel.loadBars()
-            if viewModel.bars.isEmpty {
-                Task {
+            Task {
+                let start = ContinuousClock.now
+                if viewModel.bars.isEmpty {
                     await viewModel.refreshData()
-                    withAnimation(.easeOut(duration: 0.4)) { appState.showSplash = false }
+                } else {
+                    viewModel.triggerShadowRecomputation()
+                    try? await Task.sleep(for: .milliseconds(400))
                 }
-            } else {
-                viewModel.triggerShadowRecomputation()
-                Task {
-                    try? await Task.sleep(for: .milliseconds(800))
+                // Industry standard: minimum 1.5s splash so it doesn't feel like a flash
+                let elapsed = ContinuousClock.now - start
+                let minDuration: Duration = .seconds(1.5)
+                if elapsed < minDuration {
+                    try? await Task.sleep(for: minDuration - elapsed)
+                }
+                await MainActor.run {
                     withAnimation(.easeOut(duration: 0.4)) { appState.showSplash = false }
                 }
             }
